@@ -1,4 +1,4 @@
-package main.java.hr.java.vjezbe.entitet;
+package hr.java.vjezbe.entitet;
 
 public class Predmet {
     private String sifra;

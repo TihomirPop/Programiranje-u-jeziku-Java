@@ -1,4 +1,4 @@
-package main.java.hr.java.vjezbe.glavna;
+package hr.java.vjezbe.glavna;
 
 import hr.java.vjezbe.entitet.Ispit;
 import hr.java.vjezbe.entitet.Predmet;

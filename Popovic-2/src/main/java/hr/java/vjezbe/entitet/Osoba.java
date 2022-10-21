@@ -1,4 +1,4 @@
-package main.java.hr.java.vjezbe.entitet;
+package hr.java.vjezbe.entitet;
 
 public abstract class Osoba {
     private String ime;
