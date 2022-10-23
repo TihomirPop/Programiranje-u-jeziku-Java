@@ -18,7 +18,6 @@ public class Profesor extends Osoba {
         this.sifra = sifra;
     }
 
-
     public String getTitula() {
         return titula;
     }

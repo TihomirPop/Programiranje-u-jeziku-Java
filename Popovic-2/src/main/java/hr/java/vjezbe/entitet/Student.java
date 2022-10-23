@@ -6,13 +6,11 @@ public class Student extends Osoba{
     private String jmbag;
     private LocalDate datumRodjenja;
 
-
     public Student(String ime, String prezime, String jmbag, LocalDate datumRodjenja) {
         super(ime, prezime);
         this.jmbag = jmbag;
         this.datumRodjenja = datumRodjenja;
     }
-
 
     public String getJmbag() {
         return jmbag;
