@@ -2,7 +2,6 @@ package hr.java.vjezbe.entitet;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.Arrays;
 
 public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska{
 
@@ -19,41 +18,16 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
         return konacnaOcjena.round(new MathContext(1));
     }
 
-    private int studentIndex(Student student){
-        int index = -1;
-
-        for(int i = 0; i < getStudenti().length; i++)
-            if(getStudenti()[i] == student){
-                index = i;
-                break;
-            }
-
-        return index;
-    }
-
     @Override
     public Student odrediNajuspjesnijegStudentaNaGodini(int godina){
-        Student najuspjesniji = null;
+        Student najuspjesniji = getStudenti()[0];
+        BigDecimal najveciProsjek = odrediProsjekOcjenaNaIspitima(filtrirajIspitePoStudentu(getIspiti(), najuspjesniji));
 
-        for(Ispit ispit: getIspiti())
-            if(ispit.getDatumIVrijeme().getYear() == godina){
-                najuspjesniji = ispit.getStudent();
-                break;
-            }
-
-        for(Ispit ispit: getIspiti()){
-            if(ispit.getDatumIVrijeme().getYear() == godina){
-                if(najuspjesniji == ispit.getStudent())
-                    continue;
-
-                Ispit[] studentoviIspiti = filtrirajIspitePoStudentu(getIspiti(), ispit.getStudent());
-                Ispit[] najuspjesnijiIspiti = filtrirajIspitePoStudentu(getIspiti(), najuspjesniji);
-
-                if(odrediProsjekOcjenaNaIspitima(studentoviIspiti).compareTo(odrediProsjekOcjenaNaIspitima(najuspjesnijiIspiti)) == 1)
-                    najuspjesniji = ispit.getStudent();
-                else if(odrediProsjekOcjenaNaIspitima(studentoviIspiti).compareTo(odrediProsjekOcjenaNaIspitima(najuspjesnijiIspiti)) == 0)
-                    if(studentIndex(ispit.getStudent()) > studentIndex(najuspjesniji))
-                        najuspjesniji = ispit.getStudent();
+        for(Student student: getStudenti()){
+            BigDecimal prosjek = odrediProsjekOcjenaNaIspitima(filtrirajIspitePoStudentu(getIspiti(), student));
+            if(prosjek.compareTo(najveciProsjek) >= 0){
+                najuspjesniji = student;
+                najveciProsjek = prosjek;
             }
         }
 
