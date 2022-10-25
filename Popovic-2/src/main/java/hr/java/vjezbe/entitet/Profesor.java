@@ -4,10 +4,33 @@ public class Profesor extends Osoba {
     private String sifra;
     private  String titula;
 
-    public Profesor(String sifra, String ime, String prezime, String titula) {
-        super(ime, prezime);
-        this.sifra = sifra;
-        this.titula = titula;
+    private Profesor(Builder builder){
+        super(builder.ime, builder.prezime);
+        this.sifra = builder.sifra;
+        this.titula = builder.titula;
+    }
+    public static class Builder{
+        private String ime;
+        private String prezime;
+        private String sifra;
+        private String titula;
+
+        public Builder(String ime, String prezime){
+            this.ime = ime;
+            this.prezime = prezime;
+        }
+        public Builder saSifrom(String sifra){
+            this.sifra = sifra;
+            return this;
+        }
+        public Builder saTitulom(String titula){
+            this.titula = titula;
+            return this;
+        }
+
+        public Profesor build(){
+            return new Profesor(this);
+        }
     }
 
     public String getSifra() {

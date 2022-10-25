@@ -6,11 +6,13 @@ public interface Visokoskolska {
     public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(Ispit[] ispiti, int ocjenaPismeno, int ocjenaObrana);
 
     default public BigDecimal odrediProsjekOcjenaNaIspitima(Ispit[] ispiti){
-        BigDecimal prosjek = new BigDecimal("0");
-        for(Ispit ispit: ispiti)
-            prosjek.add(BigDecimal.valueOf(ispit.getOcjena()));
+        BigDecimal prosjek = BigDecimal.ZERO;
 
-        prosjek.divide(BigDecimal.valueOf(ispiti.length));
+        for(Ispit ispit: ispiti){
+            prosjek = prosjek.add(BigDecimal.valueOf(ispit.getOcjena()));
+        }
+
+        prosjek = prosjek.divide(BigDecimal.valueOf(ispiti.length));
 
         return prosjek;
     }

@@ -1,10 +1,8 @@
 package hr.java.vjezbe.glavna;
 
-import hr.java.vjezbe.entitet.Ispit;
-import hr.java.vjezbe.entitet.Predmet;
-import hr.java.vjezbe.entitet.Profesor;
-import  hr.java.vjezbe.entitet.Student;
+import hr.java.vjezbe.entitet.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,9 +10,9 @@ import java.util.Scanner;
 
 public class Glavna {
     private static final int BROJ_PROFESORA = 2;
-    private static final int BROJ_PREDMETA = 3;
-    private static final int BROJ_STUDENATA = 3;
-    private static final int BROJ_ISPITA = 1;
+    private static final int BROJ_PREDMETA = 2;
+    private static final int BROJ_STUDENATA = 2;
+    private static final int BROJ_ISPITA = 2;
 
     private static Profesor[] ucitajProfesore(Scanner input){
         Profesor[] profesori = new Profesor[BROJ_PROFESORA];
@@ -34,7 +32,7 @@ public class Glavna {
             System.out.print("Unesite titulu profesora: ");
             String titula = input.nextLine();
 
-            profesori[i] = new Profesor(sifra, ime, prezime, titula);
+            profesori[i] = new Profesor.Builder(ime, prezime).saSifrom(sifra).saTitulom(titula).build();
         }
         return profesori;
     }
@@ -111,6 +109,11 @@ public class Glavna {
             input.nextLine();
             Predmet predmet = predmeti[brojPredmeta - 1];
 
+            System.out.print("Unesite naziv dvorane: ");
+            String nazivDvorane = input.nextLine();
+            System.out.print("Unesite zgradu dvorane: ");
+            String nazivZgrade = input.nextLine();
+
             System.out.print("Odaberi studenta: \n");
             for(int j = 0; j < studenti.length; j++){
                 System.out.print((j+1) + ". " + studenti[j].getIme() + " " + studenti[j].getPrezime() + "\n");
@@ -127,7 +130,7 @@ public class Glavna {
             System.out.print("Unesite datum i vrijeme ispita u formatu (dd.MM.yyyy.THH:mm): ");
             LocalDateTime datum = LocalDateTime.parse(input.nextLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy.'T'HH:mm"));
 
-            ispiti[i] = new Ispit(predmet, student, ocjena, datum);
+            ispiti[i] = new Ispit(predmet, student, ocjena, datum, new Dvorana(nazivDvorane, nazivZgrade));
         }
 
         return ispiti;
@@ -136,15 +139,83 @@ public class Glavna {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        Profesor[] profesori = ucitajProfesore(input);
-        Predmet[] predmeti = ucitajPredmete(input, profesori);
-        Student[] studenti = ucitajStudente(input);
-        Ispit[] ispiti = ucitajIspite(input, predmeti, studenti);
+        System.out.print("Unesite broj obrazovnih ustanova: ");
+        int brojUstanova = input.nextInt();
+        input.nextLine();
 
-        for (Ispit ispit : ispiti) {
-            if (ispit.getOcjena() == 5) {
-                System.out.print("Student " + ispit.getStudent().getIme() + " " + ispit.getStudent().getPrezime() + " je ostvario ocjenu 'izvrstan' na predmetu '" + ispit.getPredmet().getNaziv() + "' \n");
+        ObrazovnaUstanova[] obrazovneUstanove = new ObrazovnaUstanova[brojUstanova];
+
+        for(int i = 0; i < brojUstanova; i++) {
+            System.out.println("Unesite podatke za " + (i+1) + ". obrazovnu ustanovu:");
+
+            Profesor[] profesori = ucitajProfesore(input);
+            Predmet[] predmeti = ucitajPredmete(input, profesori);
+            Student[] studenti = ucitajStudente(input);
+            Ispit[] ispiti = ucitajIspite(input, predmeti, studenti);
+
+            for (Ispit ispit : ispiti) {
+                if (ispit.getOcjena().equals(5)) {
+                    System.out.print("Student " + ispit.getStudent().getIme() + " " + ispit.getStudent().getPrezime() + " je ostvario ocjenu 'izvrstan' na predmetu '" + ispit.getPredmet().getNaziv() + "' \n");
+                }
             }
+
+            for(Predmet predmet: predmeti){
+                int indexStudenta = 0;
+                Student[] studentiPredmeta = new Student[predmet.getStudenti().length];
+
+                for(Ispit ispit: ispiti)
+                    if(ispit.getPredmet() == predmet){
+                        studentiPredmeta[indexStudenta] = ispit.getStudent();
+                        indexStudenta++;
+                    }
+
+                predmet.setStudenti(studentiPredmeta);
+            }
+
+            System.out.print("Odaberite obrazovnu ustanovu za navedene podatke koju želite unijeti (1 - Veleučilište Jave, 2 - Fakultet računarstva): ");
+            int odabirUstanove = input.nextInt();
+            input.nextLine();
+
+            System.out.print("Unesite naziv obrazovne ustanove: ");
+            String nazivUstanove = input.nextLine();
+
+            switch(odabirUstanove){
+                case 1:
+                    obrazovneUstanove[i] = new VeleucilisteJave(nazivUstanove, predmeti, profesori, studenti, ispiti);
+
+                    for(Student student: obrazovneUstanove[i].getStudenti()){
+                        System.out.print("Unesite ocjenu završnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
+                        int zavrsni = input.nextInt();
+                        input.nextLine();
+                        System.out.print("Unesite ocjenu obrane zavrsnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
+                        int obrana = input.nextInt();
+                        input.nextLine();
+                        System.out.println("Konačna ocjena studija studenta " + student.getIme() + " " + student.getPrezime() + " je " + ((VeleucilisteJave)obrazovneUstanove[i]).izracunajKonacnuOcjenuStudijaZaStudenta(((VeleucilisteJave) obrazovneUstanove[i]).filtrirajIspitePoStudentu(obrazovneUstanove[i].getIspiti(), student), zavrsni, obrana));
+                    }
+
+                    Student najboljiStudentVeleuciliste = ((VeleucilisteJave)obrazovneUstanove[i]).odrediNajuspjesnijegStudentaNaGodini(2022);
+                    System.out.println("Najbolji student 2022. godine je " + najboljiStudentVeleuciliste.getIme() + " " + najboljiStudentVeleuciliste.getPrezime() + " JMBAG: " + najboljiStudentVeleuciliste.getJmbag());
+                    break;
+                case 2:
+                    obrazovneUstanove[i] = new FakultetRacunarstva(nazivUstanove, predmeti, profesori, studenti, ispiti);
+
+                    for(Student student: obrazovneUstanove[i].getStudenti()){
+                        System.out.print("Unesite ocjenu završnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
+                        int zavrsni = input.nextInt();
+                        input.nextLine();
+                        System.out.print("Unesite ocjenu obrane zavrsnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
+                        int obrana = input.nextInt();
+                        input.nextLine();
+                        System.out.println("Konačna ocjena studija studenta " + student.getIme() + " " + student.getPrezime() + " je " + ((FakultetRacunarstva)obrazovneUstanove[i]).izracunajKonacnuOcjenuStudijaZaStudenta(((FakultetRacunarstva) obrazovneUstanove[i]).filtrirajIspitePoStudentu(obrazovneUstanove[i].getIspiti(), student), zavrsni, obrana));
+                    }
+
+                    Student najboljiStudent = ((FakultetRacunarstva)obrazovneUstanove[i]).odrediNajuspjesnijegStudentaNaGodini(2022);
+                    System.out.println("Najbolji student 2022. godine je " + najboljiStudent.getIme() + " " + najboljiStudent.getPrezime() + " JMBAG: " + najboljiStudent.getJmbag());
+                    Student rektorova = ((FakultetRacunarstva)obrazovneUstanove[i]).odrediStudentaZaRektorovuNagradu();
+                    System.out.println("Student koji je osvojio rektorovu nagradu je " + rektorova.getIme() + " " + rektorova.getPrezime() + " JMBAG: " + rektorova.getJmbag());
+                    break;
+            }
+
         }
     }
 }
