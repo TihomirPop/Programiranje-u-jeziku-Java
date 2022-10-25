@@ -12,9 +12,9 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
     @Override
     public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(Ispit[] ispiti, int ocjenaPismeno, int ocjenaObrana){
         BigDecimal konacnaOcjena = odrediProsjekOcjenaNaIspitima(ispiti);
-        konacnaOcjena.multiply(BigDecimal.valueOf(2));
-        konacnaOcjena.add(BigDecimal.valueOf(ocjenaPismeno)).add(BigDecimal.valueOf(ocjenaObrana));
-        konacnaOcjena.divide(BigDecimal.valueOf(4));
+        konacnaOcjena = konacnaOcjena.multiply(BigDecimal.valueOf(2));
+        konacnaOcjena = konacnaOcjena.add(BigDecimal.valueOf(ocjenaPismeno)).add(BigDecimal.valueOf(ocjenaObrana));
+        konacnaOcjena = konacnaOcjena.divide(BigDecimal.valueOf(4));
         return konacnaOcjena.round(new MathContext(1));
     }
 

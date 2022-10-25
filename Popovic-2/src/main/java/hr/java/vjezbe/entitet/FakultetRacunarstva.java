@@ -12,10 +12,10 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
     @Override
     public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(Ispit[] ispiti, int diplomskiRadPismeno, int diplomskiRadObrana){
         BigDecimal konacnaOcjena = odrediProsjekOcjenaNaIspitima(ispiti);
-        konacnaOcjena.multiply(BigDecimal.valueOf(3));
-        konacnaOcjena.add(BigDecimal.valueOf(diplomskiRadPismeno)).add(BigDecimal.valueOf(diplomskiRadObrana));
-        konacnaOcjena.divide(BigDecimal.valueOf(5));
-        return konacnaOcjena.round(new MathContext(1));
+        konacnaOcjena = konacnaOcjena.multiply(BigDecimal.valueOf(3));
+        konacnaOcjena = konacnaOcjena.add(BigDecimal.valueOf(diplomskiRadPismeno)).add(BigDecimal.valueOf(diplomskiRadObrana));
+        konacnaOcjena = konacnaOcjena.divide(BigDecimal.valueOf(5));
+        return konacnaOcjena;
     }
 
     @Override
