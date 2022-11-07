@@ -333,11 +333,12 @@ public class Glavna {
             System.out.print("Unesite naziv obrazovne ustanove: ");
             String nazivUstanove = input.nextLine();
 
+            Student[] pozitivniStudenti;
             switch (odabirUstanove) {
                 case 1:
                     obrazovneUstanove[i] = new VeleucilisteJave(nazivUstanove, predmeti, profesori, studenti, ispiti);
-
-                    for (Student student : obrazovneUstanove[i].getStudenti()) {
+                    pozitivniStudenti = obrazovneUstanove[0].filtrirajPozitivneStudente();
+                    for (Student student : pozitivniStudenti) {
                         System.out.print("Unesite ocjenu završnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
                         int zavrsni = input.nextInt();
                         input.nextLine();
@@ -352,8 +353,8 @@ public class Glavna {
                     break;
                 case 2:
                     obrazovneUstanove[i] = new FakultetRacunarstva(nazivUstanove, predmeti, profesori, studenti, ispiti);
-
-                    for (Student student : obrazovneUstanove[i].getStudenti()) {
+                    pozitivniStudenti = obrazovneUstanove[0].filtrirajPozitivneStudente();
+                    for (Student student : pozitivniStudenti) {
                         System.out.print("Unesite ocjenu završnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
                         int zavrsni = input.nextInt();
                         input.nextLine();

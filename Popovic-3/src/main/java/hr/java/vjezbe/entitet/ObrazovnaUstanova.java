@@ -1,5 +1,8 @@
 package hr.java.vjezbe.entitet;
 
+import java.util.HashSet;
+import java.util.List;
+
 public abstract class ObrazovnaUstanova {
     private String naziv;
     private Predmet[] predmeti;
@@ -56,4 +59,16 @@ public abstract class ObrazovnaUstanova {
     }
 
     public abstract Student odrediNajuspjesnijegStudentaNaGodini(int godina);
+
+    public Student[] filtrirajPozitivneStudente(){
+        HashSet<Student> pozitivniStudenti = new HashSet<>();
+        for(Student student: studenti)
+            pozitivniStudenti.add(student);
+
+        for(Ispit ispit: ispiti)
+            if(ispit.getOcjena() == 1)
+                pozitivniStudenti.remove(ispit.getStudent());
+
+        return pozitivniStudenti.toArray(new Student[0]);
+    }
 }

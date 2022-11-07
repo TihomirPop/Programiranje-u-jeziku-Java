@@ -2,6 +2,7 @@ package hr.java.vjezbe.entitet;
 
 import hr.java.vjezbe.glavna.Glavna;
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
+import hr.java.vjezbe.iznimke.PostojiViseNajmladjihStudenataException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,11 +79,19 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
                 najbolji = student;
                 prosjekNajboljeg = prosjekStudenta;
             }
-            else if (prosjekStudenta.compareTo(prosjekNajboljeg) == 0)
+            else if (prosjekStudenta.compareTo(prosjekNajboljeg) == 0){
                 if (student.getDatumRodjenja().compareTo(najbolji.getDatumRodjenja()) == -1){
                     najbolji = student;
                     prosjekNajboljeg = prosjekStudenta;
+                } else if (student.getDatumRodjenja().compareTo(najbolji.getDatumRodjenja()) == 0) {
+                    String najmladjiStudenti = najbolji.getIme() + " " + najbolji.getPrezime() + ", " + student.getIme() + " " + student.getPrezime();
+
+                    System.out.println("Postoji vise najmladih studenata: " + najmladjiStudenti);
+                    logger.error("Postoji vise najmladih studenata: " + najmladjiStudenti);
+
+                    throw new PostojiViseNajmladjihStudenataException(najmladjiStudenti);
                 }
+            }
         }
 
         return najbolji;
