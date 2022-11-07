@@ -1,9 +1,15 @@
 package hr.java.vjezbe.entitet;
 
+import hr.java.vjezbe.glavna.Glavna;
+import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 
 public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
+    private static final Logger logger = LoggerFactory.getLogger(Glavna.class);
 
     public FakultetRacunarstva(String naziv, Predmet[] predmeti, Profesor[] profesori, Student[] studenti, Ispit[] ispiti) {
         super(naziv, predmeti, profesori, studenti, ispiti);
@@ -11,11 +17,17 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
 
     @Override
     public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(Ispit[] ispiti, int diplomskiRadPismeno, int diplomskiRadObrana){
-        BigDecimal konacnaOcjena = odrediProsjekOcjenaNaIspitima(ispiti);
-        konacnaOcjena = konacnaOcjena.multiply(BigDecimal.valueOf(3));
-        konacnaOcjena = konacnaOcjena.add(BigDecimal.valueOf(diplomskiRadPismeno)).add(BigDecimal.valueOf(diplomskiRadObrana));
-        konacnaOcjena = konacnaOcjena.divide(BigDecimal.valueOf(5));
-        return konacnaOcjena;
+        try {
+            BigDecimal konacnaOcjena = odrediProsjekOcjenaNaIspitima(ispiti);
+            konacnaOcjena = konacnaOcjena.multiply(BigDecimal.valueOf(3));
+            konacnaOcjena = konacnaOcjena.add(BigDecimal.valueOf(diplomskiRadPismeno)).add(BigDecimal.valueOf(diplomskiRadObrana));
+            konacnaOcjena = konacnaOcjena.divide(BigDecimal.valueOf(5));
+            return konacnaOcjena;
+        } catch (NemoguceOdreditiProsjekStudentaException e){
+            logger.warn("Student " + ispiti[0].getStudent().getIme() + " " + ispiti[0].getStudent().getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!", e);
+            System.out.println("Student " + ispiti[0].getStudent().getIme() + " " + ispiti[0].getStudent().getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!");
+            return BigDecimal.ONE;
+        }
     }
 
     @Override
@@ -44,15 +56,33 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
     }
 
     @Override
-    public Student odrediStudentaZaRektorovuNagradu(){
+    public Student odrediStudentaZaRektorovuNagradu() {
         Student najbolji = getStudenti()[0];
+        BigDecimal prosjekNajboljeg;
+        try {
+            prosjekNajboljeg = odrediProsjekOcjenaNaIspitima(filtrirajIspitePoStudentu(getIspiti(), najbolji));
+        } catch (NemoguceOdreditiProsjekStudentaException e) {
+            logger.warn("Student " + najbolji.getIme() + " " + najbolji.getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!", e);
+            prosjekNajboljeg = BigDecimal.ONE;
+        }
 
-        for(Student student: getStudenti()){
-            if(odrediProsjekOcjenaNaIspitima(filtrirajIspitePoStudentu(getIspiti(), student)).compareTo(odrediProsjekOcjenaNaIspitima(filtrirajIspitePoStudentu(getIspiti(), najbolji))) == 1)
+        for (Student student : getStudenti()) {
+            BigDecimal prosjekStudenta;
+            try {
+                prosjekStudenta = odrediProsjekOcjenaNaIspitima(filtrirajIspitePoStudentu(getIspiti(), student));
+            } catch (NemoguceOdreditiProsjekStudentaException e) {
+                logger.warn("Student " + student.getIme() + " " + student.getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!", e);
+                prosjekStudenta = BigDecimal.ONE;
+            }
+            if (prosjekStudenta.compareTo(prosjekNajboljeg) == 1) {
                 najbolji = student;
-            else if(odrediProsjekOcjenaNaIspitima(filtrirajIspitePoStudentu(getIspiti(), student)).compareTo(odrediProsjekOcjenaNaIspitima(filtrirajIspitePoStudentu(getIspiti(), najbolji))) == 0)
-                if(student.getDatumRodjenja().compareTo(najbolji.getDatumRodjenja()) == -1)
+                prosjekNajboljeg = prosjekStudenta;
+            }
+            else if (prosjekStudenta.compareTo(prosjekNajboljeg) == 0)
+                if (student.getDatumRodjenja().compareTo(najbolji.getDatumRodjenja()) == -1){
                     najbolji = student;
+                    prosjekNajboljeg = prosjekStudenta;
+                }
         }
 
         return najbolji;

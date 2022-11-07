@@ -1,0 +1,60 @@
+2022-11-06 17:55:39,784 INFO [main] h.j.v.g.Glavna [Glavna.java:146] program je pokrenut
+2022-11-07 08:34:44,753 ERROR [main] h.j.v.g.Glavna [Glavna.java:69] Broj ECTS mora biti veci od 0
+hr.java.vjezbe.iznimke.KriviInputException: Broj ECTS mora biti veci od 0
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:66)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:176)
+2022-11-07 08:34:50,470 ERROR [main] h.j.v.g.Glavna [Glavna.java:69] Broj ECTS mora biti veci od 0
+hr.java.vjezbe.iznimke.KriviInputException: Broj ECTS mora biti veci od 0
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:66)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:176)
+2022-11-07 08:34:52,758 ERROR [main] h.j.v.g.Glavna [Glavna.java:73] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:63)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:176)
+2022-11-07 08:49:55,296 ERROR [main] h.j.v.g.Glavna [Glavna.java:69] Broj ECTS mora biti veci od 0
+hr.java.vjezbe.iznimke.KriviInputException: Broj ECTS mora biti veci od 0
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:66)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:194)
+2022-11-07 08:49:58,477 ERROR [main] h.j.v.g.Glavna [Glavna.java:73] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:63)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:194)
+2022-11-07 08:50:28,512 ERROR [main] h.j.v.g.Glavna [Glavna.java:95] Redni broj profesora mora biti izmedu 1 i 2
+hr.java.vjezbe.iznimke.KriviInputException: Redni broj profesora mora biti izmedu 1 i 2
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:92)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:194)
+2022-11-07 08:50:36,329 ERROR [main] h.j.v.g.Glavna [Glavna.java:95] Redni broj profesora mora biti izmedu 1 i 2
+hr.java.vjezbe.iznimke.KriviInputException: Redni broj profesora mora biti izmedu 1 i 2
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:92)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:194)
+2022-11-07 08:50:38,765 ERROR [main] h.j.v.g.Glavna [Glavna.java:99] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:89)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:194)
+2022-11-07 09:23:19,530 ERROR [main] h.j.v.g.Glavna [Glavna.java:73] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:63)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:212)
+2022-11-07 10:32:10,859 ERROR [main] h.j.v.g.Glavna [Glavna.java:294] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:284)
