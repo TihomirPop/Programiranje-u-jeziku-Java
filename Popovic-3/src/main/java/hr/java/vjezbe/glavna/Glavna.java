@@ -41,11 +41,11 @@ public class Glavna {
                     throw (new KriviInputException("Broj ustanova mora biti veci od 0"));
                 kriviBrojUstanova = false;
             } catch (KriviInputException e) {
-                logger.error(e.getMessage(), e);
+                logger.warn(e.getMessage(), e);
                 System.out.println(e.getMessage());
                 kriviBrojUstanova = true;
             } catch (InputMismatchException e) {
-                logger.error("Neispravan unos!", e);
+                logger.warn("Neispravan unos!", e);
                 System.out.println("Neispravan unos!");
                 input.nextLine();
                 kriviBrojUstanova = true;
@@ -103,6 +103,61 @@ public class Glavna {
         System.out.print("Unesite naziv obrazovne ustanove: ");
         String nazivUstanove = input.nextLine();
 
+        switch (odabirUstanove) {
+            case 1:
+                obrazovneUstanove[i] = new VeleucilisteJave(nazivUstanove, predmeti, profesori, studenti, ispiti);
+                break;
+            case 2:
+                obrazovneUstanove[i] = new FakultetRacunarstva(nazivUstanove, predmeti, profesori, studenti, ispiti);
+                break;
+        }
+
+        if(obrazovneUstanove[i] instanceof Visokoskolska visokoskolska){
+            Student[] pozitivniStudenti = obrazovneUstanove[i].filtrirajPozitivneStudente();
+
+            for (Student student : pozitivniStudenti) {
+                boolean kriviZavrsni;
+                do {
+                    try {
+                        System.out.print("Unesite ocjenu završnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
+                        int zavrsni = input.nextInt();
+                        input.nextLine();
+
+                        if(zavrsni < 1 || zavrsni > 5)
+                            throw new KriviInputException("Ocjene iz zavrsnog rada moraju biti izmedu 1 i 5");
+
+                        System.out.print("Unesite ocjenu obrane zavrsnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
+                        int obrana = input.nextInt();
+                        input.nextLine();
+
+                        if(obrana < 1 || obrana > 5)
+                            throw new KriviInputException("Ocjene iz zavrsnog rada moraju biti izmedu 1 i 5");
+                        kriviZavrsni = false;
+
+                        System.out.println("Konačna ocjena studija studenta " + student.getIme() + " " + student.getPrezime() + " je " + visokoskolska.izracunajKonacnuOcjenuStudijaZaStudenta(visokoskolska.filtrirajIspitePoStudentu(obrazovneUstanove[i].getIspiti(), student), zavrsni, obrana));
+                    } catch (KriviInputException e) {
+                        logger.warn(e.getMessage(), e);
+                        System.out.println(e.getMessage());
+                        kriviZavrsni = true;
+                    } catch (InputMismatchException e) {
+                        logger.warn("Neispravan unos!", e);
+                        System.out.println("Neispravan unos!");
+                        input.nextLine();
+                        kriviZavrsni = true;
+                    }
+                }while (kriviZavrsni);
+            }
+
+            Student najboljiStudentVeleuciliste = obrazovneUstanove[i].odrediNajuspjesnijegStudentaNaGodini(2022);
+            System.out.println("Najbolji student 2022. godine je " + najboljiStudentVeleuciliste.getIme() + " " + najboljiStudentVeleuciliste.getPrezime() + " JMBAG: " + najboljiStudentVeleuciliste.getJmbag());
+
+            if(obrazovneUstanove[i] instanceof Diplomski diplomski) {
+                Student rektorova = diplomski.odrediStudentaZaRektorovuNagradu();
+                System.out.println("Student koji je osvojio rektorovu nagradu je " + rektorova.getIme() + " " + rektorova.getPrezime() + " JMBAG: " + rektorova.getJmbag());
+            }
+
+        }
+/*
         Student[] pozitivniStudenti;
         switch (odabirUstanove) {
             case 1:
@@ -139,7 +194,7 @@ public class Glavna {
                 Student rektorova = ((FakultetRacunarstva) obrazovneUstanove[i]).odrediStudentaZaRektorovuNagradu();
                 System.out.println("Student koji je osvojio rektorovu nagradu je " + rektorova.getIme() + " " + rektorova.getPrezime() + " JMBAG: " + rektorova.getJmbag());
                 break;
-        }
+        }*/
     }
 
     /**
@@ -200,11 +255,11 @@ public class Glavna {
                         throw (new KriviInputException("Broj ECTS mora biti veci od 0"));
                     kriviBrojECTSa = false;
                 } catch (KriviInputException e) {
-                    logger.error(e.getMessage(), e);
+                    logger.warn(e.getMessage(), e);
                     System.out.println(e.getMessage());
                     kriviBrojECTSa = true;
                 } catch (InputMismatchException e) {
-                    logger.error("Neispravan unos!", e);
+                    logger.warn("Neispravan unos!", e);
                     System.out.println("Neispravan unos!");
                     input.nextLine();
                     kriviBrojECTSa = true;
@@ -226,11 +281,11 @@ public class Glavna {
                         throw (new KriviInputException("Redni broj profesora mora biti izmedu 1 i " + BROJ_PROFESORA));
                     kriviBrojProfesora = false;
                 } catch (KriviInputException e) {
-                    logger.error(e.getMessage(), e);
+                    logger.warn(e.getMessage(), e);
                     System.out.println(e.getMessage());
                     kriviBrojProfesora = true;
                 } catch (InputMismatchException e) {
-                    logger.error("Neispravan unos!", e);
+                    logger.warn("Neispravan unos!", e);
                     System.out.println("Neispravan unos!");
                     input.nextLine();
                     kriviBrojProfesora = true;
@@ -249,11 +304,11 @@ public class Glavna {
                         throw (new KriviInputException("Broj studenata mora biti izmedu 1 i " + BROJ_STUDENATA));
                     kriviBrojStudenata = false;
                 } catch (KriviInputException e) {
-                    logger.error(e.getMessage(), e);
+                    logger.warn(e.getMessage(), e);
                     System.out.println(e.getMessage());
                     kriviBrojStudenata = true;
                 } catch (InputMismatchException e) {
-                    logger.error("Neispravan unos!", e);
+                    logger.warn("Neispravan unos!", e);
                     System.out.println("Neispravan unos!");
                     input.nextLine();
                     kriviBrojStudenata = true;
@@ -290,7 +345,7 @@ public class Glavna {
                     datumRodenja = LocalDate.parse(input.nextLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy."));
                     kriviFormatDatuma = false;
                 } catch (DateTimeParseException e) {
-                    logger.error("Krivi format datuma!", e);
+                    logger.warn("Krivi format datuma!", e);
                     System.out.println("Krivi format datuma!");
                     kriviFormatDatuma = true;
                 }
@@ -332,11 +387,11 @@ public class Glavna {
                         throw (new KriviInputException("Redni broj predmeta mora biti izmedu 1 i " + BROJ_PREDMETA));
                     kriviBrojPredmeta = false;
                 } catch (KriviInputException e) {
-                    logger.error(e.getMessage(), e);
+                    logger.warn(e.getMessage(), e);
                     System.out.println(e.getMessage());
                     kriviBrojPredmeta = true;
                 } catch (InputMismatchException e) {
-                    logger.error("Neispravan unos!", e);
+                    logger.warn("Neispravan unos!", e);
                     System.out.println("Neispravan unos!");
                     input.nextLine();
                     kriviBrojPredmeta = true;
@@ -364,11 +419,11 @@ public class Glavna {
                         throw (new KriviInputException("Redni broj studenta mora biti izmedu 1 i " + BROJ_STUDENATA));
                     kriviBrojStudenta = false;
                 } catch (KriviInputException e) {
-                    logger.error(e.getMessage(), e);
+                    logger.warn(e.getMessage(), e);
                     System.out.println(e.getMessage());
                     kriviBrojStudenta = true;
                 } catch (InputMismatchException e) {
-                    logger.error("Neispravan unos!", e);
+                    logger.warn("Neispravan unos!", e);
                     System.out.println("Neispravan unos!");
                     input.nextLine();
                     kriviBrojStudenta = true;
@@ -387,11 +442,11 @@ public class Glavna {
                         throw (new KriviInputException("Ocjena mora biti izmedu 1 i 5"));
                     krivaOcjena = false;
                 } catch (KriviInputException e) {
-                    logger.error(e.getMessage(), e);
+                    logger.warn(e.getMessage(), e);
                     System.out.println(e.getMessage());
                     krivaOcjena = true;
                 } catch (InputMismatchException e) {
-                    logger.error("Neispravan unos!", e);
+                    logger.warn("Neispravan unos!", e);
                     System.out.println("Neispravan unos!");
                     input.nextLine();
                     krivaOcjena = true;
@@ -406,7 +461,7 @@ public class Glavna {
                     datum = LocalDateTime.parse(input.nextLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy.'T'HH:mm"));
                     kriviFormatDatuma = false;
                 } catch (DateTimeParseException e) {
-                    logger.error("Krivi format datuma!", e);
+                    logger.warn("Krivi format datuma!", e);
                     System.out.println("Krivi format datuma!");
                     kriviFormatDatuma = true;
                 }
