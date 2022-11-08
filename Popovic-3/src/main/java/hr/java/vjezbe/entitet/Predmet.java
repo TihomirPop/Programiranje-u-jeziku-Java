@@ -1,5 +1,8 @@
 package hr.java.vjezbe.entitet;
 
+/**
+ * Klasa koja predstavlja predmet neke obrazovne ustanove
+ */
 public class Predmet {
     private String sifra;
     private String naziv;

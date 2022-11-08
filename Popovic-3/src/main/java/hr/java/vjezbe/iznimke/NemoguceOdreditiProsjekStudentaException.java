@@ -1,5 +1,8 @@
 package hr.java.vjezbe.iznimke;
 
+/**
+ * Oznaceni exception koji se baca kada je barem jedna studentova ocjena negativna
+ */
 public class NemoguceOdreditiProsjekStudentaException extends Exception{
     public NemoguceOdreditiProsjekStudentaException() {
     }

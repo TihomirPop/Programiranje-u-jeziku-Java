@@ -1,5 +1,8 @@
 package hr.java.vjezbe.entitet;
 
+/**
+ * Klasa koja predstavlja profesora neke obrazovne ustanove, nasljeduje osobu
+ */
 public class Profesor extends Osoba {
     private String sifra;
     private  String titula;
@@ -9,25 +12,50 @@ public class Profesor extends Osoba {
         this.sifra = builder.sifra;
         this.titula = builder.titula;
     }
+
+    /**
+     * Builder klasa za objekt tipa Profesor
+     */
     public static class Builder{
         private String ime;
         private String prezime;
         private String sifra;
         private String titula;
 
+        /**
+         * Konstruktor buildera sa obaveznim parametrima
+         * @param ime - ime profesora
+         * @param prezime - prezime profesora
+         */
         public Builder(String ime, String prezime){
             this.ime = ime;
             this.prezime = prezime;
         }
+
+        /**
+         * metoda za dodavanje sifre builderu profesora
+         * @param sifra - sifra profesora
+         * @return - builder vraca sam sebe
+         */
         public Builder saSifrom(String sifra){
             this.sifra = sifra;
             return this;
         }
+
+        /**
+         * metoda za dodavanje titule builderu profesora
+         * @param titula - titula profesora
+         * @return - builder vraca sam sebe
+         */
         public Builder saTitulom(String titula){
             this.titula = titula;
             return this;
         }
 
+        /**
+         * metoda koja builda objekt tipa profesor sa zadanim elementima
+         * @return - profesor sa zadanim elementima
+         */
         public Profesor build(){
             return new Profesor(this);
         }

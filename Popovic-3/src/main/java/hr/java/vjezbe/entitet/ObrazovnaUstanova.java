@@ -3,6 +3,9 @@ package hr.java.vjezbe.entitet;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Apstraktna klasa koja predstavlja obrazovnu ustanovu
+ */
 public abstract class ObrazovnaUstanova {
     private String naziv;
     private Predmet[] predmeti;
@@ -58,7 +61,17 @@ public abstract class ObrazovnaUstanova {
         this.ispiti = ispiti;
     }
 
+    /**
+     * apstraktna metoda koja vraca najuspjesnijeg studenta na godini
+     * @param godina - godina na kojoj se trazi najuspjesniji student
+     * @return - najuspjesniji student
+     */
     public abstract Student odrediNajuspjesnijegStudentaNaGodini(int godina);
+
+    /**
+     * filtrira pozitivne studente
+     * @return - array pozitivnih studenata
+     */
 
     public Student[] filtrirajPozitivneStudente(){
         HashSet<Student> pozitivniStudenti = new HashSet<>();
@@ -69,6 +82,12 @@ public abstract class ObrazovnaUstanova {
             if(ispit.getOcjena() == 1)
                 pozitivniStudenti.remove(ispit.getStudent());
 
-        return pozitivniStudenti.toArray(new Student[0]);
+        Student[] pozitivniStudentiArray = new Student[pozitivniStudenti.size()];
+        int i = 0;
+        for(Student student: pozitivniStudenti)
+            pozitivniStudentiArray[i++] = student;
+
+        return pozitivniStudentiArray;
+        //return pozitivniStudenti.toArray(new Student[0]);
     }
 }

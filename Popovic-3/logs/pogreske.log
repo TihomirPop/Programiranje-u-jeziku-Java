@@ -58,3 +58,187 @@ java.util.InputMismatchException: null
 	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
 	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
 	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:284)
+2022-11-07 22:09:35,095 ERROR [main] h.j.v.g.Glavna [Glavna.java:294] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:284)
+2022-11-07 22:10:43,670 ERROR [main] h.j.v.g.Glavna [Glavna.java:294] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:284)
+2022-11-07 22:14:36,197 WARN [main] h.j.v.g.Glavna [VeleucilisteJave.java:39] Student Marko Curic zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!
+hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student Marko Curic je ocjenjen negativnom ocjenom iz predmeta Programiranje u jeziku Java
+	at hr.java.vjezbe.entitet.Visokoskolska.odrediProsjekOcjenaNaIspitima(Visokoskolska.java:16)
+	at hr.java.vjezbe.entitet.VeleucilisteJave.odrediNajuspjesnijegStudentaNaGodini(VeleucilisteJave.java:37)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:351)
+2022-11-07 22:14:36,198 WARN [main] h.j.v.g.Glavna [VeleucilisteJave.java:48] Student Marko Curic zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!
+hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student Marko Curic je ocjenjen negativnom ocjenom iz predmeta Programiranje u jeziku Java
+	at hr.java.vjezbe.entitet.Visokoskolska.odrediProsjekOcjenaNaIspitima(Visokoskolska.java:16)
+	at hr.java.vjezbe.entitet.VeleucilisteJave.odrediNajuspjesnijegStudentaNaGodini(VeleucilisteJave.java:46)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:351)
+2022-11-07 22:26:27,459 ERROR [main] h.j.v.g.Glavna [Glavna.java:226] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.ucitajIspite(Glavna.java:216)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:308)
+2022-11-07 22:27:42,705 ERROR [main] h.j.v.g.Glavna [FakultetRacunarstva.java:90] Postoji vise najmladih studenata: Emil Frankovic, Emil Frankovic
+2022-11-07 22:43:09,604 ERROR [main] h.j.v.g.Glavna [Glavna.java:264] Krivi format datuma!
+java.time.format.DateTimeParseException: Text '' could not be parsed at index 0
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2106)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:2008)
+	at java.base/java.time.LocalDateTime.parse(LocalDateTime.java:494)
+	at hr.java.vjezbe.glavna.Glavna.ucitajIspite(Glavna.java:261)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:308)
+2022-11-07 22:43:39,247 ERROR [main] h.j.v.g.Glavna [FakultetRacunarstva.java:90] Postoji vise najmladih studenata: Emil  Frankovic, Danka Zupanovic
+2022-11-07 23:30:17,056 WARN [main] h.j.v.g.Glavna [VeleucilisteJave.java:39] Student Marko curic zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!
+hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student Marko curic je ocjenjen negativnom ocjenom iz predmeta Programiranje u Javi
+	at hr.java.vjezbe.entitet.Visokoskolska.odrediProsjekOcjenaNaIspitima(Visokoskolska.java:16)
+	at hr.java.vjezbe.entitet.VeleucilisteJave.odrediNajuspjesnijegStudentaNaGodini(VeleucilisteJave.java:37)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:351)
+2022-11-07 23:30:17,060 WARN [main] h.j.v.g.Glavna [VeleucilisteJave.java:48] Student Marko curic zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!
+hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student Marko curic je ocjenjen negativnom ocjenom iz predmeta Programiranje u Javi
+	at hr.java.vjezbe.entitet.Visokoskolska.odrediProsjekOcjenaNaIspitima(Visokoskolska.java:16)
+	at hr.java.vjezbe.entitet.VeleucilisteJave.odrediNajuspjesnijegStudentaNaGodini(VeleucilisteJave.java:46)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:351)
+2022-11-07 23:46:36,789 ERROR [main] h.j.v.g.Glavna [Glavna.java:100] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:90)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:306)
+2022-11-07 23:46:40,505 ERROR [main] h.j.v.g.Glavna [Glavna.java:123] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:113)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:306)
+2022-11-07 23:47:40,295 ERROR [main] h.j.v.g.Glavna [Glavna.java:74] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:64)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:306)
+2022-11-07 23:47:54,030 ERROR [main] h.j.v.g.Glavna [Glavna.java:294] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:284)
+2022-11-07 23:47:54,371 ERROR [main] h.j.v.g.Glavna [Glavna.java:294] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:284)
+2022-11-07 23:47:54,832 ERROR [main] h.j.v.g.Glavna [Glavna.java:294] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:284)
+2022-11-07 23:50:18,319 WARN [main] h.j.v.g.Glavna [VeleucilisteJave.java:39] Student M C zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!
+hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student M C je ocjenjen negativnom ocjenom iz predmeta Java
+	at hr.java.vjezbe.entitet.Visokoskolska.odrediProsjekOcjenaNaIspitima(Visokoskolska.java:18)
+	at hr.java.vjezbe.entitet.VeleucilisteJave.odrediNajuspjesnijegStudentaNaGodini(VeleucilisteJave.java:37)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:351)
+2022-11-07 23:50:18,320 WARN [main] h.j.v.g.Glavna [VeleucilisteJave.java:48] Student M C zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!
+hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student M C je ocjenjen negativnom ocjenom iz predmeta Java
+	at hr.java.vjezbe.entitet.Visokoskolska.odrediProsjekOcjenaNaIspitima(Visokoskolska.java:18)
+	at hr.java.vjezbe.entitet.VeleucilisteJave.odrediNajuspjesnijegStudentaNaGodini(VeleucilisteJave.java:46)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:351)
+2022-11-08 00:01:34,868 ERROR [main] h.j.v.g.Glavna [Glavna.java:249] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.ucitajIspite(Glavna.java:239)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:308)
+2022-11-08 00:01:39,869 ERROR [main] h.j.v.g.Glavna [Glavna.java:264] Krivi format datuma!
+java.time.format.DateTimeParseException: Text '2' could not be parsed at index 0
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2106)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:2008)
+	at java.base/java.time.LocalDateTime.parse(LocalDateTime.java:494)
+	at hr.java.vjezbe.glavna.Glavna.ucitajIspite(Glavna.java:261)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:308)
+2022-11-08 00:01:40,385 ERROR [main] h.j.v.g.Glavna [Glavna.java:264] Krivi format datuma!
+java.time.format.DateTimeParseException: Text '2' could not be parsed at index 0
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2106)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:2008)
+	at java.base/java.time.LocalDateTime.parse(LocalDateTime.java:494)
+	at hr.java.vjezbe.glavna.Glavna.ucitajIspite(Glavna.java:261)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:308)
+2022-11-08 00:02:29,640 ERROR [main] h.j.v.g.Glavna [Glavna.java:294] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:284)
+2022-11-08 00:02:29,917 ERROR [main] h.j.v.g.Glavna [Glavna.java:294] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:284)
+2022-11-08 00:02:30,212 ERROR [main] h.j.v.g.Glavna [Glavna.java:294] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:284)
+2022-11-08 00:02:30,593 ERROR [main] h.j.v.g.Glavna [Glavna.java:294] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:284)
+2022-11-08 00:02:31,905 ERROR [main] h.j.v.g.Glavna [Glavna.java:294] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:284)
+2022-11-08 00:04:54,246 WARN [main] h.j.v.g.Glavna [VeleucilisteJave.java:39] Student Marko Curic zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!
+hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student Marko Curic je ocjenjen negativnom ocjenom iz predmeta Programiranje u javi
+	at hr.java.vjezbe.entitet.Visokoskolska.odrediProsjekOcjenaNaIspitima(Visokoskolska.java:16)
+	at hr.java.vjezbe.entitet.VeleucilisteJave.odrediNajuspjesnijegStudentaNaGodini(VeleucilisteJave.java:37)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:351)
+2022-11-08 00:04:54,250 WARN [main] h.j.v.g.Glavna [VeleucilisteJave.java:48] Student Marko Curic zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!
+hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student Marko Curic je ocjenjen negativnom ocjenom iz predmeta Programiranje u javi
+	at hr.java.vjezbe.entitet.Visokoskolska.odrediProsjekOcjenaNaIspitima(Visokoskolska.java:16)
+	at hr.java.vjezbe.entitet.VeleucilisteJave.odrediNajuspjesnijegStudentaNaGodini(VeleucilisteJave.java:46)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:351)
+2022-11-08 11:15:15,861 WARN [main] h.j.v.g.Glavna [VeleucilisteJave.java:39] Student Marko Curic zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!
+hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student Marko Curic je ocjenjen negativnom ocjenom iz predmeta Programiranje u jeziku Java
+	at hr.java.vjezbe.entitet.Visokoskolska.odrediProsjekOcjenaNaIspitima(Visokoskolska.java:16)
+	at hr.java.vjezbe.entitet.VeleucilisteJave.odrediNajuspjesnijegStudentaNaGodini(VeleucilisteJave.java:37)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:351)
+2022-11-08 11:15:15,867 WARN [main] h.j.v.g.Glavna [VeleucilisteJave.java:48] Student Marko Curic zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!
+hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student Marko Curic je ocjenjen negativnom ocjenom iz predmeta Programiranje u jeziku Java
+	at hr.java.vjezbe.entitet.Visokoskolska.odrediProsjekOcjenaNaIspitima(Visokoskolska.java:16)
+	at hr.java.vjezbe.entitet.VeleucilisteJave.odrediNajuspjesnijegStudentaNaGodini(VeleucilisteJave.java:46)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:351)
+2022-11-08 11:18:43,217 ERROR [main] h.j.v.g.Glavna [FakultetRacunarstva.java:90] Postoji vise najmladih studenata: Emil Frankovic, Danka Zupanovic

@@ -1,5 +1,8 @@
 package hr.java.vjezbe.iznimke;
 
+/**
+ * Generic exception za sve slucaje kada korisnit unese krivu vrijednost
+ */
 public class KriviInputException extends Exception{
     public KriviInputException() {
     }

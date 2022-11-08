@@ -2,6 +2,9 @@ package hr.java.vjezbe.entitet;
 
 import java.time.LocalDateTime;
 
+/**
+ * Klasa koja predstavlja ispit neke obrazovne ustanove
+ */
 public final class Ispit implements Online {
     private Predmet predmet;
     private Student student;
@@ -15,9 +18,6 @@ public final class Ispit implements Online {
         this.ocjena = ocjena;
         this.datumIVrijeme = datumIVrijeme;
         this.dvorana = dvorana;
-    }
-    public Ispit(){
-
     }
 
     public Predmet getPredmet() {

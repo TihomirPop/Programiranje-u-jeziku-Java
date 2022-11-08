@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+/**
+ * Klasa koja predstavlja fakultet racunarstva, nasljeduje ObrazovnaUstanova i implementira Diplomski
+ */
 public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
     private static final Logger logger = LoggerFactory.getLogger(Glavna.class);
 
@@ -16,6 +19,14 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
         super(naziv, predmeti, profesori, studenti, ispiti);
     }
 
+    /**
+     * Racuna konacnu ocjenu studenta tako da pomnozi prosjek sa 3, doda ocjene iz pismenog djela i obrane diplomskog rada i podjeli sa 5
+     * Ako metoda ulovi NemoguceOdreditiProsjekStudentaException, to znaci da je barem jedan ispit negativan i da je student negativan
+     * @param ispiti - array ispita studenta
+     * @param diplomskiRadPismeno - ocjena iz pismenog dijala zavrsnog rada
+     * @param diplomskiRadObrana - ocjena iz obrane zavrsnog rada
+     * @return - konacna ocjena studenta
+     */
     @Override
     public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(Ispit[] ispiti, int diplomskiRadPismeno, int diplomskiRadObrana){
         try {
@@ -31,6 +42,13 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
         }
     }
 
+    /**
+     * Vraca najuspjesnijeg studenta na godini
+     * Najuspjesniji student je onaj sa najvise petica
+     * Ako vise studenata ima najvise petica onda se uzima onaj koji je prvi po redu u Student arrayu
+     * @param godina - godina na kojoj se trazi najuspjesniji student
+     * @return - najuspjesniji student
+     */
     @Override
     public Student odrediNajuspjesnijegStudentaNaGodini(int godina){
         Student najuspjesniji = getStudenti()[0];
@@ -56,6 +74,13 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
         return najuspjesniji;
     }
 
+    /**
+     * Vraca studenta koji ce dobiti rektorovu nagradu
+     * To je student sa najvecim prosjekom
+     * Ako vise studenata ima najveci prosjek onda se uzima onaj koji je najmladi
+     * Ako su najmladi studenti rodeni na isti datum onda se baca PostojiViseNajmladjihStudenataException
+     * @return - student koji ce dobiti rektorovu nagradu
+     */
     @Override
     public Student odrediStudentaZaRektorovuNagradu() {
         Student najbolji = getStudenti()[0];
@@ -79,7 +104,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
                 najbolji = student;
                 prosjekNajboljeg = prosjekStudenta;
             }
-            else if (prosjekStudenta.compareTo(prosjekNajboljeg) == 0){
+            else if ((prosjekStudenta.compareTo(prosjekNajboljeg) == 0) && (najbolji != student)){
                 if (student.getDatumRodjenja().compareTo(najbolji.getDatumRodjenja()) == -1){
                     najbolji = student;
                     prosjekNajboljeg = prosjekStudenta;

@@ -1,5 +1,8 @@
 package hr.java.vjezbe.iznimke;
 
+/**
+ * Neoznaceni exception koji se baca kada je vise studenata najmlade
+ */
 public class PostojiViseNajmladjihStudenataException extends RuntimeException{
     public PostojiViseNajmladjihStudenataException() {
     }
