@@ -7,13 +7,15 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.List;
 
 /**
  * Klasa koja predstavlja veleuciliste Jave, nasljeduje ObrazovnaUstanova i implementira Visokoskolska
  */
 public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska{
     private static final Logger logger = LoggerFactory.getLogger(Glavna.class);
-    public VeleucilisteJave(String naziv, Predmet[] predmeti, Profesor[] profesori, Student[] studenti, Ispit[] ispiti) {
+
+    public VeleucilisteJave(String naziv, List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
         super(naziv, predmeti, profesori, studenti, ispiti);
     }
 
@@ -26,7 +28,7 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
      * @return - konacna ocjena studenta
      */
     @Override
-    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(Ispit[] ispiti, int ocjenaPismeno, int ocjenaObrana){
+    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(List<Ispit> ispiti, int ocjenaPismeno, int ocjenaObrana){
         try {
             BigDecimal konacnaOcjena = odrediProsjekOcjenaNaIspitima(ispiti);
             konacnaOcjena = konacnaOcjena.multiply(BigDecimal.valueOf(2));
@@ -34,8 +36,8 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
             konacnaOcjena = konacnaOcjena.divide(BigDecimal.valueOf(4));
             return konacnaOcjena.round(new MathContext(1));
         } catch (NemoguceOdreditiProsjekStudentaException e) {
-            logger.warn("Student " + ispiti[0].getStudent().getIme() + " " + ispiti[0].getStudent().getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!", e);
-            System.out.println("Student " + ispiti[0].getStudent().getIme() + " " + ispiti[0].getStudent().getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!");
+            logger.warn("Student " + ispiti.get(0).getStudent().getIme() + " " + ispiti.get(0).getStudent().getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!", e);
+            System.out.println("Student " + ispiti.get(0).getStudent().getIme() + " " + ispiti.get(0).getStudent().getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!");
             return BigDecimal.ONE;
         }
     }
@@ -49,7 +51,7 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
      */
     @Override
     public Student odrediNajuspjesnijegStudentaNaGodini(int godina) {
-        Student najuspjesniji = getStudenti()[0];
+        Student najuspjesniji = getStudenti().get(0);
         BigDecimal najveciProsjek;
         try {
             najveciProsjek = odrediProsjekOcjenaNaIspitima(filtrirajIspitePoStudentu(getIspiti(), najuspjesniji));

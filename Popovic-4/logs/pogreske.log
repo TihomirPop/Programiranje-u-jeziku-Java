@@ -277,3 +277,31 @@ hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student Marko C
 hr.java.vjezbe.iznimke.KriviInputException: Broj ECTS mora biti veci od 0
 	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:255)
 	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:60)
+2022-11-19 14:15:20,146 WARN [main] h.j.v.g.Glavna [Glavna.java:47] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:37)
+2022-11-19 14:18:27,178 WARN [main] h.j.v.g.Glavna [VeleucilisteJave.java:59] Student Marko Curic zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!
+hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student Marko Curic je ocjenjen negativnom ocjenom iz predmeta Programiranje u jeziku Java
+	at hr.java.vjezbe.entitet.Visokoskolska.odrediProsjekOcjenaNaIspitima(Visokoskolska.java:35)
+	at hr.java.vjezbe.entitet.VeleucilisteJave.odrediNajuspjesnijegStudentaNaGodini(VeleucilisteJave.java:57)
+	at hr.java.vjezbe.glavna.Glavna.odabirUstanove(Glavna.java:143)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:79)
+2022-11-19 14:18:27,178 WARN [main] h.j.v.g.Glavna [VeleucilisteJave.java:68] Student Marko Curic zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!
+hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student Marko Curic je ocjenjen negativnom ocjenom iz predmeta Programiranje u jeziku Java
+	at hr.java.vjezbe.entitet.Visokoskolska.odrediProsjekOcjenaNaIspitima(Visokoskolska.java:35)
+	at hr.java.vjezbe.entitet.VeleucilisteJave.odrediNajuspjesnijegStudentaNaGodini(VeleucilisteJave.java:66)
+	at hr.java.vjezbe.glavna.Glavna.odabirUstanove(Glavna.java:143)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:79)
+2022-11-19 14:20:57,338 WARN [main] h.j.v.g.Glavna [Glavna.java:348] Neispravan unos!
+java.util.InputMismatchException: null
+	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
+	at java.base/java.util.Scanner.next(Scanner.java:1598)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
+	at hr.java.vjezbe.glavna.Glavna.ucitajIspite(Glavna.java:338)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:61)
+2022-11-19 14:22:04,126 ERROR [main] h.j.v.g.Glavna [FakultetRacunarstva.java:116] Postoji vise najmladih studenata: Emil Frankovic, Danka Zipanovic

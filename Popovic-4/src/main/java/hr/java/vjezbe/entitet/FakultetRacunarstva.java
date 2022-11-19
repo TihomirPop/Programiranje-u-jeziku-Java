@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.List;
 
 /**
  * Klasa koja predstavlja fakultet racunarstva, nasljeduje ObrazovnaUstanova i implementira Diplomski
@@ -15,7 +16,7 @@ import java.math.MathContext;
 public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
     private static final Logger logger = LoggerFactory.getLogger(Glavna.class);
 
-    public FakultetRacunarstva(String naziv, Predmet[] predmeti, Profesor[] profesori, Student[] studenti, Ispit[] ispiti) {
+    public FakultetRacunarstva(String naziv, List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
         super(naziv, predmeti, profesori, studenti, ispiti);
     }
 
@@ -28,7 +29,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
      * @return - konacna ocjena studenta
      */
     @Override
-    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(Ispit[] ispiti, int diplomskiRadPismeno, int diplomskiRadObrana){
+    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(List<Ispit> ispiti, int diplomskiRadPismeno, int diplomskiRadObrana){
         try {
             BigDecimal konacnaOcjena = odrediProsjekOcjenaNaIspitima(ispiti);
             konacnaOcjena = konacnaOcjena.multiply(BigDecimal.valueOf(3));
@@ -36,8 +37,8 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
             konacnaOcjena = konacnaOcjena.divide(BigDecimal.valueOf(5));
             return konacnaOcjena;
         } catch (NemoguceOdreditiProsjekStudentaException e){
-            logger.warn("Student " + ispiti[0].getStudent().getIme() + " " + ispiti[0].getStudent().getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!", e);
-            System.out.println("Student " + ispiti[0].getStudent().getIme() + " " + ispiti[0].getStudent().getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!");
+            logger.warn("Student " + ispiti.get(0).getStudent().getIme() + " " + ispiti.get(0).getStudent().getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!", e);
+            System.out.println("Student " + ispiti.get(0).getStudent().getIme() + " " + ispiti.get(0).getStudent().getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!");
             return BigDecimal.ONE;
         }
     }
@@ -51,7 +52,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
      */
     @Override
     public Student odrediNajuspjesnijegStudentaNaGodini(int godina){
-        Student najuspjesniji = getStudenti()[0];
+        Student najuspjesniji = getStudenti().get(0);
         int najvisePetica = 0;
         for(Ispit ispit: filtrirajIspitePoStudentu(getIspiti(), najuspjesniji))
             if(ispit.getOcjena().equals(5) && (ispit.getDatumIVrijeme().getYear() == godina))
@@ -59,7 +60,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
 
 
         for(Student student: getStudenti()){
-            Ispit[] ispiti = filtrirajIspitePoStudentu(getIspiti(), student);
+            List<Ispit> ispiti = filtrirajIspitePoStudentu(getIspiti(), student);
             int n = 0;
             for(Ispit ispit: ispiti)
                 if(ispit.getOcjena().equals(5) && (ispit.getDatumIVrijeme().getYear() == godina))
@@ -83,7 +84,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
      */
     @Override
     public Student odrediStudentaZaRektorovuNagradu() {
-        Student najbolji = getStudenti()[0];
+        Student najbolji = getStudenti().get(0);
         BigDecimal prosjekNajboljeg;
         try {
             prosjekNajboljeg = odrediProsjekOcjenaNaIspitima(filtrirajIspitePoStudentu(getIspiti(), najbolji));

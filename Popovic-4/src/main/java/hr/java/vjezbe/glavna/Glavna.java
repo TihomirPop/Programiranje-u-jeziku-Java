@@ -9,8 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Glavna klasa sa metodom main
@@ -51,15 +50,15 @@ public class Glavna {
                 kriviBrojUstanova = true;
             }
         } while (kriviBrojUstanova);
-        ObrazovnaUstanova[] obrazovneUstanove = new ObrazovnaUstanova[brojUstanova];
+        List<ObrazovnaUstanova> obrazovneUstanove = new ArrayList<>();
 
         for (int i = 0; i < brojUstanova; i++) {
             System.out.println("Unesite podatke za " + (i + 1) + ". obrazovnu ustanovu:");
 
-            Profesor[] profesori = ucitajProfesore(input);
-            Predmet[] predmeti = ucitajPredmete(input, profesori);
-            Student[] studenti = ucitajStudente(input);
-            Ispit[] ispiti = ucitajIspite(input, predmeti, studenti);
+            List<Profesor> profesori = ucitajProfesore(input);
+            List<Predmet> predmeti = ucitajPredmete(input, profesori);
+            List<Student> studenti = ucitajStudente(input);
+            List<Ispit> ispiti = ucitajIspite(input, predmeti, studenti);
 
             for (Ispit ispit : ispiti) {
                 if (ispit.getOcjena() == Ocjena.ODLICAN) {
@@ -68,14 +67,11 @@ public class Glavna {
             }
 
             for (Predmet predmet : predmeti) {
-                int indexStudenta = 0;
-                Student[] studentiPredmeta = new Student[predmet.getStudenti().length];
+                List<Student> studentiPredmeta = new ArrayList<>();
 
                 for (Ispit ispit : ispiti)
-                    if (ispit.getPredmet() == predmet) {
-                        studentiPredmeta[indexStudenta] = ispit.getStudent();
-                        indexStudenta++;
-                    }
+                    if (ispit.getPredmet() == predmet)
+                        studentiPredmeta.add(ispit.getStudent());
 
                 predmet.setStudenti(studentiPredmeta);
             }
@@ -95,7 +91,7 @@ public class Glavna {
      * @param studenti - array studenata te ustanove
      * @param ispiti - array ispita te ustanove
      */
-    private static void odabirUstanove(Scanner input, ObrazovnaUstanova[] obrazovneUstanove, int i, Profesor[] profesori, Predmet[] predmeti, Student[] studenti, Ispit[] ispiti) {
+    private static void odabirUstanove(Scanner input, List<ObrazovnaUstanova> obrazovneUstanove, int i, List<Profesor> profesori, List<Predmet> predmeti, List<Student> studenti, List<Ispit> ispiti) {
         System.out.print("Odaberite obrazovnu ustanovu za navedene podatke koju želite unijeti (1 - Veleučilište Jave, 2 - Fakultet računarstva): ");
         int odabirUstanove = input.nextInt();
         input.nextLine();
@@ -104,12 +100,12 @@ public class Glavna {
         String nazivUstanove = input.nextLine();
 
         switch (odabirUstanove) {
-            case 1 -> obrazovneUstanove[i] = new VeleucilisteJave(nazivUstanove, predmeti, profesori, studenti, ispiti);
-            case 2 -> obrazovneUstanove[i] = new FakultetRacunarstva(nazivUstanove, predmeti, profesori, studenti, ispiti);
+            case 1 -> obrazovneUstanove.add(new VeleucilisteJave(nazivUstanove, predmeti, profesori, studenti, ispiti));
+            case 2 -> obrazovneUstanove.add(new FakultetRacunarstva(nazivUstanove, predmeti, profesori, studenti, ispiti));
         }
 
-        if(obrazovneUstanove[i] instanceof Visokoskolska visokoskolska){
-            Student[] pozitivniStudenti = obrazovneUstanove[i].filtrirajPozitivneStudente();
+        if(obrazovneUstanove.get(i) instanceof Visokoskolska visokoskolska){
+            Set<Student> pozitivniStudenti = obrazovneUstanove.get(i).filtrirajPozitivneStudente();
 
             for (Student student : pozitivniStudenti) {
                 boolean kriviZavrsni;
@@ -130,7 +126,7 @@ public class Glavna {
                             throw new KriviInputException("Ocjene iz zavrsnog rada moraju biti izmedu 1 i 5");
                         kriviZavrsni = false;
 
-                        System.out.println("Konačna ocjena studija studenta " + student.getIme() + " " + student.getPrezime() + " je " + visokoskolska.izracunajKonacnuOcjenuStudijaZaStudenta(visokoskolska.filtrirajIspitePoStudentu(obrazovneUstanove[i].getIspiti(), student), zavrsni, obrana));
+                        System.out.println("Konačna ocjena studija studenta " + student.getIme() + " " + student.getPrezime() + " je " + visokoskolska.izracunajKonacnuOcjenuStudijaZaStudenta(visokoskolska.filtrirajIspitePoStudentu(obrazovneUstanove.get(i).getIspiti(), student), zavrsni, obrana));
                     } catch (KriviInputException e) {
                         logger.warn(e.getMessage(), e);
                         System.out.println(e.getMessage());
@@ -144,10 +140,10 @@ public class Glavna {
                 }while (kriviZavrsni);
             }
 
-            Student najboljiStudentVeleuciliste = obrazovneUstanove[i].odrediNajuspjesnijegStudentaNaGodini(2022);
+            Student najboljiStudentVeleuciliste = obrazovneUstanove.get(i).odrediNajuspjesnijegStudentaNaGodini(2022);
             System.out.println("Najbolji student 2022. godine je " + najboljiStudentVeleuciliste.getIme() + " " + najboljiStudentVeleuciliste.getPrezime() + " JMBAG: " + najboljiStudentVeleuciliste.getJmbag());
 
-            if(obrazovneUstanove[i] instanceof Diplomski diplomski) {
+            if(obrazovneUstanove.get(i) instanceof Diplomski diplomski) {
                 Student rektorova = diplomski.odrediStudentaZaRektorovuNagradu();
                 System.out.println("Student koji je osvojio rektorovu nagradu je " + rektorova.getIme() + " " + rektorova.getPrezime() + " JMBAG: " + rektorova.getJmbag());
             }
@@ -160,8 +156,8 @@ public class Glavna {
      * @param input - Scanner s kojim se ucitavaju podatci
      * @return - array ucitanih profesora
      */
-    private static Profesor[] ucitajProfesore(Scanner input){
-        Profesor[] profesori = new Profesor[BROJ_PROFESORA];
+    private static List<Profesor> ucitajProfesore(Scanner input){
+        List<Profesor> profesori = new ArrayList<>();
 
         for(int i = 0; i < BROJ_PROFESORA; i++){
             System.out.print("Unesite " + (i + 1) + ". profesora: \n");
@@ -178,7 +174,7 @@ public class Glavna {
             System.out.print("Unesite titulu profesora: ");
             String titula = input.nextLine();
 
-            profesori[i] = new Profesor.Builder(ime, prezime).saSifrom(sifra).saTitulom(titula).build();
+            profesori.add(new Profesor.Builder(ime, prezime).saSifrom(sifra).saTitulom(titula).build());
         }
         return profesori;
     }
@@ -189,8 +185,8 @@ public class Glavna {
      * @param profesori - array dostupnih profesora
      * @return - array ucitanih predmeta
      */
-    private static Predmet[] ucitajPredmete(Scanner input, Profesor[] profesori){
-        Predmet[] predmeti = new Predmet[BROJ_PREDMETA];
+    private static List<Predmet> ucitajPredmete(Scanner input, List<Profesor> profesori){
+        List<Predmet> predmeti = new ArrayList<>();
 
         for(int i = 0; i < BROJ_PREDMETA; i++) {
             System.out.print("Unesite " + (i + 1) + ". predmet: \n");
@@ -229,7 +225,7 @@ public class Glavna {
             do {
                 System.out.print("Odaberite profesora: \n");
                 for (int j = 0; j < BROJ_PROFESORA; j++) {
-                    System.out.print((j + 1) + ". " + profesori[j].getIme() + " " + profesori[j].getPrezime() + "\n");
+                    System.out.print((j + 1) + ". " + profesori.get(j).getIme() + " " + profesori.get(j).getPrezime() + "\n");
                 }
                 System.out.print("Odabir >> ");
                 try {
@@ -249,7 +245,7 @@ public class Glavna {
                     kriviBrojProfesora = true;
                 }
             } while (kriviBrojProfesora);
-            Profesor profesor = profesori[brojProfesora - 1];
+            Profesor profesor = profesori.get(brojProfesora - 1);
 
             boolean kriviBrojStudenata;
             int brojStudenata = 0;
@@ -272,9 +268,9 @@ public class Glavna {
                     kriviBrojStudenata = true;
                 }
             }while(kriviBrojStudenata);
-            Student[] studenti = new Student[brojStudenata];
+            List<Student> studenti = new ArrayList<>();
 
-            predmeti[i] = new Predmet(sifra, naziv, ECTS, profesor, studenti);
+            predmeti.add(new Predmet(sifra, naziv, ECTS, profesor, studenti));
         }
         return predmeti;
     }
@@ -284,8 +280,8 @@ public class Glavna {
      * @param input - scanner s kojim se ucitavaju podatci
      * @return - array ucitanih studenata
      */
-    private static Student[] ucitajStudente(Scanner input){
-        Student[] studenti = new Student[BROJ_STUDENATA];
+    private static List<Student> ucitajStudente(Scanner input){
+        List<Student> studenti = new ArrayList<>();
 
         for(int i = 0; i < BROJ_STUDENATA; i++) {
             System.out.print("Unesite " + (i + 1) + ". studenta: \n");
@@ -312,7 +308,7 @@ public class Glavna {
             System.out.print("Unesite JMBAG studenta: " + ime + " " + prezime + ": ");
             String JMBAG = input.nextLine();
 
-            studenti[i] = new Student(ime, prezime, JMBAG, datumRodenja);
+            studenti.add(new Student(ime, prezime, JMBAG, datumRodenja));
         }
 
         return studenti;
@@ -325,8 +321,8 @@ public class Glavna {
      * @param studenti - array dostupnih studenata
      * @return - array ucitanih ispita
      */
-    private static Ispit[] ucitajIspite(Scanner input, Predmet[] predmeti, Student[] studenti){
-        Ispit[] ispiti = new Ispit[BROJ_ISPITA];
+    private static List<Ispit> ucitajIspite(Scanner input, List<Predmet> predmeti, List<Student> studenti){
+        List<Ispit> ispiti = new ArrayList<>();
 
         for(int i = 0; i < BROJ_ISPITA; i++) {
             boolean kriviBrojPredmeta;
@@ -334,8 +330,8 @@ public class Glavna {
             do {
                 System.out.print("Unesite " + (i + 1) + ". ispitni rok: \n");
                 System.out.print("Odaberi predmet: \n");
-                for (int j = 0; j < predmeti.length; j++) {
-                    System.out.print((j + 1) + ". " + predmeti[j].getNaziv() + "\n");
+                for (int j = 0; j < predmeti.size(); j++) {
+                    System.out.print((j + 1) + ". " + predmeti.get(j).getNaziv() + "\n");
                 }
                 System.out.print("Odabir >> ");
                 try {
@@ -355,7 +351,7 @@ public class Glavna {
                     kriviBrojPredmeta = true;
                 }
             } while (kriviBrojPredmeta);
-            Predmet predmet = predmeti[brojPredmeta - 1];
+            Predmet predmet = predmeti.get(brojPredmeta - 1);
 
             System.out.print("Unesite naziv dvorane: ");
             String nazivDvorane = input.nextLine();
@@ -366,8 +362,8 @@ public class Glavna {
             int brojStudenta = 0;
             do {
                 System.out.print("Odaberi studenta: \n");
-                for (int j = 0; j < studenti.length; j++) {
-                    System.out.print((j + 1) + ". " + studenti[j].getIme() + " " + studenti[j].getPrezime() + "\n");
+                for (int j = 0; j < studenti.size(); j++) {
+                    System.out.print((j + 1) + ". " + studenti.get(j).getIme() + " " + studenti.get(j).getPrezime() + "\n");
                 }
                 System.out.print("Odabir >> ");
                 try {
@@ -387,7 +383,7 @@ public class Glavna {
                     kriviBrojStudenta = true;
                 }
             } while (kriviBrojStudenta);
-            Student student = studenti[brojStudenta - 1];
+            Student student = studenti.get(brojStudenta - 1);
 
             boolean krivaOcjena;
             int intOcjena = 0;
@@ -445,7 +441,7 @@ public class Glavna {
                 }
             } while (kriviFormatDatuma);
 
-            ispiti[i] = new Ispit(predmet, student, ocjena, datum, new Dvorana(nazivDvorane, nazivZgrade));
+            ispiti.add(new Ispit(predmet, student, ocjena, datum, new Dvorana(nazivDvorane, nazivZgrade)));
         }
 
         return ispiti;
