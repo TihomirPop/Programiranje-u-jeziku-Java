@@ -79,7 +79,7 @@ public abstract class ObrazovnaUstanova {
             pozitivniStudenti.add(student);
 
         for(Ispit ispit: ispiti)
-            if(ispit.getOcjena() == 1)
+            if(ispit.getOcjena() == Ocjena.NEDOVOLJAN)
                 pozitivniStudenti.remove(ispit.getStudent());
 
         Student[] pozitivniStudentiArray = new Student[pozitivniStudenti.size()];

@@ -2,8 +2,6 @@ package hr.java.vjezbe.glavna;
 
 import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.iznimke.KriviInputException;
-import hr.java.vjezbe.iznimke.NeispravanJMBAGException;
-import hr.java.vjezbe.iznimke.PostojiJMBAGException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Glavna klasa sa metodom main
@@ -224,19 +220,7 @@ public class Glavna {
             System.out.print("Unesite titulu profesora: ");
             String titula = input.nextLine();
 
-            System.out.print("Unesite JMBG profesora: ");
-            String JMBG = input.nextLine();
-
-            Pattern pattern = Pattern.compile("[0-9]{13}");
-            Matcher matcher = pattern.matcher(JMBG);
-            if(!matcher.find())
-                throw new NeispravanJMBAGException("JMBG mora sadrzavati 13 znamenki");
-
-            /*
-            if(JMBG.length() != 13)
-                throw new NeispravanJMBAGException("JMBG mora sadrzavati 13 znamenki");*/
-
-            profesori[i] = new Profesor.Builder(ime, prezime).saSifrom(sifra).saTitulom(titula).saJMBG(JMBG).build();
+            profesori[i] = new Profesor.Builder(ime, prezime).saSifrom(sifra).saTitulom(titula).build();
         }
         return profesori;
     }
@@ -369,10 +353,6 @@ public class Glavna {
 
             System.out.print("Unesite JMBAG studenta: " + ime + " " + prezime + ": ");
             String JMBAG = input.nextLine();
-
-            for(int j = 0; j < i; j++)
-                if(studenti[j].getJmbag().equals(JMBAG))
-                    throw new PostojiJMBAGException("Upisani JMBAG vec postoji");
 
             studenti[i] = new Student(ime, prezime, JMBAG, datumRodenja);
         }

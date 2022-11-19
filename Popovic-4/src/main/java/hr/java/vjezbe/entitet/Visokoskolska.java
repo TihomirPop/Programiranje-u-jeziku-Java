@@ -29,9 +29,9 @@ public interface Visokoskolska {
 
         for(Ispit ispit: ispiti){
 
-            if (ispit.getOcjena() == 1)
+            if (ispit.getOcjena() == Ocjena.NEDOVOLJAN)
                 throw(new NemoguceOdreditiProsjekStudentaException("Student " + ispit.getStudent().getIme() + " " + ispit.getStudent().getPrezime() + " je ocjenjen negativnom ocjenom iz predmeta " + ispit.getPredmet().getNaziv()));
-            prosjek = prosjek.add(BigDecimal.valueOf(ispit.getOcjena()));
+            prosjek = prosjek.add(ispit.getOcjena().getBigDecimal());
         }
 
         prosjek = prosjek.divide(BigDecimal.valueOf(ispiti.length));
@@ -47,14 +47,14 @@ public interface Visokoskolska {
     private Ispit[] filtrirajPolozeneIspite(Ispit[] ispiti){
         int n = 0;
         for(Ispit ispit: ispiti)
-            if(ispit.getOcjena() > 1)
+            if(ispit.getOcjena().getInt() > 1)
                 n++;
 
         Ispit[] polozeni = new Ispit[n];
 
         n = 0;
         for(Ispit ispit: ispiti)
-            if(ispit.getOcjena() > 1) {
+            if(ispit.getOcjena().getInt() > 1) {
                 polozeni[n] = ispit;
                 n++;
             }

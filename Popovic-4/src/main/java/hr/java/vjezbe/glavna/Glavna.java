@@ -2,8 +2,6 @@ package hr.java.vjezbe.glavna;
 
 import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.iznimke.KriviInputException;
-import hr.java.vjezbe.iznimke.NeispravanJMBAGException;
-import hr.java.vjezbe.iznimke.PostojiJMBAGException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Glavna klasa sa metodom main
@@ -66,7 +62,7 @@ public class Glavna {
             Ispit[] ispiti = ucitajIspite(input, predmeti, studenti);
 
             for (Ispit ispit : ispiti) {
-                if (ispit.getOcjena().equals(5)) {
+                if (ispit.getOcjena() == Ocjena.ODLICAN) {
                     System.out.print("Student " + ispit.getStudent().getIme() + " " + ispit.getStudent().getPrezime() + " je ostvario ocjenu 'izvrstan' na predmetu '" + ispit.getPredmet().getNaziv() + "' \n");
                 }
             }
@@ -108,12 +104,8 @@ public class Glavna {
         String nazivUstanove = input.nextLine();
 
         switch (odabirUstanove) {
-            case 1:
-                obrazovneUstanove[i] = new VeleucilisteJave(nazivUstanove, predmeti, profesori, studenti, ispiti);
-                break;
-            case 2:
-                obrazovneUstanove[i] = new FakultetRacunarstva(nazivUstanove, predmeti, profesori, studenti, ispiti);
-                break;
+            case 1 -> obrazovneUstanove[i] = new VeleucilisteJave(nazivUstanove, predmeti, profesori, studenti, ispiti);
+            case 2 -> obrazovneUstanove[i] = new FakultetRacunarstva(nazivUstanove, predmeti, profesori, studenti, ispiti);
         }
 
         if(obrazovneUstanove[i] instanceof Visokoskolska visokoskolska){
@@ -161,44 +153,6 @@ public class Glavna {
             }
 
         }
-/*
-        Student[] pozitivniStudenti;
-        switch (odabirUstanove) {
-            case 1:
-                obrazovneUstanove[i] = new VeleucilisteJave(nazivUstanove, predmeti, profesori, studenti, ispiti);
-                pozitivniStudenti = obrazovneUstanove[i].filtrirajPozitivneStudente();
-                for (Student student : pozitivniStudenti) {
-                    System.out.print("Unesite ocjenu završnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
-                    int zavrsni = input.nextInt();
-                    input.nextLine();
-                    System.out.print("Unesite ocjenu obrane zavrsnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
-                    int obrana = input.nextInt();
-                    input.nextLine();
-                    System.out.println("Konačna ocjena studija studenta " + student.getIme() + " " + student.getPrezime() + " je " + ((VeleucilisteJave) obrazovneUstanove[i]).izracunajKonacnuOcjenuStudijaZaStudenta(((VeleucilisteJave) obrazovneUstanove[i]).filtrirajIspitePoStudentu(obrazovneUstanove[i].getIspiti(), student), zavrsni, obrana));
-                }
-
-                Student najboljiStudentVeleuciliste = ((VeleucilisteJave) obrazovneUstanove[i]).odrediNajuspjesnijegStudentaNaGodini(2022);
-                System.out.println("Najbolji student 2022. godine je " + najboljiStudentVeleuciliste.getIme() + " " + najboljiStudentVeleuciliste.getPrezime() + " JMBAG: " + najboljiStudentVeleuciliste.getJmbag());
-                break;
-            case 2:
-                obrazovneUstanove[i] = new FakultetRacunarstva(nazivUstanove, predmeti, profesori, studenti, ispiti);
-                pozitivniStudenti = obrazovneUstanove[i].filtrirajPozitivneStudente();
-                for (Student student : pozitivniStudenti) {
-                    System.out.print("Unesite ocjenu završnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
-                    int zavrsni = input.nextInt();
-                    input.nextLine();
-                    System.out.print("Unesite ocjenu obrane zavrsnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
-                    int obrana = input.nextInt();
-                    input.nextLine();
-                    System.out.println("Konačna ocjena studija studenta " + student.getIme() + " " + student.getPrezime() + " je " + ((FakultetRacunarstva) obrazovneUstanove[i]).izracunajKonacnuOcjenuStudijaZaStudenta(((FakultetRacunarstva) obrazovneUstanove[i]).filtrirajIspitePoStudentu(obrazovneUstanove[i].getIspiti(), student), zavrsni, obrana));
-                }
-
-                Student najboljiStudent = ((FakultetRacunarstva) obrazovneUstanove[i]).odrediNajuspjesnijegStudentaNaGodini(2022);
-                System.out.println("Najbolji student 2022. godine je " + najboljiStudent.getIme() + " " + najboljiStudent.getPrezime() + " JMBAG: " + najboljiStudent.getJmbag());
-                Student rektorova = ((FakultetRacunarstva) obrazovneUstanove[i]).odrediStudentaZaRektorovuNagradu();
-                System.out.println("Student koji je osvojio rektorovu nagradu je " + rektorova.getIme() + " " + rektorova.getPrezime() + " JMBAG: " + rektorova.getJmbag());
-                break;
-        }*/
     }
 
     /**
@@ -224,19 +178,7 @@ public class Glavna {
             System.out.print("Unesite titulu profesora: ");
             String titula = input.nextLine();
 
-            System.out.print("Unesite JMBG profesora: ");
-            String JMBG = input.nextLine();
-
-            Pattern pattern = Pattern.compile("[0-9]{13}");
-            Matcher matcher = pattern.matcher(JMBG);
-            if(!matcher.find())
-                throw new NeispravanJMBAGException("JMBG mora sadrzavati 13 znamenki");
-
-            /*
-            if(JMBG.length() != 13)
-                throw new NeispravanJMBAGException("JMBG mora sadrzavati 13 znamenki");*/
-
-            profesori[i] = new Profesor.Builder(ime, prezime).saSifrom(sifra).saTitulom(titula).saJMBG(JMBG).build();
+            profesori[i] = new Profesor.Builder(ime, prezime).saSifrom(sifra).saTitulom(titula).build();
         }
         return profesori;
     }
@@ -316,7 +258,7 @@ public class Glavna {
                 try {
                     brojStudenata = input.nextInt();
                     input.nextLine();
-                    if (brojStudenata < 1 || brojProfesora > BROJ_STUDENATA)
+                    if (brojStudenata < 1 || brojStudenata > BROJ_STUDENATA)
                         throw (new KriviInputException("Broj studenata mora biti izmedu 1 i " + BROJ_STUDENATA));
                     kriviBrojStudenata = false;
                 } catch (KriviInputException e) {
@@ -369,10 +311,6 @@ public class Glavna {
 
             System.out.print("Unesite JMBAG studenta: " + ime + " " + prezime + ": ");
             String JMBAG = input.nextLine();
-
-            for(int j = 0; j < i; j++)
-                if(studenti[j].getJmbag().equals(JMBAG))
-                    throw new PostojiJMBAGException("Upisani JMBAG vec postoji");
 
             studenti[i] = new Student(ime, prezime, JMBAG, datumRodenja);
         }
@@ -452,13 +390,13 @@ public class Glavna {
             Student student = studenti[brojStudenta - 1];
 
             boolean krivaOcjena;
-            Integer ocjena = null;
+            int intOcjena = 0;
             do {
                 System.out.print("Unesite ocjenu na ispitu (1-5): ");
                 try {
-                    ocjena = input.nextInt();
+                    intOcjena = input.nextInt();
                     input.nextLine();
-                    if (ocjena < 1 || ocjena > 5)
+                    if (intOcjena < 1 || intOcjena > 5)
                         throw (new KriviInputException("Ocjena mora biti izmedu 1 i 5"));
                     krivaOcjena = false;
                 } catch (KriviInputException e) {
@@ -472,6 +410,26 @@ public class Glavna {
                     krivaOcjena = true;
                 }
             } while (krivaOcjena);
+            Ocjena ocjena;
+            switch (intOcjena){
+                case 1:
+                    ocjena = Ocjena.NEDOVOLJAN;
+                    break;
+                case 2:
+                    ocjena = Ocjena.DOVOLJAN;
+                    break;
+                case 3:
+                    ocjena = Ocjena.DOBAR;
+                    break;
+                case 4:
+                    ocjena = Ocjena.VRLODOBAR;
+                case 5:
+                    ocjena = Ocjena.ODLICAN;
+                    break;
+                default:
+                    throw new RuntimeException("Critical error, nije moguce doci do ovog dijela koda!");
+            }
+
 
             boolean kriviFormatDatuma;
             LocalDateTime datum = null;

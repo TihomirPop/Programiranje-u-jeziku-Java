@@ -6,13 +6,11 @@ package hr.java.vjezbe.entitet;
 public class Profesor extends Osoba {
     private String sifra;
     private  String titula;
-    private String JMBG;
 
     private Profesor(Builder builder){
         super(builder.ime, builder.prezime);
         this.sifra = builder.sifra;
         this.titula = builder.titula;
-        this.JMBG = builder.JMBG;
     }
 
     /**
@@ -23,7 +21,6 @@ public class Profesor extends Osoba {
         private String prezime;
         private String sifra;
         private String titula;
-        private String JMBG;
 
         /**
          * Konstruktor buildera sa obaveznim parametrima
@@ -55,11 +52,6 @@ public class Profesor extends Osoba {
             return this;
         }
 
-        public Builder saJMBG(String JMBG){
-            this.JMBG = JMBG;
-            return this;
-        }
-
         /**
          * metoda koja builda objekt tipa profesor sa zadanim elementima
          * @return - profesor sa zadanim elementima
@@ -83,13 +75,5 @@ public class Profesor extends Osoba {
 
     public void setTitula(String titula) {
         this.titula = titula;
-    }
-
-    public String getJMBG() {
-        return JMBG;
-    }
-
-    public void setJMBG(String JMBG) {
-        this.JMBG = JMBG;
     }
 }

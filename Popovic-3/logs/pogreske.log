@@ -273,58 +273,7 @@ hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException: Student Marko C
 	at hr.java.vjezbe.glavna.Glavna.odabirUstanove(Glavna.java:151)
 	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:83)
 2022-11-08 16:27:30,704 ERROR [main] h.j.v.g.Glavna [FakultetRacunarstva.java:115] Postoji vise najmladih studenata: Emil Frankovic, Danka Zupanovic
-2022-11-08 17:31:23,039 WARN [main] h.j.v.g.Glavna [Glavna.java:263] Neispravan unos!
-java.util.InputMismatchException: null
-	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
-	at java.base/java.util.Scanner.next(Scanner.java:1598)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
-	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:253)
-	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:61)
-2022-11-08 17:32:55,253 WARN [main] h.j.v.g.Glavna [Glavna.java:49] Neispravan unos!
-java.util.InputMismatchException: null
-	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
-	at java.base/java.util.Scanner.next(Scanner.java:1598)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
-	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:39)
-2022-11-08 17:32:55,635 WARN [main] h.j.v.g.Glavna [Glavna.java:49] Neispravan unos!
-java.util.InputMismatchException: null
-	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
-	at java.base/java.util.Scanner.next(Scanner.java:1598)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
-	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:39)
-2022-11-08 17:32:55,998 WARN [main] h.j.v.g.Glavna [Glavna.java:49] Neispravan unos!
-java.util.InputMismatchException: null
-	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
-	at java.base/java.util.Scanner.next(Scanner.java:1598)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
-	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:39)
-2022-11-08 17:32:56,450 WARN [main] h.j.v.g.Glavna [Glavna.java:49] Neispravan unos!
-java.util.InputMismatchException: null
-	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
-	at java.base/java.util.Scanner.next(Scanner.java:1598)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
-	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:39)
-2022-11-08 17:32:56,973 WARN [main] h.j.v.g.Glavna [Glavna.java:49] Neispravan unos!
-java.util.InputMismatchException: null
-	at java.base/java.util.Scanner.throwFor(Scanner.java:943)
-	at java.base/java.util.Scanner.next(Scanner.java:1598)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
-	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:39)
-2022-11-08 17:33:54,787 ERROR [main] h.j.v.g.Glavna [Glavna.java:361] Upisani JMBAG vec postoji
-hr.java.vjezbe.iznimke.PostojiJMBAGException: Upisani JMBAG vec postoji
-	at hr.java.vjezbe.glavna.Glavna.ucitajStudente(Glavna.java:360)
-	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:62)
-2022-11-08 18:00:59,059 ERROR [main] h.j.v.g.Glavna [NeispravanJMBAGException.java:19] JMBG mora sadrzavati 13 znamenki
-hr.java.vjezbe.iznimke.NeispravanJMBAGException: JMBG mora sadrzavati 13 znamenki
-	at hr.java.vjezbe.glavna.Glavna.ucitajProfesore(Glavna.java:233)
-	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:63)
-2022-11-08 18:03:38,779 ERROR [main] h.j.v.g.Glavna [PostojiJMBAGException.java:18] Upisani JMBAG vec postoji
-hr.java.vjezbe.iznimke.PostojiJMBAGException: Upisani JMBAG vec postoji
-	at hr.java.vjezbe.glavna.Glavna.ucitajStudente(Glavna.java:375)
-	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:65)
+2022-11-18 18:29:34,566 WARN [main] h.j.v.g.Glavna [Glavna.java:258] Broj ECTS mora biti veci od 0
+hr.java.vjezbe.iznimke.KriviInputException: Broj ECTS mora biti veci od 0
+	at hr.java.vjezbe.glavna.Glavna.ucitajPredmete(Glavna.java:255)
+	at hr.java.vjezbe.glavna.Glavna.main(Glavna.java:60)

@@ -8,11 +8,11 @@ import java.time.LocalDateTime;
 public final class Ispit implements Online {
     private Predmet predmet;
     private Student student;
-    private Integer ocjena;
+    private Ocjena ocjena;
     private LocalDateTime datumIVrijeme;
 
     private Dvorana dvorana;
-    public Ispit(Predmet predmet, Student student, Integer ocjena, LocalDateTime datumIVrijeme, Dvorana dvorana) {
+    public Ispit(Predmet predmet, Student student, Ocjena ocjena, LocalDateTime datumIVrijeme, Dvorana dvorana) {
         this.predmet = predmet;
         this.student = student;
         this.ocjena = ocjena;
@@ -36,11 +36,11 @@ public final class Ispit implements Online {
         this.student = student;
     }
 
-    public Integer getOcjena() {
+    public Ocjena getOcjena() {
         return ocjena;
     }
 
-    public void setOcjena(Integer ocjena) {
+    public void setOcjena(Ocjena ocjena) {
         this.ocjena = ocjena;
     }
 
