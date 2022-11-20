@@ -2,6 +2,7 @@ package hr.java.vjezbe.glavna;
 
 import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.iznimke.KriviInputException;
+import hr.java.vjezbe.sortiranje.StudentSorter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +19,7 @@ public class Glavna {
     private static final Logger logger = LoggerFactory.getLogger(Glavna.class);
 
     private static final int BROJ_PROFESORA = 2;
-    private static final int BROJ_PREDMETA = 2;
+    private static final int BROJ_PREDMETA = 3;
     private static final int BROJ_STUDENATA = 2;
     private static final int BROJ_ISPITA = 2;
 
@@ -52,28 +53,43 @@ public class Glavna {
         } while (kriviBrojUstanova);
         List<ObrazovnaUstanova> obrazovneUstanove = new ArrayList<>();
 
+        List<Profesor> profesori = new ArrayList<>();
+        List<Predmet> predmeti = new ArrayList<>();
+        List<Student> studenti = new ArrayList<>();
+        List<Ispit> ispiti = new ArrayList<>();
+        Map<Profesor, List<Predmet>> nositelji = new HashMap<>();
+
         for (int i = 0; i < brojUstanova; i++) {
+            profesori.clear();
+            predmeti.clear();
+            studenti.clear();
+            ispiti.clear();
+            nositelji.clear();
+
             System.out.println("Unesite podatke za " + (i + 1) + ". obrazovnu ustanovu:");
 
-            List<Profesor> profesori = ucitajProfesore(input);
-            List<Predmet> predmeti = ucitajPredmete(input, profesori);
-            List<Student> studenti = ucitajStudente(input);
-            List<Ispit> ispiti = ucitajIspite(input, predmeti, studenti);
+            profesori = ucitajProfesore(input);
+            predmeti = ucitajPredmete(input, profesori, nositelji);
+            studenti = ucitajStudente(input);
+            ispiti = ucitajIspite(input, predmeti, studenti);
+
+            for (Predmet predmet : predmeti)
+                for (Ispit ispit : ispiti)
+                    if (ispit.getPredmet() == predmet)
+                        predmet.getStudenti().add(ispit.getStudent());
+
+            for(Predmet predmet: predmeti){
+                if(predmet.getStudenti().isEmpty())
+                    System.out.println("Nema studenata upisanih na predmet '" + predmet.getNaziv() + "'.");
+                else
+                    for(Student student: predmet.getStudenti().stream().sorted(new StudentSorter()).toList())
+                        System.out.println(student.getPrezime() + " " + student.getIme());
+            }
 
             for (Ispit ispit : ispiti) {
                 if (ispit.getOcjena() == Ocjena.ODLICAN) {
                     System.out.print("Student " + ispit.getStudent().getIme() + " " + ispit.getStudent().getPrezime() + " je ostvario ocjenu 'izvrstan' na predmetu '" + ispit.getPredmet().getNaziv() + "' \n");
                 }
-            }
-
-            for (Predmet predmet : predmeti) {
-                List<Student> studentiPredmeta = new ArrayList<>();
-
-                for (Ispit ispit : ispiti)
-                    if (ispit.getPredmet() == predmet)
-                        studentiPredmeta.add(ispit.getStudent());
-
-                predmet.setStudenti(studentiPredmeta);
             }
 
             odabirUstanove(input, obrazovneUstanove, i, profesori, predmeti, studenti, ispiti);
@@ -112,21 +128,21 @@ public class Glavna {
                 do {
                     try {
                         System.out.print("Unesite ocjenu završnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
-                        int zavrsni = input.nextInt();
+                        int intZavrsni = input.nextInt();
                         input.nextLine();
 
-                        if(zavrsni < 1 || zavrsni > 5)
+                        if(intZavrsni < 1 || intZavrsni > 5)
                             throw new KriviInputException("Ocjene iz zavrsnog rada moraju biti izmedu 1 i 5");
 
                         System.out.print("Unesite ocjenu obrane zavrsnog rada za studenta: " + student.getIme() + " " + student.getPrezime() + ": ");
-                        int obrana = input.nextInt();
+                        int intObrana = input.nextInt();
                         input.nextLine();
 
-                        if(obrana < 1 || obrana > 5)
+                        if(intObrana < 1 || intObrana > 5)
                             throw new KriviInputException("Ocjene iz zavrsnog rada moraju biti izmedu 1 i 5");
                         kriviZavrsni = false;
 
-                        System.out.println("Konačna ocjena studija studenta " + student.getIme() + " " + student.getPrezime() + " je " + visokoskolska.izracunajKonacnuOcjenuStudijaZaStudenta(visokoskolska.filtrirajIspitePoStudentu(obrazovneUstanove.get(i).getIspiti(), student), zavrsni, obrana));
+                        System.out.println("Konačna ocjena studija studenta " + student.getIme() + " " + student.getPrezime() + " je " + visokoskolska.izracunajKonacnuOcjenuStudijaZaStudenta(visokoskolska.filtrirajIspitePoStudentu(obrazovneUstanove.get(i).getIspiti(), student), intToOcjena(intZavrsni), intToOcjena(intObrana)));
                     } catch (KriviInputException e) {
                         logger.warn(e.getMessage(), e);
                         System.out.println(e.getMessage());
@@ -185,69 +201,76 @@ public class Glavna {
      * @param profesori - array dostupnih profesora
      * @return - array ucitanih predmeta
      */
-    private static List<Predmet> ucitajPredmete(Scanner input, List<Profesor> profesori){
+    private static List<Predmet> ucitajPredmete(Scanner input, List<Profesor> profesori, Map<Profesor, List<Predmet>> nositelji){
         List<Predmet> predmeti = new ArrayList<>();
 
-        for(int i = 0; i < BROJ_PREDMETA; i++) {
-            System.out.print("Unesite " + (i + 1) + ". predmet: \n");
+        boolean krivaKolicinaProfesora;
+        boolean kriviBrojPredmeta;
+        do {
+            predmeti.clear();
+            nositelji.clear();
+            for (int i = 0; i < BROJ_PREDMETA; i++) {
+                System.out.print("Unesite " + (i + 1) + ". predmet: \n");
 
-            System.out.print("Unesite sifru predmeta: ");
-            String sifra = input.nextLine();
+                System.out.print("Unesite sifru predmeta: ");
+                String sifra = input.nextLine();
 
-            System.out.print("Unesite naziv predmeta: ");
-            String naziv = input.nextLine();
+                System.out.print("Unesite naziv predmeta: ");
+                String naziv = input.nextLine();
 
 
-            boolean kriviBrojECTSa;
-            Integer ECTS = null;
-            do {
-                System.out.print("Unesite broj ECTS bodova za predmet '" + naziv + "': ");
-                try {
-                    ECTS = input.nextInt();
-                    input.nextLine();
-                    if (ECTS < 1)
-                        throw (new KriviInputException("Broj ECTS mora biti veci od 0"));
-                    kriviBrojECTSa = false;
-                } catch (KriviInputException e) {
-                    logger.warn(e.getMessage(), e);
-                    System.out.println(e.getMessage());
-                    kriviBrojECTSa = true;
-                } catch (InputMismatchException e) {
-                    logger.warn("Neispravan unos!", e);
-                    System.out.println("Neispravan unos!");
-                    input.nextLine();
-                    kriviBrojECTSa = true;
-                }
-            } while (kriviBrojECTSa);
+                boolean kriviBrojECTSa;
+                Integer ECTS = null;
+                do {
+                    System.out.print("Unesite broj ECTS bodova za predmet '" + naziv + "': ");
+                    try {
+                        ECTS = input.nextInt();
+                        input.nextLine();
+                        if (ECTS < 1)
+                            throw (new KriviInputException("Broj ECTS mora biti veci od 0"));
+                        kriviBrojECTSa = false;
+                    } catch (KriviInputException e) {
+                        logger.warn(e.getMessage(), e);
+                        System.out.println(e.getMessage());
+                        kriviBrojECTSa = true;
+                    } catch (InputMismatchException e) {
+                        logger.warn("Neispravan unos!", e);
+                        System.out.println("Neispravan unos!");
+                        input.nextLine();
+                        kriviBrojECTSa = true;
+                    }
+                } while (kriviBrojECTSa);
 
-            boolean kriviBrojProfesora;
-            int brojProfesora = 0;
-            do {
-                System.out.print("Odaberite profesora: \n");
-                for (int j = 0; j < BROJ_PROFESORA; j++) {
-                    System.out.print((j + 1) + ". " + profesori.get(j).getIme() + " " + profesori.get(j).getPrezime() + "\n");
-                }
-                System.out.print("Odabir >> ");
-                try {
-                    brojProfesora = input.nextInt();
-                    input.nextLine();
-                    if (brojProfesora < 1 || brojProfesora > BROJ_PROFESORA)
-                        throw (new KriviInputException("Redni broj profesora mora biti izmedu 1 i " + BROJ_PROFESORA));
-                    kriviBrojProfesora = false;
-                } catch (KriviInputException e) {
-                    logger.warn(e.getMessage(), e);
-                    System.out.println(e.getMessage());
-                    kriviBrojProfesora = true;
-                } catch (InputMismatchException e) {
-                    logger.warn("Neispravan unos!", e);
-                    System.out.println("Neispravan unos!");
-                    input.nextLine();
-                    kriviBrojProfesora = true;
-                }
-            } while (kriviBrojProfesora);
-            Profesor profesor = profesori.get(brojProfesora - 1);
+                boolean kriviBrojProfesora;
+                int brojProfesora = 0;
+                do {
+                    System.out.print("Odaberite profesora: \n");
+                    for (int j = 0; j < BROJ_PROFESORA; j++) {
+                        System.out.print((j + 1) + ". " + profesori.get(j).getIme() + " " + profesori.get(j).getPrezime() + "\n");
+                    }
+                    System.out.print("Odabir >> ");
+                    try {
+                        brojProfesora = input.nextInt();
+                        input.nextLine();
+                        if (brojProfesora < 1 || brojProfesora > BROJ_PROFESORA)
+                            throw (new KriviInputException("Redni broj profesora mora biti izmedu 1 i " + BROJ_PROFESORA));
+                        kriviBrojProfesora = false;
+                    } catch (KriviInputException e) {
+                        logger.warn(e.getMessage(), e);
+                        System.out.println(e.getMessage());
+                        kriviBrojProfesora = true;
+                    } catch (InputMismatchException e) {
+                        logger.warn("Neispravan unos!", e);
+                        System.out.println("Neispravan unos!");
+                        input.nextLine();
+                        kriviBrojProfesora = true;
+                    }
+                } while (kriviBrojProfesora);
+                Profesor profesor = profesori.get(brojProfesora - 1);
 
+            /*
             boolean kriviBrojStudenata;
+
             int brojStudenata = 0;
             do {
                 System.out.print("Unesite broj studenata za predmetu '" + naziv + "': ");
@@ -267,11 +290,44 @@ public class Glavna {
                     input.nextLine();
                     kriviBrojStudenata = true;
                 }
-            }while(kriviBrojStudenata);
-            List<Student> studenti = new ArrayList<>();
+            }while(kriviBrojStudenata);*/
 
-            predmeti.add(new Predmet(sifra, naziv, ECTS, profesor, studenti));
+                Set<Student> studenti = new HashSet<>();
+
+                predmeti.add(new Predmet(sifra, naziv, ECTS, profesor, studenti));
+            }
+
+
+            for(Profesor profesor: profesori){
+                List<Predmet> profesoroviPredmeti = new ArrayList<>();
+
+                for(Predmet predmet: predmeti)
+                    if(predmet.getNositelj() == profesor)
+                        profesoroviPredmeti.add(predmet);
+
+                nositelji.put(profesor, profesoroviPredmeti);
+            }
+
+            krivaKolicinaProfesora = false;
+            kriviBrojPredmeta = true;
+            for(List<Predmet> predmetList: nositelji.values()){
+                if(predmetList.isEmpty()){
+                    krivaKolicinaProfesora = true;
+                    break;
+                }
+                if(predmetList.size() > 1)
+                    kriviBrojPredmeta = false;
+            }
+
+        }while (krivaKolicinaProfesora || kriviBrojPredmeta);
+
+        for(Profesor nositelj: nositelji.keySet()){
+            System.out.println("Profesor " + nositelj.getIme() + " " + nositelj.getPrezime() + " predaje sljedeće predmete: ");
+            int n = 1;
+            for(Predmet predmet: nositelji.get(nositelj))
+                System.out.println(n++ + ") " + predmet.getNaziv());
         }
+
         return predmeti;
     }
 
@@ -406,25 +462,7 @@ public class Glavna {
                     krivaOcjena = true;
                 }
             } while (krivaOcjena);
-            Ocjena ocjena;
-            switch (intOcjena){
-                case 1:
-                    ocjena = Ocjena.NEDOVOLJAN;
-                    break;
-                case 2:
-                    ocjena = Ocjena.DOVOLJAN;
-                    break;
-                case 3:
-                    ocjena = Ocjena.DOBAR;
-                    break;
-                case 4:
-                    ocjena = Ocjena.VRLODOBAR;
-                case 5:
-                    ocjena = Ocjena.ODLICAN;
-                    break;
-                default:
-                    throw new RuntimeException("Critical error, nije moguce doci do ovog dijela koda!");
-            }
+            Ocjena ocjena = intToOcjena(intOcjena);
 
 
             boolean kriviFormatDatuma;
@@ -445,6 +483,17 @@ public class Glavna {
         }
 
         return ispiti;
+    }
+
+    private static Ocjena intToOcjena(int intOcjena) {
+        return switch (intOcjena) {
+            case 1 -> Ocjena.NEDOVOLJAN;
+            case 2 -> Ocjena.DOVOLJAN;
+            case 3 -> Ocjena.DOBAR;
+            case 4 -> Ocjena.VRLODOBAR;
+            case 5 -> Ocjena.ODLICAN;
+            default -> throw new RuntimeException("Critical error, nije moguce doci do ovog dijela koda!");
+        };
     }
 }
 

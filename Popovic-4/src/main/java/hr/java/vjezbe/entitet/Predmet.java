@@ -1,6 +1,7 @@
 package hr.java.vjezbe.entitet;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Klasa koja predstavlja predmet neke obrazovne ustanove
@@ -10,9 +11,9 @@ public class Predmet {
     private String naziv;
     private Integer brojEctsBodova;
     private Profesor nositelj;
-    private List<Student> studenti;
+    private Set<Student> studenti;
 
-    public Predmet(String sifra, String naziv, Integer brojEctsBodova, Profesor nositelj, List<Student> studenti) {
+    public Predmet(String sifra, String naziv, Integer brojEctsBodova, Profesor nositelj, Set<Student> studenti) {
         this.sifra = sifra;
         this.naziv = naziv;
         this.brojEctsBodova = brojEctsBodova;
@@ -52,11 +53,11 @@ public class Predmet {
         this.nositelj = nositelj;
     }
 
-    public List<Student> getStudenti() {
+    public Set<Student> getStudenti() {
         return studenti;
     }
 
-    public void setStudenti(List<Student> studenti) {
+    public void setStudenti(Set<Student> studenti) {
         this.studenti = studenti;
     }
 }

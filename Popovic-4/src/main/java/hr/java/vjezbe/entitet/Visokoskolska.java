@@ -18,7 +18,7 @@ public interface Visokoskolska {
      * @param ocjenaObrana - ocjena iz obrane zavrsnog rada
      * @return - konacna ocjena
      */
-    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(List<Ispit> ispiti, int ocjenaPismeno, int ocjenaObrana);
+    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(List<Ispit> ispiti, Ocjena ocjenaPismeno, Ocjena ocjenaObrana);
 
     /**
      * Racuna prosjek ocjena na ispitima

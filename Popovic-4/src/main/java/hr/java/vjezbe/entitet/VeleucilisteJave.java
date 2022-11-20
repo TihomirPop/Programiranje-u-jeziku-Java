@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.List;
 
 /**
@@ -28,13 +27,13 @@ public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska
      * @return - konacna ocjena studenta
      */
     @Override
-    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(List<Ispit> ispiti, int ocjenaPismeno, int ocjenaObrana){
+    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(List<Ispit> ispiti, Ocjena ocjenaPismeno, Ocjena ocjenaObrana){
         try {
             BigDecimal konacnaOcjena = odrediProsjekOcjenaNaIspitima(ispiti);
             konacnaOcjena = konacnaOcjena.multiply(BigDecimal.valueOf(2));
-            konacnaOcjena = konacnaOcjena.add(BigDecimal.valueOf(ocjenaPismeno)).add(BigDecimal.valueOf(ocjenaObrana));
+            konacnaOcjena = konacnaOcjena.add(ocjenaPismeno.getBigDecimal()).add(ocjenaObrana.getBigDecimal());
             konacnaOcjena = konacnaOcjena.divide(BigDecimal.valueOf(4));
-            return konacnaOcjena.round(new MathContext(1));
+            return konacnaOcjena;
         } catch (NemoguceOdreditiProsjekStudentaException e) {
             logger.warn("Student " + ispiti.get(0).getStudent().getIme() + " " + ispiti.get(0).getStudent().getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!", e);
             System.out.println("Student " + ispiti.get(0).getStudent().getIme() + " " + ispiti.get(0).getStudent().getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!");

@@ -1,6 +1,7 @@
 package hr.java.vjezbe.entitet;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Klasa koja predstavlja studenta neke obrazovne ustanove, nasljeduje osobu
@@ -29,5 +30,21 @@ public class Student extends Osoba{
 
     public void setDatumRodjenja(LocalDate datumRodjenja) {
         this.datumRodjenja = datumRodjenja;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student student)) return false;
+
+        if (getJmbag() != null ? !getJmbag().equals(student.getJmbag()) : student.getJmbag() != null) return false;
+        return getDatumRodjenja() != null ? getDatumRodjenja().equals(student.getDatumRodjenja()) : student.getDatumRodjenja() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getJmbag() != null ? getJmbag().hashCode() : 0;
+        result = 31 * result + (getDatumRodjenja() != null ? getDatumRodjenja().hashCode() : 0);
+        return result;
     }
 }
