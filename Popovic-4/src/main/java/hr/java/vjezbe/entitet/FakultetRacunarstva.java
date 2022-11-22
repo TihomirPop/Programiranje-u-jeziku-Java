@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.List;
 
 /**
@@ -55,7 +54,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
         Student najuspjesniji = getStudenti().get(0);
         int najvisePetica = 0;
         for(Ispit ispit: filtrirajIspitePoStudentu(getIspiti(), najuspjesniji))
-            if(ispit.getOcjena().equals(5) && (ispit.getDatumIVrijeme().getYear() == godina))
+            if(ispit.getOcjena() == Ocjena.ODLICAN && (ispit.getDatumIVrijeme().getYear() == godina))
                 najvisePetica++;
 
 
@@ -63,7 +62,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
             List<Ispit> ispiti = filtrirajIspitePoStudentu(getIspiti(), student);
             int n = 0;
             for(Ispit ispit: ispiti)
-                if(ispit.getOcjena().equals(5) && (ispit.getDatumIVrijeme().getYear() == godina))
+                if(ispit.getOcjena() == Ocjena.ODLICAN && (ispit.getDatumIVrijeme().getYear() == godina))
                     n++;
 
             if(n > najvisePetica){
@@ -101,12 +100,12 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
                 logger.warn("Student " + student.getIme() + " " + student.getPrezime() + " zbog negativne ocjene na jednom od predmeta ima prosjek 'nedovoljan (1)'!", e);
                 prosjekStudenta = BigDecimal.ONE;
             }
-            if (prosjekStudenta.compareTo(prosjekNajboljeg) == 1) {
+            if (prosjekStudenta.compareTo(prosjekNajboljeg) > 0) {
                 najbolji = student;
                 prosjekNajboljeg = prosjekStudenta;
             }
             else if ((prosjekStudenta.compareTo(prosjekNajboljeg) == 0) && (najbolji != student)){
-                if (student.getDatumRodjenja().compareTo(najbolji.getDatumRodjenja()) == -1){
+                if (student.getDatumRodjenja().compareTo(najbolji.getDatumRodjenja()) < 0){
                     najbolji = student;
                     prosjekNajboljeg = prosjekStudenta;
                 } else if (student.getDatumRodjenja().compareTo(najbolji.getDatumRodjenja()) == 0) {

@@ -81,9 +81,10 @@ public class Glavna {
             for(Predmet predmet: predmeti){
                 if(predmet.getStudenti().isEmpty())
                     System.out.println("Nema studenata upisanih na predmet '" + predmet.getNaziv() + "'.");
-                else
-                    for(Student student: predmet.getStudenti().stream().sorted(new StudentSorter()).toList())
-                        System.out.println(student.getPrezime() + " " + student.getIme());
+                else{
+                    System.out.println("Studenti upisani na predmet '" + predmet.getNaziv() + "' su:");
+                    predmet.getStudenti().stream().sorted(new StudentSorter()).forEach(s -> System.out.println(s.getPrezime() + " " + s.getIme()));
+                }
             }
 
             for (Ispit ispit : ispiti) {
@@ -122,7 +123,6 @@ public class Glavna {
 
         if(obrazovneUstanove.get(i) instanceof Visokoskolska visokoskolska){
             Set<Student> pozitivniStudenti = obrazovneUstanove.get(i).filtrirajPozitivneStudente();
-
             for (Student student : pozitivniStudenti) {
                 boolean kriviZavrsni;
                 do {
@@ -156,8 +156,8 @@ public class Glavna {
                 }while (kriviZavrsni);
             }
 
-            Student najboljiStudentVeleuciliste = obrazovneUstanove.get(i).odrediNajuspjesnijegStudentaNaGodini(2022);
-            System.out.println("Najbolji student 2022. godine je " + najboljiStudentVeleuciliste.getIme() + " " + najboljiStudentVeleuciliste.getPrezime() + " JMBAG: " + najboljiStudentVeleuciliste.getJmbag());
+            Student najboljiStudent = obrazovneUstanove.get(i).odrediNajuspjesnijegStudentaNaGodini(2022);
+            System.out.println("Najbolji student 2022. godine je " + najboljiStudent.getIme() + " " + najboljiStudent.getPrezime() + " JMBAG: " + najboljiStudent.getJmbag());
 
             if(obrazovneUstanove.get(i) instanceof Diplomski diplomski) {
                 Student rektorova = diplomski.odrediStudentaZaRektorovuNagradu();
@@ -267,30 +267,6 @@ public class Glavna {
                     }
                 } while (kriviBrojProfesora);
                 Profesor profesor = profesori.get(brojProfesora - 1);
-
-            /*
-            boolean kriviBrojStudenata;
-
-            int brojStudenata = 0;
-            do {
-                System.out.print("Unesite broj studenata za predmetu '" + naziv + "': ");
-                try {
-                    brojStudenata = input.nextInt();
-                    input.nextLine();
-                    if (brojStudenata < 1 || brojStudenata > BROJ_STUDENATA)
-                        throw (new KriviInputException("Broj studenata mora biti izmedu 1 i " + BROJ_STUDENATA));
-                    kriviBrojStudenata = false;
-                } catch (KriviInputException e) {
-                    logger.warn(e.getMessage(), e);
-                    System.out.println(e.getMessage());
-                    kriviBrojStudenata = true;
-                } catch (InputMismatchException e) {
-                    logger.warn("Neispravan unos!", e);
-                    System.out.println("Neispravan unos!");
-                    input.nextLine();
-                    kriviBrojStudenata = true;
-                }
-            }while(kriviBrojStudenata);*/
 
                 Set<Student> studenti = new HashSet<>();
 

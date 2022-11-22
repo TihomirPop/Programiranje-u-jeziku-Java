@@ -18,7 +18,7 @@ public interface Visokoskolska {
      * @param ocjenaObrana - ocjena iz obrane zavrsnog rada
      * @return - konacna ocjena
      */
-    public BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(List<Ispit> ispiti, Ocjena ocjenaPismeno, Ocjena ocjenaObrana);
+    BigDecimal izracunajKonacnuOcjenuStudijaZaStudenta(List<Ispit> ispiti, Ocjena ocjenaPismeno, Ocjena ocjenaObrana);
 
     /**
      * Racuna prosjek ocjena na ispitima
@@ -26,7 +26,7 @@ public interface Visokoskolska {
      * @return - prosjek ocjena
      * @throws NemoguceOdreditiProsjekStudentaException - iznimka koja se baca kada je ocjena barem jednog ispita 1
      */
-    default public BigDecimal odrediProsjekOcjenaNaIspitima(List<Ispit> ispiti) throws NemoguceOdreditiProsjekStudentaException{
+    default BigDecimal odrediProsjekOcjenaNaIspitima(List<Ispit> ispiti) throws NemoguceOdreditiProsjekStudentaException{
         BigDecimal prosjek = BigDecimal.ZERO;
 
         for(Ispit ispit: ispiti){
@@ -47,12 +47,8 @@ public interface Visokoskolska {
      * @return - array polozenih ispita
      */
     private List<Ispit> filtrirajPolozeneIspite(List<Ispit> ispiti){
-        int n = 0;
-        for(Ispit ispit: ispiti)
-            if(ispit.getOcjena().getInt() > 1)
-                n++;
-
         List<Ispit> polozeni = new ArrayList<>();
+
 
         for(Ispit ispit: ispiti)
             if(ispit.getOcjena().getInt() > 1)
@@ -68,11 +64,6 @@ public interface Visokoskolska {
      * @return - array ispita koje je pisao zadani student
      */
     default public List<Ispit> filtrirajIspitePoStudentu(List<Ispit> ispiti, Student student){
-        int n = 0;
-        for(Ispit ispit: ispiti)
-            if(ispit.getStudent().equals(student))
-                n++;
-
         List<Ispit> ispitiStudenta = new ArrayList<>();
 
         for(Ispit ispit: ispiti)

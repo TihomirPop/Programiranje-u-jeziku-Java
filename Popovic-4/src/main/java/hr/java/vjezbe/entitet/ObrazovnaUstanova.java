@@ -76,8 +76,7 @@ public abstract class ObrazovnaUstanova {
 
     public Set<Student> filtrirajPozitivneStudente(){
         Set<Student> pozitivniStudenti = new HashSet<>();
-        for(Student student: studenti)
-            pozitivniStudenti.add(student);
+        pozitivniStudenti.addAll(studenti);
 
         for(Ispit ispit: ispiti)
             if(ispit.getOcjena() == Ocjena.NEDOVOLJAN)
