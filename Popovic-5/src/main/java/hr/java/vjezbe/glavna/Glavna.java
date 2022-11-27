@@ -2,6 +2,7 @@ package hr.java.vjezbe.glavna;
 
 import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.iznimke.KriviInputException;
+import hr.java.vjezbe.sortiranje.ObrazovneUstanoveSorter;
 import hr.java.vjezbe.sortiranje.StudentSorter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Glavna klasa sa metodom main
@@ -51,7 +53,7 @@ public class Glavna {
                 kriviBrojUstanova = true;
             }
         } while (kriviBrojUstanova);
-        List<ObrazovnaUstanova> obrazovneUstanove = new ArrayList<>();
+        Sveuciliste<ObrazovnaUstanova> sveucilista = new Sveuciliste<>();
 
         List<Profesor> profesori = new ArrayList<>();
         List<Predmet> predmeti = new ArrayList<>();
@@ -87,28 +89,32 @@ public class Glavna {
                 }
             }
 
+            /*
             for (Ispit ispit : ispiti) {
                 if (ispit.getOcjena() == Ocjena.ODLICAN) {
                     System.out.print("Student " + ispit.getStudent().getIme() + " " + ispit.getStudent().getPrezime() + " je ostvario ocjenu 'izvrstan' na predmetu '" + ispit.getPredmet().getNaziv() + "' \n");
                 }
-            }
+            }*/
 
-            odabirUstanove(input, obrazovneUstanove, i, profesori, predmeti, studenti, ispiti);
+            ispiti.stream().filter(ispit -> ispit.getOcjena() == Ocjena.ODLICAN).forEach(ispit -> System.out.print("Student " + ispit.getStudent().getIme() + " " + ispit.getStudent().getPrezime() + " je ostvario ocjenu 'izvrstan' na predmetu '" + ispit.getPredmet().getNaziv() + "' \n"));
 
+            odabirUstanove(input, sveucilista, i, profesori, predmeti, studenti, ispiti);
         }
+
+        List<ObrazovnaUstanova> sortiraneUstanove = sveucilista.getObrazovneUstanove().stream().sorted(new ObrazovneUstanoveSorter()).collect(Collectors.toList());
     }
 
     /**
      * Metoda za odabir ustanove, racunanje konacne ocjene studenta, trazenje najboljeg studenta i trazenje studenta za rektorovu nagradu
      * @param input - scanner - scanner s kojim se ucitavaju podatci
-     * @param obrazovneUstanove - array obraznovnih ustanova
+     * @param sveucilista - array obraznovnih ustanova
      * @param i - redni broj obrazovne ustanove za koju se unose podatci
      * @param profesori - array profesora te ustanove
      * @param predmeti - array predmeta te ustanove
      * @param studenti - array studenata te ustanove
      * @param ispiti - array ispita te ustanove
      */
-    private static void odabirUstanove(Scanner input, List<ObrazovnaUstanova> obrazovneUstanove, int i, List<Profesor> profesori, List<Predmet> predmeti, List<Student> studenti, List<Ispit> ispiti) {
+    private static void odabirUstanove(Scanner input, Sveuciliste<ObrazovnaUstanova> sveucilista, int i, List<Profesor> profesori, List<Predmet> predmeti, List<Student> studenti, List<Ispit> ispiti) {
         System.out.print("Odaberite obrazovnu ustanovu za navedene podatke koju želite unijeti (1 - Veleučilište Jave, 2 - Fakultet računarstva): ");
         int odabirUstanove = input.nextInt();
         input.nextLine();
@@ -117,12 +123,12 @@ public class Glavna {
         String nazivUstanove = input.nextLine();
 
         switch (odabirUstanove) {
-            case 1 -> obrazovneUstanove.add(new VeleucilisteJave(nazivUstanove, predmeti, profesori, studenti, ispiti));
-            case 2 -> obrazovneUstanove.add(new FakultetRacunarstva(nazivUstanove, predmeti, profesori, studenti, ispiti));
+            case 1 -> sveucilista.dodajObrazovnuUstanovu(new VeleucilisteJave(nazivUstanove, predmeti, profesori, studenti, ispiti));
+            case 2 -> sveucilista.dodajObrazovnuUstanovu(new FakultetRacunarstva(nazivUstanove, predmeti, profesori, studenti, ispiti));
         }
 
-        if(obrazovneUstanove.get(i) instanceof Visokoskolska visokoskolska){
-            Set<Student> pozitivniStudenti = obrazovneUstanove.get(i).filtrirajPozitivneStudente();
+        if(sveucilista.dohvatiObrazovnuUstanovu(i) instanceof Visokoskolska visokoskolska){
+            Set<Student> pozitivniStudenti = sveucilista.dohvatiObrazovnuUstanovu(i).filtrirajPozitivneStudente();
             for (Student student : pozitivniStudenti) {
                 boolean kriviZavrsni;
                 do {
@@ -142,7 +148,7 @@ public class Glavna {
                             throw new KriviInputException("Ocjene iz zavrsnog rada moraju biti izmedu 1 i 5");
                         kriviZavrsni = false;
 
-                        System.out.println("Konačna ocjena studija studenta " + student.getIme() + " " + student.getPrezime() + " je " + visokoskolska.izracunajKonacnuOcjenuStudijaZaStudenta(visokoskolska.filtrirajIspitePoStudentu(obrazovneUstanove.get(i).getIspiti(), student), intToOcjena(intZavrsni), intToOcjena(intObrana)));
+                        System.out.println("Konačna ocjena studija studenta " + student.getIme() + " " + student.getPrezime() + " je " + visokoskolska.izracunajKonacnuOcjenuStudijaZaStudenta(visokoskolska.filtrirajIspitePoStudentu(sveucilista.dohvatiObrazovnuUstanovu(i).getIspiti(), student), intToOcjena(intZavrsni), intToOcjena(intObrana)));
                     } catch (KriviInputException e) {
                         logger.warn(e.getMessage(), e);
                         System.out.println(e.getMessage());
@@ -156,10 +162,10 @@ public class Glavna {
                 }while (kriviZavrsni);
             }
 
-            Student najboljiStudent = obrazovneUstanove.get(i).odrediNajuspjesnijegStudentaNaGodini(2022);
+            Student najboljiStudent = sveucilista.dohvatiObrazovnuUstanovu(i).odrediNajuspjesnijegStudentaNaGodini(2022);
             System.out.println("Najbolji student 2022. godine je " + najboljiStudent.getIme() + " " + najboljiStudent.getPrezime() + " JMBAG: " + najboljiStudent.getJmbag());
 
-            if(obrazovneUstanove.get(i) instanceof Diplomski diplomski) {
+            if(sveucilista.dohvatiObrazovnuUstanovu(i) instanceof Diplomski diplomski) {
                 Student rektorova = diplomski.odrediStudentaZaRektorovuNagradu();
                 System.out.println("Student koji je osvojio rektorovu nagradu je " + rektorova.getIme() + " " + rektorova.getPrezime() + " JMBAG: " + rektorova.getJmbag());
             }
