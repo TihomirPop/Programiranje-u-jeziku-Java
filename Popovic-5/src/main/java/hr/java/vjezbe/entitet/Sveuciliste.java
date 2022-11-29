@@ -19,6 +19,6 @@ public class Sveuciliste <T extends ObrazovnaUstanova>{
     }
 
     public List<T> getObrazovneUstanove() {
-        return new ArrayList<>(obrazovneUstanove);
+        return obrazovneUstanove;
     }
 }

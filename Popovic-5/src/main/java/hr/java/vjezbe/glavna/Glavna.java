@@ -85,7 +85,9 @@ public class Glavna {
                     System.out.println("Nema studenata upisanih na predmet '" + predmet.getNaziv() + "'.");
                 else{
                     System.out.println("Studenti upisani na predmet '" + predmet.getNaziv() + "' su:");
-                    predmet.getStudenti().stream().sorted(new StudentSorter()).forEach(s -> System.out.println(s.getPrezime() + " " + s.getIme()));
+                    predmet.getStudenti().stream()
+                            .sorted(new StudentSorter())
+                            .forEach(s -> System.out.println(s.getPrezime() + " " + s.getIme()));
                 }
             }
 
@@ -96,14 +98,17 @@ public class Glavna {
                 }
             }*/
 
-            ispiti.stream().filter(ispit -> ispit.getOcjena() == Ocjena.ODLICAN).forEach(ispit -> System.out.print("Student " + ispit.getStudent().getIme() + " " + ispit.getStudent().getPrezime() + " je ostvario ocjenu 'izvrstan' na predmetu '" + ispit.getPredmet().getNaziv() + "' \n"));
+            ispiti.stream()
+                    .filter(ispit -> ispit.getOcjena() == Ocjena.ODLICAN)
+                    .forEach(ispit -> System.out.print("Student " + ispit.getStudent().getIme() + " " + ispit.getStudent().getPrezime() + " je ostvario ocjenu 'izvrstan' na predmetu '" + ispit.getPredmet().getNaziv() + "' \n"));
 
             odabirUstanove(input, sveucilista, i, profesori, predmeti, studenti, ispiti);
         }
 
-        List<ObrazovnaUstanova> sortiraneUstanove = sveucilista.getObrazovneUstanove().stream().sorted(new ObrazovneUstanoveSorter()).collect(Collectors.toList());
         System.out.println("Sortirane obrazovne ustanove prema broju studenata:");
-        sortiraneUstanove.stream().forEach(ustanova -> System.out.println(ustanova.getNaziv() + ": " + ustanova.getStudenti().size() + " studenta"));
+        sveucilista.getObrazovneUstanove().stream()
+                .sorted(new ObrazovneUstanoveSorter())
+                .forEach(ustanova -> System.out.println(ustanova.getNaziv() + ": " + ustanova.getStudenti().size() + " studenta"));
     }
 
     /**

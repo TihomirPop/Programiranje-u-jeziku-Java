@@ -65,6 +65,6 @@ public interface Visokoskolska {
      * @return - array ispita koje je pisao zadani student
      */
     default public List<Ispit> filtrirajIspitePoStudentu(List<Ispit> ispiti, Student student){
-        return new ArrayList<>(ispiti.stream().filter(ispit -> ispit.getStudent().equals(student)).collect(Collectors.toList()));
+        return ispiti.stream().filter(ispit -> ispit.getStudent().equals(student)).collect(Collectors.toList());
     }
 }
