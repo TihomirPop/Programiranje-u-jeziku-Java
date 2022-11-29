@@ -102,6 +102,8 @@ public class Glavna {
         }
 
         List<ObrazovnaUstanova> sortiraneUstanove = sveucilista.getObrazovneUstanove().stream().sorted(new ObrazovneUstanoveSorter()).collect(Collectors.toList());
+        System.out.println("Sortirane obrazovne ustanove prema broju studenata:");
+        sortiraneUstanove.stream().forEach(ustanova -> System.out.println(ustanova.getNaziv() + ": " + ustanova.getStudenti().size() + " studenta"));
     }
 
     /**
