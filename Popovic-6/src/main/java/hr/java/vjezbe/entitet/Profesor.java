@@ -8,7 +8,7 @@ public class Profesor extends Osoba {
     private  String titula;
 
     private Profesor(Builder builder){
-        super(builder.ime, builder.prezime);
+        super(builder.id, builder.ime, builder.prezime);
         this.sifra = builder.sifra;
         this.titula = builder.titula;
     }
@@ -17,6 +17,7 @@ public class Profesor extends Osoba {
      * Builder klasa za objekt tipa Profesor
      */
     public static class Builder{
+        private Long id;
         private String ime;
         private String prezime;
         private String sifra;
@@ -27,7 +28,8 @@ public class Profesor extends Osoba {
          * @param ime - ime profesora
          * @param prezime - prezime profesora
          */
-        public Builder(String ime, String prezime){
+        public Builder(Long id, String ime, String prezime){
+            this.id = id;
             this.ime = ime;
             this.prezime = prezime;
         }

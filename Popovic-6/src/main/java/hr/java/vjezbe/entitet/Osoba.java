@@ -3,11 +3,12 @@ package hr.java.vjezbe.entitet;
 /**
  * Klasa koja predstavlja osobu
  */
-public abstract class Osoba {
+public abstract class Osoba extends Entitet{
     private String ime;
     private String prezime;
 
-    public Osoba(String ime, String prezime) {
+    public Osoba(Long id, String ime, String prezime) {
+        super(id);
         this.ime = ime;
         this.prezime = prezime;
     }

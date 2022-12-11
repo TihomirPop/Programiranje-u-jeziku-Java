@@ -7,14 +7,15 @@ import java.util.Set;
 /**
  * Apstraktna klasa koja predstavlja obrazovnu ustanovu
  */
-public abstract class ObrazovnaUstanova {
+public abstract class ObrazovnaUstanova extends Entitet{
     private String naziv;
     private List<Predmet> predmeti;
     private List<Profesor> profesori;
     private List<Student> studenti;
     private List<Ispit> ispiti;
 
-    public ObrazovnaUstanova(String naziv, List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
+    public ObrazovnaUstanova(Long id, String naziv, List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
+        super(id);
         this.naziv = naziv;
         this.predmeti = predmeti;
         this.profesori = profesori;

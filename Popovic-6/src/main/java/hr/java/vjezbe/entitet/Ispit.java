@@ -5,14 +5,15 @@ import java.time.LocalDateTime;
 /**
  * Klasa koja predstavlja ispit neke obrazovne ustanove
  */
-public final class Ispit implements Online {
+public final class Ispit extends Entitet implements Online{
     private Predmet predmet;
     private Student student;
     private Ocjena ocjena;
     private LocalDateTime datumIVrijeme;
 
     private Dvorana dvorana;
-    public Ispit(Predmet predmet, Student student, Ocjena ocjena, LocalDateTime datumIVrijeme, Dvorana dvorana) {
+    public Ispit(Long id, Predmet predmet, Student student, Ocjena ocjena, LocalDateTime datumIVrijeme, Dvorana dvorana) {
+        super(id);
         this.predmet = predmet;
         this.student = student;
         this.ocjena = ocjena;

@@ -5,14 +5,15 @@ import java.util.Set;
 /**
  * Klasa koja predstavlja predmet neke obrazovne ustanove
  */
-public class Predmet {
+public class Predmet extends Entitet{
     private String sifra;
     private String naziv;
     private Integer brojEctsBodova;
     private Profesor nositelj;
     private Set<Student> studenti;
 
-    public Predmet(String sifra, String naziv, Integer brojEctsBodova, Profesor nositelj, Set<Student> studenti) {
+    public Predmet(Long id, String sifra, String naziv, Integer brojEctsBodova, Profesor nositelj, Set<Student> studenti) {
+        super(id);
         this.sifra = sifra;
         this.naziv = naziv;
         this.brojEctsBodova = brojEctsBodova;
