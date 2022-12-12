@@ -8,11 +8,15 @@ import java.time.LocalDate;
 public class Student extends Osoba{
     private String jmbag;
     private LocalDate datumRodjenja;
+    private Ocjena ocjenaPismeno;
+    private Ocjena ocjenaObrana;
 
-    public Student(Long id, String ime, String prezime, String jmbag, LocalDate datumRodjenja) {
+    public Student(Long id, String ime, String prezime, String jmbag, LocalDate datumRodjenja, Ocjena ocjenaPismeno, Ocjena ocjenaObrana) {
         super(id, ime, prezime);
         this.jmbag = jmbag;
         this.datumRodjenja = datumRodjenja;
+        this.ocjenaPismeno = ocjenaPismeno;
+        this.ocjenaObrana = ocjenaObrana;
     }
 
     public String getJmbag() {
@@ -29,6 +33,22 @@ public class Student extends Osoba{
 
     public void setDatumRodjenja(LocalDate datumRodjenja) {
         this.datumRodjenja = datumRodjenja;
+    }
+
+    public Ocjena getOcjenaPismeno() {
+        return ocjenaPismeno;
+    }
+
+    public void setOcjenaPismeno(Ocjena ocjenaPismeno) {
+        this.ocjenaPismeno = ocjenaPismeno;
+    }
+
+    public Ocjena getOcjenaObrana() {
+        return ocjenaObrana;
+    }
+
+    public void setOcjenaObrana(Ocjena ocjenaObrana) {
+        this.ocjenaObrana = ocjenaObrana;
     }
 
     @Override
