@@ -4,9 +4,7 @@ import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.sortiranje.ObrazovneUstanoveSorter;
 import hr.java.vjezbe.sortiranje.StudentSorter;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,6 +19,7 @@ public class GlavnaDatoteke {
     private static final String PREDMETI_PATH = "dat/predmeti.txt";
     private static final String ISPITI_PATH = "dat/ispiti.txt";
     private static final String OBRAZOVNE_USTANOVE_PATH = "dat/obrazovneUstanove.txt";
+    private static final String OBRAZOVNE_USTANOVE_SERIJALIZACIJA_PATH = "dat/obrazovne-ustanove.dat";
     private static final int SIZE_OF_PROFESOR = 5;
     private static final int SIZE_OF_STUDENT = 7;
     private static final int SIZE_OF_PREDMET = 6;
@@ -77,6 +76,12 @@ public class GlavnaDatoteke {
         obrazovneUstanove.stream()
                 .sorted(new ObrazovneUstanoveSorter())
                 .forEach(ustanova -> System.out.println(ustanova.getNaziv() + ": " + ustanova.getStudenti().size() + " studenta"));
+
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(OBRAZOVNE_USTANOVE_SERIJALIZACIJA_PATH))) {
+            out.writeObject(obrazovneUstanove);
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
     }
 
     private static List<Profesor> getProfesori(){
