@@ -1,20 +1,20 @@
 1
-P5567
 Janko
 Petrović
+P5567
 Viši predavač
 2
-P9878
 Ivica
 Župan
+P9878
 Profesor visoke škole
 3
-P987
 Darko
-Milić
-predavač
+Milic
+P123
+Viši predavač
 4
-P661
 Danica
 Despot
-predavač
+P456
+Predavac

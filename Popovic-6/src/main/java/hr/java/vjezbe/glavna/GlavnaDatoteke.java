@@ -2,15 +2,17 @@ package hr.java.vjezbe.glavna;
 
 import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.sortiranje.ObrazovneUstanoveSorter;
+import hr.java.vjezbe.sortiranje.StudentSorter;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GlavnaDatoteke {
@@ -43,17 +45,19 @@ public class GlavnaDatoteke {
             }
 
             for(Predmet predmet: obrazovnaUstanova.getPredmeti()){
-                if(predmet.getStudenti().size() > 0){
-                    System.out.println("Studenti upisani na predmet '" + predmet.getNaziv() + "' su");
-                    predmet.getStudenti().forEach(student -> System.out.println(student.getIme() + " " + student.getPrezime()));
-                }
-                else
+                if(predmet.getStudenti().isEmpty())
                     System.out.println("Nema studenata upisanih na predmet '" + predmet.getNaziv() + "'.");
+                else{
+                    System.out.println("Studenti upisani na predmet '" + predmet.getNaziv() + "' su:");
+                    predmet.getStudenti().stream()
+                            .sorted(new StudentSorter())
+                            .forEach(s -> System.out.println(s.getPrezime() + " " + s.getIme()));
+                }
             }
 
             for(Ispit ispit: obrazovnaUstanova.getIspiti())
                 if(ispit.getOcjena().equals(Ocjena.ODLICAN))
-                    System.out.println("Student " + ispit.getStudent().getIme() + " " + ispit.getStudent().getPrezime() + " je dobio ocjenu 'izvrstan' na predmetu " + ispit.getPredmet());
+                    System.out.println("Student " + ispit.getStudent().getIme() + " " + ispit.getStudent().getPrezime() + " je dobio ocjenu 'izvrstan' na predmetu " + ispit.getPredmet().getNaziv());
 
             if(obrazovnaUstanova instanceof Visokoskolska ustanova){
                 for(Student student: obrazovnaUstanova.getStudenti())
@@ -83,9 +87,9 @@ public class GlavnaDatoteke {
             for(int i = 0; i < profesoriLines.size(); i += SIZE_OF_PROFESOR){
                 profesori.add(new Profesor.Builder(
                         Long.parseLong(profesoriLines.get(i)),
-                        profesoriLines.get(i + 2),
-                        profesoriLines.get(i + 3))
-                        .saSifrom(profesoriLines.get(i + 1))
+                        profesoriLines.get(i + 1),
+                        profesoriLines.get(i + 2))
+                        .saSifrom(profesoriLines.get(i + 3))
                         .saTitulom(profesoriLines.get(i + 4))
                         .build());
             }
@@ -105,8 +109,8 @@ public class GlavnaDatoteke {
                         Long.parseLong(studentiLines.get(i)),
                         studentiLines.get(i + 1),
                         studentiLines.get(i + 2),
-                        studentiLines.get(i + 4),
-                        LocalDate.parse(studentiLines.get(i + 3), DateTimeFormatter.ofPattern("dd.MM.yyyy.")),
+                        studentiLines.get(i + 3),
+                        LocalDate.parse(studentiLines.get(i + 4), DateTimeFormatter.ofPattern("dd.MM.yyyy.")),
                         intToOcjena(Integer.parseInt(studentiLines.get(i + 5))),
                         intToOcjena(Integer.parseInt(studentiLines.get(i + 6)))
                 ));
@@ -176,15 +180,15 @@ public class GlavnaDatoteke {
                 List<Long> ispitiID = Arrays.stream(obrazovneUstanoveLines.get(i + 5).split(" ")).map(Long::parseLong).collect(Collectors.toList());
                 Integer vrstaUstanove = Integer.parseInt(obrazovneUstanoveLines.get(i + 6));
 
-                List<Predmet> predmetiUstanove = predmeti.stream().filter(p -> studentiID.contains(p.getId())).collect(Collectors.toList());
-                List<Profesor> profesoriUstanove = profesori.stream().filter(p -> studentiID.contains(p.getId())).collect(Collectors.toList());
+                List<Predmet> predmetiUstanove = predmeti.stream().filter(p -> predmetiID.contains(p.getId())).collect(Collectors.toList());
+                List<Profesor> profesoriUstanove = profesori.stream().filter(p -> profesoriID.contains(p.getId())).collect(Collectors.toList());
                 List<Student> studentiUstanove = studenti.stream().filter(s -> studentiID.contains(s.getId())).collect(Collectors.toList());
-                List<Ispit> ispitiUstanove = ispiti.stream().filter(ispit -> studentiID.contains(ispit.getId())).collect(Collectors.toList());
+                List<Ispit> ispitiUstanove = ispiti.stream().filter(ispit -> ispitiID.contains(ispit.getId())).collect(Collectors.toList());
 
                 ObrazovnaUstanova obrazovnaUstanova = switch (vrstaUstanove){
                     case 1 -> new VeleucilisteJave(id, naziv, predmetiUstanove, profesoriUstanove, studentiUstanove, ispitiUstanove);
                     case 2 -> new FakultetRacunarstva(id, naziv, predmetiUstanove, profesoriUstanove, studentiUstanove, ispitiUstanove);
-                    default -> {throw new RuntimeException("Nedozvoljena vrijednost za odabir obrazovne ustanove");}
+                    default -> throw new RuntimeException("Nedozvoljena vrijednost za odabir obrazovne ustanove");
                 };
                 obrazovneUstanove.add(obrazovnaUstanova);
             }
