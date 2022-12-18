@@ -1,6 +1,7 @@
 module hr.java.vjezbe.glavna {
     requires javafx.controls;
     requires javafx.fxml;
+    requires org.slf4j;
 
 
     opens hr.java.vjezbe.glavna to javafx.fxml;

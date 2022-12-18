@@ -1,7 +1,7 @@
 package hr.java.vjezbe.entitet;
 
 
-import hr.java.vjezbe.glavna.GlavnaDatoteke;
+import hr.java.vjezbe.glavna.HelloApplication;
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 import hr.java.vjezbe.iznimke.PostojiViseNajmladjihStudenataException;
 import org.slf4j.Logger;
@@ -14,7 +14,7 @@ import java.util.List;
  * Klasa koja predstavlja fakultet racunarstva, nasljeduje ObrazovnaUstanova i implementira Diplomski
  */
 public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski{
-    private static final Logger logger = LoggerFactory.getLogger(GlavnaDatoteke.class);
+    private static final Logger logger = LoggerFactory.getLogger(HelloApplication.class);
 
     public FakultetRacunarstva(Long id, String naziv, List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
         super(id, naziv, predmeti, profesori, studenti, ispiti);

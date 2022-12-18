@@ -1,6 +1,6 @@
 package hr.java.vjezbe.entitet;
 
-import hr.java.vjezbe.glavna.GlavnaDatoteke;
+import hr.java.vjezbe.glavna.HelloApplication;
 import hr.java.vjezbe.iznimke.NemoguceOdreditiProsjekStudentaException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import java.util.List;
  * Klasa koja predstavlja veleuciliste Jave, nasljeduje ObrazovnaUstanova i implementira Visokoskolska
  */
 public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska{
-    private static final Logger logger = LoggerFactory.getLogger(GlavnaDatoteke.class);
+    private static final Logger logger = LoggerFactory.getLogger(HelloApplication.class);
 
     public VeleucilisteJave(Long id, String naziv, List<Predmet> predmeti, List<Profesor> profesori, List<Student> studenti, List<Ispit> ispiti) {
         super(id, naziv, predmeti, profesori, studenti, ispiti);
