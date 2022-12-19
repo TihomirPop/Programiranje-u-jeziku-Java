@@ -23,13 +23,13 @@
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Student">
-            <items>
+               <items>
               <MenuItem mnemonicParsing="false" onAction="#prikaziPretraguStudenta" text="Pretraga" />
-            </items>
+               </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Predmet">
             <items>
-              <MenuItem mnemonicParsing="false" text="Pretraga" />
+              <MenuItem mnemonicParsing="false" onAction="#prikaziPretraguPredmeta" text="Pretraga" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Ispit">
