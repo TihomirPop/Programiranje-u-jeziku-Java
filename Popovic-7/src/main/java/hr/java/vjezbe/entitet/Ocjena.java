@@ -17,7 +17,7 @@ public enum Ocjena {
         this.opis = opis;
     }
 
-    public int getInt() {
+    public Integer getInt() {
         return ocjena;
     }
 
