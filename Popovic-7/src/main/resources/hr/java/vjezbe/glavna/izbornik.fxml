@@ -9,13 +9,13 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="1920.0" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.java.vjezbe.glavna.IzbornikController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1920.0" prefWidth="400.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1920.0" percentWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="-Infinity" vgrow="NEVER" />
   </rowConstraints>
    <children>
-      <MenuBar GridPane.valignment="TOP">
+      <MenuBar fx:id="menuBar" GridPane.valignment="TOP">
         <menus>
           <Menu mnemonicParsing="false" text="Profesor">
             <items>

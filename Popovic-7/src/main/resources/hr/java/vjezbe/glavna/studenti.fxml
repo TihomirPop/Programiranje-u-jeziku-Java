@@ -54,17 +54,17 @@
             <Insets right="5.0" />
          </padding>
       </Label>
-      <TextField fx:id="jmbagTextField" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <TextField fx:id="jmbagTextField" maxWidth="100.0" onAction="#pretraziStudente" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="prezimeTextField" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TextField fx:id="prezimeTextField" maxWidth="100.0" onAction="#pretraziStudente" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="imeTextField" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <TextField fx:id="imeTextField" maxWidth="100.0" onAction="#pretraziStudente" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>
@@ -72,13 +72,13 @@
       <Button mnemonicParsing="false" onAction="#pretraziStudente" text="Pretraga" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
       <TableView fx:id="studentTableView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="7">
         <columns>
-          <TableColumn fx:id="jmbagTableColumn" prefWidth="75.0" text="JMBAG" />
-          <TableColumn fx:id="prezimeTableColumn" prefWidth="75.0" text="Prezime" />
-            <TableColumn fx:id="imeTableColumn" prefWidth="75.0" text="Ime" />
-            <TableColumn fx:id="datumRodenjaTableColumn" prefWidth="95.199951171875" text="Datum rodenja" />
+          <TableColumn fx:id="jmbagTableColumn" prefWidth="110.0" text="JMBAG" />
+          <TableColumn fx:id="prezimeTableColumn" prefWidth="90.0" text="Prezime" />
+            <TableColumn fx:id="imeTableColumn" prefWidth="90.0" text="Ime" />
+            <TableColumn fx:id="datumRodenjaTableColumn" prefWidth="108.0" text="Datum rodenja" />
         </columns>
       </TableView>
-      <DatePicker fx:id="datumRodenjaDatePicker" maxWidth="125.0" prefHeight="26.0" prefWidth="125.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <DatePicker fx:id="datumRodenjaDatePicker" maxWidth="125.0" onAction="#pretraziStudente" prefHeight="26.0" prefWidth="125.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>

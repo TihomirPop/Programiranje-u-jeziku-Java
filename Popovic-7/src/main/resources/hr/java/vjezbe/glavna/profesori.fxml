@@ -53,22 +53,22 @@
             <Insets right="5.0" />
          </padding>
       </Label>
-      <TextField fx:id="sifraProfesoraTextField" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <TextField fx:id="sifraProfesoraTextField" maxWidth="100.0" onAction="#pretraziProfesore" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="prezimeProfesoraTextField" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TextField fx:id="prezimeProfesoraTextField" maxWidth="100.0" onAction="#pretraziProfesore" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="imeProfesoraTextField" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <TextField fx:id="imeProfesoraTextField" maxWidth="100.0" onAction="#pretraziProfesore" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="titulaProfesoraTextField" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <TextField fx:id="titulaProfesoraTextField" maxWidth="100.0" onAction="#pretraziProfesore" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>
@@ -76,10 +76,10 @@
       <Button mnemonicParsing="false" onAction="#pretraziProfesore" text="Pretraga" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
       <TableView fx:id="profesorTableView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="7">
         <columns>
-          <TableColumn fx:id="profesorSifraTableColumn" prefWidth="75.0" text="Šifra" />
-          <TableColumn fx:id="profesorPrezimeTableColumn" prefWidth="75.0" text="Prezime" />
-            <TableColumn fx:id="profesorImeTableColumn" prefWidth="75.0" text="Ime" />
-            <TableColumn fx:id="profesorTitulaTableColumn" prefWidth="75.0" text="Titula" />
+          <TableColumn fx:id="profesorSifraTableColumn" prefWidth="80.79998779296875" text="Šifra" />
+          <TableColumn fx:id="profesorPrezimeTableColumn" prefWidth="92.0" text="Prezime" />
+            <TableColumn fx:id="profesorImeTableColumn" prefWidth="92.0" text="Ime" />
+            <TableColumn fx:id="profesorTitulaTableColumn" prefWidth="136.0" text="Titula" />
         </columns>
       </TableView>
     </children>

@@ -53,22 +53,22 @@
             <Insets right="5.0" />
          </padding>
       </Label>
-      <TextField fx:id="nazivTextField" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <TextField fx:id="nazivTextField" maxWidth="100.0" onAction="#pretraziIspite" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="studentTextField" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TextField fx:id="studentTextField" maxWidth="100.0" onAction="#pretraziIspite" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="ocjenaTextField" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <TextField fx:id="ocjenaTextField" maxWidth="100.0" onAction="#pretraziIspite" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="datumIVrijemeTextField" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <TextField fx:id="datumIVrijemeTextField" maxWidth="100.0" onAction="#pretraziIspite" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>
@@ -76,10 +76,10 @@
       <Button mnemonicParsing="false" onAction="#pretraziIspite" text="Pretraga" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
       <TableView fx:id="ispitTableView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="7">
         <columns>
-          <TableColumn fx:id="nazivTableColumn" prefWidth="75.0" text="Naziv" />
-          <TableColumn fx:id="studentTableColumn" prefWidth="75.0" text="Student" />
-            <TableColumn fx:id="ocjenaTableColumn" prefWidth="75.0" text="Ocjena" />
-            <TableColumn fx:id="datumIVrijemeTableColumn" prefWidth="95.199951171875" text="Datum i vrijeme" />
+          <TableColumn fx:id="nazivTableColumn" prefWidth="123.20001220703125" text="Naziv" />
+          <TableColumn fx:id="studentTableColumn" prefWidth="109.5999755859375" text="Student" />
+            <TableColumn fx:id="ocjenaTableColumn" prefWidth="47.99993896484375" text="Ocjena" />
+            <TableColumn fx:id="datumIVrijemeTableColumn" prefWidth="119.20001220703125" text="Datum i vrijeme" />
         </columns>
       </TableView>
     </children>
