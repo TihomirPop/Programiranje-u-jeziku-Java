@@ -65,7 +65,8 @@ public class IspitiController {
 
         List<Ispit> filteredIspiti = ispiti;
 
-        filteredIspiti = filteredIspiti.stream().filter(i -> i.getPredmet().getNaziv().contains(naziv)).toList();
+        if(!naziv.isEmpty())
+            filteredIspiti = filteredIspiti.stream().filter(i -> i.getPredmet().getNaziv().contains(naziv)).toList();
         if(student.length == 1)
             filteredIspiti = filteredIspiti.stream().filter(i -> (i.getStudent().getIme() + " " + i.getStudent().getPrezime()).contains(student[0])).toList();
         else if(student.length == 2)

@@ -62,8 +62,10 @@ public class PredmetiController {
 
         List<Predmet> filteredPredmeti = predmeti;
 
-        filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getSifra().contains(sifra)).toList();
-        filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getNaziv().contains(naziv)).toList();
+        if(!sifra.isEmpty())
+            filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getSifra().contains(sifra)).toList();
+        if(!naziv.isEmpty())
+            filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getNaziv().contains(naziv)).toList();
         if(!ects.isEmpty())
         filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getBrojEctsBodova().toString().equals(ects)).toList();
         if(nositelj.length == 1)

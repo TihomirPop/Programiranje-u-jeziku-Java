@@ -50,10 +50,14 @@ public class ProfesoriController {
 
         List<Profesor> filteredProfesori = profesori;
 
-        filteredProfesori = filteredProfesori.stream().filter(p -> p.getSifra().contains(sifra)).toList();
-        filteredProfesori = filteredProfesori.stream().filter(p -> p.getPrezime().contains(prezime)).toList();
-        filteredProfesori = filteredProfesori.stream().filter(p -> p.getIme().contains(ime)).toList();
-        filteredProfesori = filteredProfesori.stream().filter(p -> p.getTitula().toLowerCase().contains(titula.toLowerCase())).toList();
+        if(!sifra.isEmpty())
+            filteredProfesori = filteredProfesori.stream().filter(p -> p.getSifra().contains(sifra)).toList();
+        if(!prezime.isEmpty())
+            filteredProfesori = filteredProfesori.stream().filter(p -> p.getPrezime().contains(prezime)).toList();
+        if(!ime.isEmpty())
+            filteredProfesori = filteredProfesori.stream().filter(p -> p.getIme().contains(ime)).toList();
+        if(!titula.isEmpty())
+            filteredProfesori = filteredProfesori.stream().filter(p -> p.getTitula().toLowerCase().contains(titula.toLowerCase())).toList();
 
         profesorTableView.setItems(FXCollections.observableList(filteredProfesori));
     }
