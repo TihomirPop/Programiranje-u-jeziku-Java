@@ -61,12 +61,11 @@ public class PredmetiController {
         String nositelj[] = nositeljTextField.getText().split(" ");
 
         List<Predmet> filteredPredmeti = predmeti;
-        if(!sifra.isEmpty())
-            filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getSifra().contains(sifra)).toList();
-        if(!naziv.isEmpty())
-            filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getNaziv().contains(naziv)).toList();
+
+        filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getSifra().contains(sifra)).toList();
+        filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getNaziv().contains(naziv)).toList();
         if(!ects.isEmpty())
-            filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getBrojEctsBodova().toString().equals(ects)).toList();
+        filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getBrojEctsBodova().toString().equals(ects)).toList();
         if(nositelj.length == 1)
             filteredPredmeti = filteredPredmeti.stream().filter(p -> (p.getNositelj().getIme() + " " + p.getNositelj().getPrezime()).contains(nositelj[0])).toList();
         else if(nositelj.length == 2)

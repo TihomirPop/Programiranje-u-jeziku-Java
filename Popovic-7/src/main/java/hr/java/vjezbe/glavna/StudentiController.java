@@ -61,12 +61,10 @@ public class StudentiController {
         LocalDate datumRodenja = datumRodenjaDatePicker.getValue();
 
         List<Student> filteredStudenti = studenti;
-        if(!jmbag.isEmpty())
-            filteredStudenti = filteredStudenti.stream().filter(s -> s.getJmbag().contains(jmbag)).toList();
-        if(!prezime.isEmpty())
-            filteredStudenti = filteredStudenti.stream().filter(s -> s.getPrezime().contains(prezime)).toList();
-        if(!ime.isEmpty())
-            filteredStudenti = filteredStudenti.stream().filter(s -> s.getIme().contains(ime)).toList();
+
+        filteredStudenti = filteredStudenti.stream().filter(s -> s.getJmbag().contains(jmbag)).toList();
+        filteredStudenti = filteredStudenti.stream().filter(s -> s.getPrezime().contains(prezime)).toList();
+        filteredStudenti = filteredStudenti.stream().filter(s -> s.getIme().contains(ime)).toList();
         if(datumRodenja != null)
             filteredStudenti = filteredStudenti.stream().filter(s -> s.getDatumRodjenja().equals(datumRodenja)).toList();
 
