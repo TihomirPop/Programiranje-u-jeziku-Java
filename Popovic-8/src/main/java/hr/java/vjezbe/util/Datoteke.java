@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 public class Datoteke {
 
-    private static final String PROFESORI_PATH = "dat/profesori.txt";
-    private static final String STUDENTI_PATH = "dat/studenti.txt";
-    private static final String PREDMETI_PATH = "dat/predmeti.txt";
-    private static final String ISPITI_PATH = "dat/ispiti.txt";
+    public static final String PROFESORI_PATH = "dat/profesori.txt";
+    public static final String STUDENTI_PATH = "dat/studenti.txt";
+    public static final String PREDMETI_PATH = "dat/predmeti.txt";
+    public static final String ISPITI_PATH = "dat/ispiti.txt";
     private static final String OBRAZOVNE_USTANOVE_PATH = "dat/obrazovneUstanove.txt";
     private static final String OBRAZOVNE_USTANOVE_SERIJALIZACIJA_PATH = "dat/obrazovne-ustanove.dat";
     private static final int SIZE_OF_PROFESOR = 5;
