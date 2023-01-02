@@ -31,4 +31,20 @@ public class IzbornikController {
         FXMLLoader fxmlLoader = new FXMLLoader(Glavna.class.getResource("ispiti.fxml"));
         Glavna.prikaziScene(fxmlLoader);
     }
+    @FXML
+    public void prikaziUnosProfesora(){
+        Glavna.prikaziScene(new FXMLLoader(Glavna.class.getResource("profesoriUnos.fxml")));
+    }
+    @FXML
+    public void prikaziUnosStudenta(){
+        Glavna.prikaziScene(new FXMLLoader(Glavna.class.getResource("studentiUnos.fxml")));
+    }
+    @FXML
+    public void prikaziUnosPredmeta(){
+        Glavna.prikaziScene(new FXMLLoader(Glavna.class.getResource("predmetiUnos.fxml")));
+    }
+    @FXML
+    public void prikaziUnosIspita(){
+        Glavna.prikaziScene(new FXMLLoader(Glavna.class.getResource("ispitiUnos.fxml")));
+    }
 }

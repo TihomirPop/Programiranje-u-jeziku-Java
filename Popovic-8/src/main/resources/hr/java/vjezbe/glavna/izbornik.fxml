@@ -19,22 +19,26 @@
         <menus>
           <Menu mnemonicParsing="false" text="Profesor">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#prikaziPretraguProfesora" text="Pretraga" />
+                <MenuItem mnemonicParsing="false" onAction="#prikaziPretraguProfesora" text="Pretraga" />
+                <MenuItem mnemonicParsing="false" onAction="#prikaziUnosProfesora" text="Unos" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Student">
                <items>
               <MenuItem mnemonicParsing="false" onAction="#prikaziPretraguStudenta" text="Pretraga" />
+                   <MenuItem mnemonicParsing="false" onAction="#prikaziUnosStudenta" text="Unos" />
                </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Predmet">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#prikaziPretraguPredmeta" text="Pretraga" />
+                <MenuItem mnemonicParsing="false" onAction="#prikaziUnosPredmeta" text="Unos" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Ispit">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#prikaziPretraguIspita" text="Pretraga" />
+                   <MenuItem mnemonicParsing="false" onAction="#prikaziUnosIspita" text="Unos" />
                </items>
             </Menu>
         </menus>
