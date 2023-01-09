@@ -28,4 +28,9 @@ public enum Ocjena {
     public BigDecimal getBigDecimal(){
         return new BigDecimal(ocjena);
     }
+
+    @Override
+    public String toString() {
+        return ocjena + " - " + opis;
+    }
 }

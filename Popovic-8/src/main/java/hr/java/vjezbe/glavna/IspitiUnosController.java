@@ -1,16 +1,13 @@
 package hr.java.vjezbe.glavna;
 
-import hr.java.vjezbe.entitet.Ispit;
-import hr.java.vjezbe.entitet.Predmet;
-import hr.java.vjezbe.entitet.Profesor;
-import hr.java.vjezbe.entitet.Student;
+import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.util.Datoteke;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -18,54 +15,61 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalLong;
 
 public class IspitiUnosController {
     @FXML
-    private TextField nazivTextField;
+    private ChoiceBox<Predmet> predmetChoiceBox;
     @FXML
-    private TextField studentTextField;
+    private ChoiceBox<Student> studentChoiceBox;
     @FXML
-    private TextField ocjenaTextField;
+    private ChoiceBox<Ocjena> ocjenaChoiceBox;
     @FXML
-    private TextField datumIVrijemeTextField;
+    private DatePicker datePicker;
+    @FXML
+    private TextField vrijemeTextField;
+
+    private List<Ispit> ispiti;
 
     public void initialize(){
-        List<Student> studenti = Datoteke.getStudenti();
-    }
-
-    public void spremi(){
         List<Profesor> profesori = Datoteke.getProfesori();
         List<Student> studenti = Datoteke.getStudenti();
         List<Predmet> predmeti = Datoteke.getPredmeti(profesori, studenti);
-        List<Ispit> ispiti = Datoteke.getIspiti(predmeti, studenti);
-        String predmet = nazivTextField.getText();
-        String student = studentTextField.getText();
-        String ocjena = ocjenaTextField.getText();
-        String datumIVrijeme = datumIVrijemeTextField.getText();
+        ispiti = Datoteke.getIspiti(predmeti, studenti);
+
+        predmetChoiceBox.setItems(FXCollections.observableList(predmeti));
+        studentChoiceBox.setItems(FXCollections.observableList(studenti));
+        ocjenaChoiceBox.setItems(FXCollections.observableList(Arrays.asList(Ocjena.values())));
+    }
+
+    public void spremi(){
+        String datum = datePicker.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy."));
+        String vrijeme = vrijemeTextField.getText();
+
         List<String> greske = new ArrayList<>();
 
-        if(predmet.isEmpty())
+        if(predmetChoiceBox.getSelectionModel().isEmpty())
             greske.add("predmet");
-        if(student.isEmpty())
+        if(studentChoiceBox.getSelectionModel().isEmpty())
             greske.add("student");
-        if(ocjena.isEmpty())
+        if(ocjenaChoiceBox.getSelectionModel().isEmpty())
             greske.add("ocjena");
-        if(datumIVrijeme.isEmpty())
-            greske.add("datum i vrijeme");
+        if(datum.isEmpty())
+            greske.add("datum");
+        if(vrijeme.isEmpty())
+            greske.add("vrijeme");
 
         if(greske.isEmpty()){
-            Long predmetId = predmeti.stream().filter(p -> p.getNaziv().equals(predmet)).toList().get(0).getId();
-            Long studentId = studenti.stream().filter(s -> (s.getIme() + " " + s.getPrezime()).equals(student)).toList().get(0).getId();
             try(BufferedWriter out = new BufferedWriter(new FileWriter(Datoteke.ISPITI_PATH, true))) {
-                OptionalLong optionalId = predmeti.stream().mapToLong(p -> p.getId()).max();
+                OptionalLong optionalId = ispiti.stream().mapToLong(p -> p.getId()).max();
                 Long id = optionalId.getAsLong() + 1;
                 out.write('\n' + id.toString());
-                out.write('\n' + predmetId.toString());
-                out.write('\n' + studentId.toString());
-                out.write('\n' + ocjena);
-                out.write('\n' + datumIVrijeme);
+                out.write('\n' + predmetChoiceBox.getValue().getId().toString());
+                out.write('\n' + studentChoiceBox.getValue().getId().toString());
+                out.write('\n' + ocjenaChoiceBox.getValue().getInt().toString());
+                out.write('\n' + datum + "T" + vrijeme);
                 out.write("\ndvorana");
                 out.write("\nzgrada");
             } catch (IOException e) {
