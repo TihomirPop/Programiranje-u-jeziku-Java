@@ -78,4 +78,8 @@ public class Profesor extends Osoba {
     public void setTitula(String titula) {
         this.titula = titula;
     }
+    @Override
+    public String toString() {
+        return getId().toString() + " - " + getIme() + " " + getPrezime();
+    }
 }

@@ -66,6 +66,8 @@ public class Student extends Osoba{
         result = 31 * result + (getDatumRodjenja() != null ? getDatumRodjenja().hashCode() : 0);
         return result;
     }
-
-
+    @Override
+    public String toString() {
+        return getId().toString() + " - " + getIme() + " " + getPrezime();
+    }
 }
