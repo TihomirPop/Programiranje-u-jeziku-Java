@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e6494698-84f9-4071-a0b5-142936b7e7b4" name="Changes" comment="Work in progress css">
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/dat/ispiti.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/dat/obrazovne-ustanove.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/dat/obrazovneUstanove.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/dat/predmeti.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/dat/profesori.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/dat/studenti.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Diplomski.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Dvorana.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Entitet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/FakultetRacunarstva.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Ispit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/ObrazovnaUstanova.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Ocjena.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Online.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Osoba.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Predmet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Profesor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Sveuciliste.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/VeleucilisteJave.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Visokoskolska.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/Glavna.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/IspitiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/IspitiUnosController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/IzbornikController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/PredmetiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/PredmetiUnosController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/ProfesoriController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/ProfesoriUnosController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/StudentiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/StudentiUnosController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/iznimke/KriviInputException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/iznimke/NemoguceOdreditiProsjekStudentaException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/iznimke/PostojiViseNajmladjihStudenataException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/sortiranje/ObrazovneUstanoveSorter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/sortiranje/StudentSorter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/util/Datoteke.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/ispiti.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/ispitiUnos.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/izbornik.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/pocetna.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/predmeti.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/predmetiUnos.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/profesori.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/profesoriUnos.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/studenti.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/studentiUnos.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/style.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2Jm4B1oP6SiAXQ4p6fk3OndUPNx" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/tihom/Documents/GitHub/Programiranje-u-jeziku-Java/Popovic-8/src/main/resources/hr/java/vjezbe/glavna&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\tihom\Documents\GitHub\Programiranje-u-jeziku-Java\Popovic-8\src\main\resources\hr\java\vjezbe\glavna" />
+      <recent name="C:\Users\tihom\Documents\GitHub\Programiranje-u-jeziku-Java\Popovic-8\src\main\resources" />
+      <recent name="C:\Users\tihom\Documents\GitHub\Programiranje-u-jeziku-Java\Popovic-8" />
+      <recent name="C:\Users\tihom\Documents\GitHub\Programiranje-u-jeziku-Java\Popovic-8\src\main\java\hr\java\vjezbe" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tihom\Documents\GitHub\Programiranje-u-jeziku-Java\Popovic-8\src\main\resources" />
+      <recent name="C:\Users\tihom\Documents\GitHub\Programiranje-u-jeziku-Java\Popovic-8" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="hr.java.vjezbe.glavna" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Glavna" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="hr.java.vjezbe.glavna.Glavna" />
+      <module name="glavna" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e6494698-84f9-4071-a0b5-142936b7e7b4" name="Changes" comment="" />
+      <created>1672669786929</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1672669786929</updated>
+      <workItem from="1672669788394" duration="368000" />
+      <workItem from="1672670174123" duration="191000" />
+      <workItem from="1672670476542" duration="14104000" />
+      <workItem from="1673105790642" duration="2544000" />
+      <workItem from="1673127882341" duration="890000" />
+      <workItem from="1673166788534" duration="7001000" />
+      <workItem from="1673186126262" duration="30000" />
+      <workItem from="1673186170840" duration="1829000" />
+      <workItem from="1673192757691" duration="144000" />
+      <workItem from="1673197575411" duration="6911000" />
+      <workItem from="1673277128810" duration="12875000" />
+      <workItem from="1673335836124" duration="4354000" />
+      <workItem from="1673365961342" duration="4786000" />
+      <workItem from="1673375802757" duration="315000" />
+      <workItem from="1673558432248" duration="25000" />
+      <workItem from="1673558481545" duration="51000" />
+      <workItem from="1673646911939" duration="1108000" />
+    </task>
+    <task id="LOCAL−00001" summary="Pocetak 8. vjezbe">
+      <created>1672671157606</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1672671157606</updated>
+    </task>
+    <task id="LOCAL−00002" summary="8. vjezba 3. zadatak gotov">
+      <created>1672673927420</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1672673927420</updated>
+    </task>
+    <task id="LOCAL−00003" summary="8. vjezba gotova">
+      <created>1672691179321</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1672691179321</updated>
+    </task>
+    <task id="LOCAL−00004" summary="8. Bolji unos predmeta">
+      <created>1673291782892</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1673291782892</updated>
+    </task>
+    <task id="LOCAL−00005" summary="Bolji unos ispita">
+      <created>1673296813968</created>
+      <option name="number" value="LOCAL−00005" />
+      <option name="presentableId" value="LOCAL−00005" />
+      <updated>1673296813968</updated>
+    </task>
+    <task id="LOCAL−00006" summary="Work in progress css">
+      <created>1673299989550</created>
+      <option name="number" value="LOCAL−00006" />
+      <option name="presentableId" value="LOCAL−00006" />
+      <updated>1673299989550</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <MESSAGE value="Pocetak 8. vjezbe" />
+    <MESSAGE value="8. vjezba 3. zadatak gotov" />
+    <MESSAGE value="8. vjezba gotova" />
+    <MESSAGE value="8. Bolji unos predmeta" />
+    <MESSAGE value="Bolji unos ispita" />
+    <MESSAGE value="Work in progress css" />
+    <option name="LAST_COMMIT_MESSAGE" value="Work in progress css" />
+  </component>
+</project>
