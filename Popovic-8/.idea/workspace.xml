@@ -5,66 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6494698-84f9-4071-a0b5-142936b7e7b4" name="Changes" comment="Work in progress css">
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/dat/ispiti.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/dat/obrazovne-ustanove.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/dat/obrazovneUstanove.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/dat/predmeti.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/dat/profesori.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/dat/studenti.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Diplomski.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Dvorana.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Entitet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/FakultetRacunarstva.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Ispit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/ObrazovnaUstanova.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Ocjena.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Online.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Osoba.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Predmet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Profesor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Student.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Sveuciliste.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/VeleucilisteJave.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/entitet/Visokoskolska.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/Glavna.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/IspitiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/IspitiUnosController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/IzbornikController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/PredmetiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/PredmetiUnosController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/ProfesoriController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/ProfesoriUnosController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/StudentiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/glavna/StudentiUnosController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/iznimke/KriviInputException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/iznimke/NemoguceOdreditiProsjekStudentaException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/iznimke/PostojiViseNajmladjihStudenataException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/sortiranje/ObrazovneUstanoveSorter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/sortiranje/StudentSorter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/hr/java/vjezbe/util/Datoteke.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/ispiti.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/ispitiUnos.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/izbornik.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/pocetna.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/predmeti.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/predmetiUnos.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/profesori.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/profesoriUnos.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/studenti.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/hr/java/vjezbe/glavna/studentiUnos.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/logback.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Popovic-9/src/main/resources/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Popovic-9/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Popovic-9/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Popovic-9/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Popovic-9/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +109,8 @@
       <workItem from="1673375802757" duration="315000" />
       <workItem from="1673558432248" duration="25000" />
       <workItem from="1673558481545" duration="51000" />
-      <workItem from="1673646911939" duration="1108000" />
+      <workItem from="1673646911939" duration="1252000" />
+      <workItem from="1673713812899" duration="632000" />
     </task>
     <task id="LOCAL−00001" summary="Pocetak 8. vjezbe">
       <created>1672671157606</created>
