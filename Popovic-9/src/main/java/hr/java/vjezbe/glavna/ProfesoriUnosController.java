@@ -29,7 +29,6 @@ public class ProfesoriUnosController {
     @FXML
     public void spremi(){
         try {
-            List<Profesor> profesori = BazaPodataka.getProfesori();;
             String sifra = sifraProfesoraTextField.getText();
             String prezime = prezimeProfesoraTextField.getText();
             String ime = imeProfesoraTextField.getText();

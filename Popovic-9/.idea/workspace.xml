@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eae7cb02-9e3e-4e5b-8601-55629fce6a4a" name="Changes" comment="9. vjezba unos profesora">
+    <list default="true" id="eae7cb02-9e3e-4e5b-8601-55629fce6a4a" name="Changes" comment="9. vjezba getFilteredProfesori">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/baza/BazaPodataka.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/baza/BazaPodataka.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriUnosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriUnosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/StudentiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/StudentiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/StudentiUnosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/StudentiUnosController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +105,8 @@
       <workItem from="1673713822308" duration="1286000" />
       <workItem from="1673821981461" duration="462000" />
       <workItem from="1673864779508" duration="2092000" />
-      <workItem from="1673867659475" duration="3949000" />
+      <workItem from="1673867659475" duration="4567000" />
+      <workItem from="1673901579491" duration="3304000" />
     </task>
     <task id="LOCAL−00001" summary="Pocetak 9. vjezbe">
       <created>1673648129436</created>
@@ -134,7 +138,13 @@
       <option name="presentableId" value="LOCAL−00005" />
       <updated>1673870144005</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL−00006" summary="9. vjezba getFilteredProfesori">
+      <created>1673871640934</created>
+      <option name="number" value="LOCAL−00006" />
+      <option name="presentableId" value="LOCAL−00006" />
+      <updated>1673871640934</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,6 +158,7 @@
     <MESSAGE value="9. vjezba BazaPodatakaException" />
     <MESSAGE value="9. vjezba database connection i getProfesori" />
     <MESSAGE value="9. vjezba unos profesora" />
-    <option name="LAST_COMMIT_MESSAGE" value="9. vjezba unos profesora" />
+    <MESSAGE value="9. vjezba getFilteredProfesori" />
+    <option name="LAST_COMMIT_MESSAGE" value="9. vjezba getFilteredProfesori" />
   </component>
 </project>

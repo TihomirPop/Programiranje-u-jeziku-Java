@@ -1,6 +1,10 @@
 package hr.java.vjezbe.glavna;
 
+import hr.java.vjezbe.baza.BazaPodataka;
+import hr.java.vjezbe.entitet.Ocjena;
+import hr.java.vjezbe.entitet.Profesor;
 import hr.java.vjezbe.entitet.Student;
+import hr.java.vjezbe.iznimke.BazaPodatakaException;
 import hr.java.vjezbe.util.Datoteke;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -37,7 +41,11 @@ public class StudentiController {
 
 
     public void initialize(){
-        studenti = Datoteke.getStudenti();
+        try {
+            studenti = BazaPodataka.getStudenti();
+        } catch (BazaPodatakaException e) {
+            throw new RuntimeException(e);
+        }
         jmbagTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getJmbag()));
         prezimeTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPrezime()));
         imeTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getIme()));
@@ -57,17 +65,17 @@ public class StudentiController {
         String ime = imeTextField.getText();
         LocalDate datumRodenja = datumRodenjaDatePicker.getValue();
 
-        List<Student> filteredStudenti = studenti;
+        if(ime.isEmpty())
+            ime = null;
+        if(prezime.isEmpty())
+            prezime = null;
+        if(jmbag.isEmpty())
+            jmbag = null;
 
-        if(!jmbag.isEmpty())
-            filteredStudenti = filteredStudenti.stream().filter(s -> s.getJmbag().contains(jmbag)).toList();
-        if(!prezime.isEmpty())
-            filteredStudenti = filteredStudenti.stream().filter(s -> s.getPrezime().contains(prezime)).toList();
-        if(!ime.isEmpty())
-            filteredStudenti = filteredStudenti.stream().filter(s -> s.getIme().contains(ime)).toList();
-        if(datumRodenja != null)
-            filteredStudenti = filteredStudenti.stream().filter(s -> s.getDatumRodjenja().equals(datumRodenja)).toList();
-
-        studentTableView.setItems(FXCollections.observableList(filteredStudenti));
+        try {
+            studentTableView.setItems(FXCollections.observableList(BazaPodataka.getFilteredStudenti(new Student(null, ime, prezime, jmbag, datumRodenja, Ocjena.ODLICAN, Ocjena.ODLICAN))));
+        } catch (BazaPodatakaException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

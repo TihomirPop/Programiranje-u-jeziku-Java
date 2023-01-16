@@ -49,25 +49,6 @@ public class ProfesoriController {
     }
 
     public void pretraziProfesore(){
-        /*
-        String sifra = sifraProfesoraTextField.getText();
-        String prezime = prezimeProfesoraTextField.getText();
-        String ime = imeProfesoraTextField.getText();
-        String titula = titulaProfesoraTextField.getText();
-
-        List<Profesor> filteredProfesori = profesori;
-
-        if(!sifra.isEmpty())
-            filteredProfesori = filteredProfesori.stream().filter(p -> p.getSifra().contains(sifra)).toList();
-        if(!prezime.isEmpty())
-            filteredProfesori = filteredProfesori.stream().filter(p -> p.getPrezime().contains(prezime)).toList();
-        if(!ime.isEmpty())
-            filteredProfesori = filteredProfesori.stream().filter(p -> p.getIme().contains(ime)).toList();
-        if(!titula.isEmpty())
-            filteredProfesori = filteredProfesori.stream().filter(p -> p.getTitula().toLowerCase().contains(titula.toLowerCase())).toList();
-
-        profesorTableView.setItems(FXCollections.observableList(filteredProfesori));*/
-
         String sifra = sifraProfesoraTextField.getText();
         String prezime = prezimeProfesoraTextField.getText();
         String ime = imeProfesoraTextField.getText();
