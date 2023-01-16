@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eae7cb02-9e3e-4e5b-8601-55629fce6a4a" name="Changes" comment="9. vjezba BazaPodatakaException">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/database.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Popovic-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Popovic-8/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="eae7cb02-9e3e-4e5b-8601-55629fce6a4a" name="Changes" comment="9. vjezba database connection i getProfesori">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/baza/BazaPodataka.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/baza/BazaPodataka.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriUnosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriUnosController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +65,7 @@
       <recent name="C:\Users\tihom\Documents\GitHub\Programiranje-u-jeziku-Java\Popovic-9\src\main\java\hr\java\vjezbe" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tihom\Documents\GitHub\Programiranje-u-jeziku-Java\Popovic-9" />
       <recent name="C:\Users\tihom\Documents\GitHub\Programiranje-u-jeziku-Java\Popovic-9\src\main\resources" />
     </key>
   </component>
@@ -103,7 +102,8 @@
       <workItem from="1673647802304" duration="338000" />
       <workItem from="1673713822308" duration="1286000" />
       <workItem from="1673821981461" duration="462000" />
-      <workItem from="1673864779508" duration="1751000" />
+      <workItem from="1673864779508" duration="2092000" />
+      <workItem from="1673867659475" duration="2429000" />
     </task>
     <task id="LOCAL−00001" summary="Pocetak 9. vjezbe">
       <created>1673648129436</created>
@@ -123,7 +123,13 @@
       <option name="presentableId" value="LOCAL−00003" />
       <updated>1673822339925</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL−00004" summary="9. vjezba database connection i getProfesori">
+      <created>1673867443084</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1673867443084</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,6 +141,7 @@
     <MESSAGE value="Pocetak 9. vjezbe" />
     <MESSAGE value="9. vjezba do pocetka 5. zadatka" />
     <MESSAGE value="9. vjezba BazaPodatakaException" />
-    <option name="LAST_COMMIT_MESSAGE" value="9. vjezba BazaPodatakaException" />
+    <MESSAGE value="9. vjezba database connection i getProfesori" />
+    <option name="LAST_COMMIT_MESSAGE" value="9. vjezba database connection i getProfesori" />
   </component>
 </project>

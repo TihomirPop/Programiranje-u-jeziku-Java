@@ -2,6 +2,7 @@ package hr.java.vjezbe.glavna;
 
 import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entitet.Profesor;
+import hr.java.vjezbe.iznimke.BazaPodatakaException;
 import hr.java.vjezbe.util.Datoteke;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -35,7 +36,11 @@ public class ProfesoriController {
 
 
     public void initialize(){
-        profesori = BazaPodataka.getProfesori();
+        try {
+            profesori = BazaPodataka.getProfesori();
+        } catch (BazaPodatakaException e) {
+            throw new RuntimeException(e);
+        }
         profesorSifraTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSifra()));
         profesorPrezimeTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPrezime()));
         profesorImeTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getIme()));

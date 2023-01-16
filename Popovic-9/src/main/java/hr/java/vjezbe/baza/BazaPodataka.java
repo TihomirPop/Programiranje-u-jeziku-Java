@@ -1,6 +1,7 @@
 package hr.java.vjezbe.baza;
 
 import hr.java.vjezbe.entitet.Profesor;
+import hr.java.vjezbe.iznimke.BazaPodatakaException;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class BazaPodataka {
         return connection;
     }
 
-    public static List<Profesor> getProfesori(){
+    public static List<Profesor> getProfesori() throws BazaPodatakaException {
         List<Profesor> profesori = new ArrayList<>();
 
         try(Connection connection = spajanjeNaBazu()) {
@@ -38,11 +39,27 @@ public class BazaPodataka {
                 profesori.add(new Profesor.Builder(id, ime, prezime).saSifrom(sifra).saTitulom(titula).build());
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new BazaPodatakaException(e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new BazaPodatakaException(e);
         }
 
         return profesori;
     };
+
+    public static void addProfesor(Profesor profesor) throws BazaPodatakaException{
+        try(Connection connection = spajanjeNaBazu()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PROFESOR (IME, PREZIME, SIFRA, TITULA) VALUES (?, ?, ?, ?)");
+            preparedStatement.setString(1, profesor.getIme());
+            preparedStatement.setString(2, profesor.getPrezime());
+            preparedStatement.setString(3, profesor.getSifra());
+            preparedStatement.setString(4, profesor.getTitula());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new BazaPodatakaException(e);
+        } catch (IOException e) {
+            throw new BazaPodatakaException(e);
+        }
+    }
 }
