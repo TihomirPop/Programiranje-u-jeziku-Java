@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6494698-84f9-4071-a0b5-142936b7e7b4" name="Changes" comment="Work in progress css">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Popovic-9/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Popovic-9/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Popovic-9/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Popovic-9/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +109,7 @@
       <workItem from="1673558481545" duration="51000" />
       <workItem from="1673646911939" duration="1252000" />
       <workItem from="1673713812899" duration="632000" />
+      <workItem from="1673821970270" duration="10000" />
     </task>
     <task id="LOCAL−00001" summary="Pocetak 8. vjezbe">
       <created>1672671157606</created>

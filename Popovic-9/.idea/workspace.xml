@@ -4,15 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eae7cb02-9e3e-4e5b-8601-55629fce6a4a" name="Changes" comment="Pocetak 9. vjezbe">
+    <list default="true" id="eae7cb02-9e3e-4e5b-8601-55629fce6a4a" name="Changes" comment="9. vjezba BazaPodatakaException">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/database.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Popovic-8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Popovic-8/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/baza/BazaPodataka.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/baza/BazaPodataka.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -56,6 +66,9 @@
       <recent name="C:\Users\tihom\Documents\GitHub\Programiranje-u-jeziku-Java\Popovic-9" />
       <recent name="C:\Users\tihom\Documents\GitHub\Programiranje-u-jeziku-Java\Popovic-9\src\main\java\hr\java\vjezbe" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tihom\Documents\GitHub\Programiranje-u-jeziku-Java\Popovic-9\src\main\resources" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Glavna" type="Application" factoryName="Application">
@@ -88,7 +101,9 @@
       <option name="presentableId" value="Default" />
       <updated>1673647801205</updated>
       <workItem from="1673647802304" duration="338000" />
-      <workItem from="1673713822308" duration="878000" />
+      <workItem from="1673713822308" duration="1286000" />
+      <workItem from="1673821981461" duration="462000" />
+      <workItem from="1673864779508" duration="1751000" />
     </task>
     <task id="LOCAL−00001" summary="Pocetak 9. vjezbe">
       <created>1673648129436</created>
@@ -96,7 +111,19 @@
       <option name="presentableId" value="LOCAL−00001" />
       <updated>1673648129436</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL−00002" summary="9. vjezba do pocetka 5. zadatka">
+      <created>1673714805753</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1673714805753</updated>
+    </task>
+    <task id="LOCAL−00003" summary="9. vjezba BazaPodatakaException">
+      <created>1673822339925</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1673822339925</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -106,6 +133,8 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Pocetak 9. vjezbe" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pocetak 9. vjezbe" />
+    <MESSAGE value="9. vjezba do pocetka 5. zadatka" />
+    <MESSAGE value="9. vjezba BazaPodatakaException" />
+    <option name="LAST_COMMIT_MESSAGE" value="9. vjezba BazaPodatakaException" />
   </component>
 </project>
