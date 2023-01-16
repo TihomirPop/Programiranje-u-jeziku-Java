@@ -49,6 +49,7 @@ public class ProfesoriController {
     }
 
     public void pretraziProfesore(){
+        /*
         String sifra = sifraProfesoraTextField.getText();
         String prezime = prezimeProfesoraTextField.getText();
         String ime = imeProfesoraTextField.getText();
@@ -65,6 +66,26 @@ public class ProfesoriController {
         if(!titula.isEmpty())
             filteredProfesori = filteredProfesori.stream().filter(p -> p.getTitula().toLowerCase().contains(titula.toLowerCase())).toList();
 
-        profesorTableView.setItems(FXCollections.observableList(filteredProfesori));
+        profesorTableView.setItems(FXCollections.observableList(filteredProfesori));*/
+
+        String sifra = sifraProfesoraTextField.getText();
+        String prezime = prezimeProfesoraTextField.getText();
+        String ime = imeProfesoraTextField.getText();
+        String titula = titulaProfesoraTextField.getText();
+
+        if(ime.isEmpty())
+            ime = null;
+        if(prezime.isEmpty())
+            prezime = null;
+        if(sifra.isEmpty())
+            sifra = null;
+        if(titula.isEmpty())
+            titula = null;
+
+        try {
+            profesorTableView.setItems(FXCollections.observableList(BazaPodataka.getFilteredProfesori(new Profesor.Builder(null, ime, prezime).saSifrom(sifra).saTitulom(titula).build())));
+        } catch (BazaPodatakaException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

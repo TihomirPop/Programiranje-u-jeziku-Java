@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eae7cb02-9e3e-4e5b-8601-55629fce6a4a" name="Changes" comment="9. vjezba database connection i getProfesori">
+    <list default="true" id="eae7cb02-9e3e-4e5b-8601-55629fce6a4a" name="Changes" comment="9. vjezba unos profesora">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/baza/BazaPodataka.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/baza/BazaPodataka.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriUnosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hr/java/vjezbe/glavna/ProfesoriUnosController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +102,7 @@
       <workItem from="1673713822308" duration="1286000" />
       <workItem from="1673821981461" duration="462000" />
       <workItem from="1673864779508" duration="2092000" />
-      <workItem from="1673867659475" duration="2429000" />
+      <workItem from="1673867659475" duration="3949000" />
     </task>
     <task id="LOCAL−00001" summary="Pocetak 9. vjezbe">
       <created>1673648129436</created>
@@ -129,7 +128,13 @@
       <option name="presentableId" value="LOCAL−00004" />
       <updated>1673867443084</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL−00005" summary="9. vjezba unos profesora">
+      <created>1673870144005</created>
+      <option name="number" value="LOCAL−00005" />
+      <option name="presentableId" value="LOCAL−00005" />
+      <updated>1673870144005</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +147,7 @@
     <MESSAGE value="9. vjezba do pocetka 5. zadatka" />
     <MESSAGE value="9. vjezba BazaPodatakaException" />
     <MESSAGE value="9. vjezba database connection i getProfesori" />
-    <option name="LAST_COMMIT_MESSAGE" value="9. vjezba database connection i getProfesori" />
+    <MESSAGE value="9. vjezba unos profesora" />
+    <option name="LAST_COMMIT_MESSAGE" value="9. vjezba unos profesora" />
   </component>
 </project>

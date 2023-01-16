@@ -38,14 +38,51 @@ public class BazaPodataka {
 
                 profesori.add(new Profesor.Builder(id, ime, prezime).saSifrom(sifra).saTitulom(titula).build());
             }
-        } catch (SQLException e) {
-            throw new BazaPodatakaException(e);
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             throw new BazaPodatakaException(e);
         }
 
         return profesori;
-    };
+    }
+
+    public static List<Profesor> getFilteredProfesori(Profesor profesor) throws BazaPodatakaException {
+        try(Connection connection = spajanjeNaBazu()) {
+            if(profesor == null){
+                return getProfesori();
+            }
+            else{
+                List<Profesor> profesori = new ArrayList<>();
+                StringBuilder sqlUpit = new StringBuilder("SELECT * FROM PROFESOR WHERE 1 = 1");
+
+                if(profesor.getId() != null)
+                    sqlUpit.append(" AND ID = " + profesor.getId());
+                if(profesor.getIme() != null)
+                    sqlUpit.append(" AND IME LIKE '%" + profesor.getIme() + "%'");
+                if(profesor.getPrezime() != null)
+                    sqlUpit.append(" AND PREZIME LIKE '%" + profesor.getPrezime() + "%'");
+                if(profesor.getSifra() != null)
+                    sqlUpit.append(" AND SIFRA LIKE '%" + profesor.getSifra() + "%'");
+                if(profesor.getTitula() != null)
+                    sqlUpit.append(" AND TITULA LIKE '%" + profesor.getTitula() + "%'");
+
+                Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(sqlUpit.toString());
+
+                while (rs.next()){
+                    Long id = rs.getLong("ID");
+                    String ime = rs.getString("IME");
+                    String prezime = rs.getString("PREZIME");
+                    String sifra = rs.getString("SIFRA");
+                    String titula = rs.getString("TITULA");
+
+                    profesori.add(new Profesor.Builder(id, ime, prezime).saSifrom(sifra).saTitulom(titula).build());
+                }
+                return profesori;
+            }
+        } catch (SQLException | IOException e) {
+            throw new BazaPodatakaException(e);
+        }
+    }
 
     public static void addProfesor(Profesor profesor) throws BazaPodatakaException{
         try(Connection connection = spajanjeNaBazu()) {
@@ -56,9 +93,7 @@ public class BazaPodataka {
             preparedStatement.setString(4, profesor.getTitula());
 
             preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new BazaPodatakaException(e);
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             throw new BazaPodatakaException(e);
         }
     }
