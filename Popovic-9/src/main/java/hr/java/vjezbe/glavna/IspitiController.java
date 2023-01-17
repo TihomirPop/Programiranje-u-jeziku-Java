@@ -1,8 +1,10 @@
 package hr.java.vjezbe.glavna;
 
+import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entitet.Ispit;
 import hr.java.vjezbe.entitet.Predmet;
 import hr.java.vjezbe.entitet.Student;
+import hr.java.vjezbe.iznimke.BazaPodatakaException;
 import hr.java.vjezbe.util.Datoteke;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -38,9 +40,11 @@ public class IspitiController {
 
 
     public void initialize(){
-        List<Student> studenti = Datoteke.getStudenti();
-        List<Predmet> predmeti = Datoteke.getPredmeti(Datoteke.getProfesori(), studenti);
-        ispiti = Datoteke.getIspiti(predmeti, studenti);
+        try {
+            ispiti = BazaPodataka.getIspiti();
+        } catch (BazaPodatakaException e) {
+            throw new RuntimeException(e);
+        }
         nazivTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPredmet().getNaziv()));
         studentTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStudent().getIme() + " " + data.getValue().getStudent().getPrezime()));
         ocjenaTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getOcjena().getInt().toString()));

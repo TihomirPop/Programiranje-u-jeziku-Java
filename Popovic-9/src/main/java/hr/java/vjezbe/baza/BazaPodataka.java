@@ -1,15 +1,13 @@
 package hr.java.vjezbe.baza;
 
-import hr.java.vjezbe.entitet.Ocjena;
-import hr.java.vjezbe.entitet.Predmet;
-import hr.java.vjezbe.entitet.Profesor;
-import hr.java.vjezbe.entitet.Student;
+import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.iznimke.BazaPodatakaException;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -91,6 +89,23 @@ public class BazaPodataka {
         }
     }
 
+    public static Profesor getProfesorById(Long id) throws  BazaPodatakaException{
+        try(Connection connection = spajanjeNaBazu()) {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM PROFESOR WHERE ID = " + id);
+
+            rs.next();
+            String ime = rs.getString("IME");
+            String prezime = rs.getString("PREZIME");
+            String sifra = rs.getString("SIFRA");
+            String titula = rs.getString("TITULA");
+
+            return new Profesor.Builder(id, ime, prezime).saSifrom(sifra).saTitulom(titula).build();
+        } catch (SQLException | IOException e) {
+            throw new BazaPodatakaException(e);
+        }
+    }
+
     public static void addProfesor(Profesor profesor) throws BazaPodatakaException{
         try(Connection connection = spajanjeNaBazu()) {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PROFESOR (IME, PREZIME, SIFRA, TITULA) VALUES (?, ?, ?, ?)");
@@ -167,6 +182,23 @@ public class BazaPodataka {
         }
     }
 
+    private static Student getStudentById(Long id) throws BazaPodatakaException{
+        try(Connection connection = spajanjeNaBazu()) {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM STUDENT WHERE ID = " + id);
+
+            rs.next();
+            String ime = rs.getString("IME");
+            String prezime = rs.getString("PREZIME");
+            String jmbag = rs.getString("JMBAG");
+            LocalDate datumRodenja = rs.getDate("DATUM_RODJENJA").toLocalDate();
+
+            return new Student(id, ime, prezime, jmbag, datumRodenja, Ocjena.ODLICAN, Ocjena.ODLICAN);
+        } catch (SQLException | IOException e) {
+            throw new BazaPodatakaException(e);
+        }
+    }
+
     public static void addStudent(Student student) throws BazaPodatakaException{
         try(Connection connection = spajanjeNaBazu()) {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO STUDENT (IME, PREZIME, JMBAG, DATUM_RODJENJA) VALUES (?, ?, ?, ?)");
@@ -194,7 +226,7 @@ public class BazaPodataka {
                 String naziv = rs.getString("NAZIV");
                 Integer brojEctsBodova = rs.getInt("BROJ_ECTS_BODOVA");
                 Long profesorId = rs.getLong("PROFESOR_ID");
-                Profesor profesor = getFilteredProfesori(new Profesor.Builder(profesorId, null, null).build()).get(0);
+                Profesor profesor = getProfesorById(profesorId);
                 predmeti.add(new Predmet(id, sifra, naziv, brojEctsBodova, profesor, new HashSet<>()));
             }
 
@@ -204,7 +236,7 @@ public class BazaPodataka {
             while (rs.next()){
                 Long predmetId = rs.getLong("PREDMET_ID");
                 Long studentId = rs.getLong("STUDENT_ID");
-                Student student = getFilteredStudenti(new Student(studentId, null, null, null, null, null, null)).get(0);
+                Student student = getStudentById(studentId);
                 predmeti.stream().filter(p -> p.getId().equals(predmetId)).forEach(p -> p.getStudenti().add(student));
             }
         } catch (SQLException | IOException e) {
@@ -243,7 +275,7 @@ public class BazaPodataka {
                     String naziv = rs.getString("NAZIV");
                     Integer brojEctsBodova = rs.getInt("BROJ_ECTS_BODOVA");
                     Long profesorId = rs.getLong("PROFESOR_ID");
-                    Profesor profesor = getFilteredProfesori(new Profesor.Builder(profesorId, null, null).build()).get(0);
+                    Profesor profesor = getProfesorById(profesorId);
                     predmeti.add(new Predmet(id, sifra, naziv, brojEctsBodova, profesor, new HashSet<>()));
                 }
 
@@ -253,13 +285,43 @@ public class BazaPodataka {
 
                     while (rs.next()){
                         Long studentId = rs.getLong("STUDENT_ID");
-                        Student student = getFilteredStudenti(new Student(studentId, null, null, null, null, null, null)).get(0);
+                        Student student = getStudentById(studentId);
                         p.getStudenti().add(student);
                     }
                 }
 
                 return predmeti;
             }
+        } catch (SQLException | IOException e) {
+            throw new BazaPodatakaException(e);
+        }
+    }
+
+    public static Predmet getPredmetById(Long id) throws BazaPodatakaException{
+        try(Connection connection = spajanjeNaBazu()) {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM PREDMET WHERE ID = " + id);
+
+            rs.next();
+            String sifra = rs.getString("SIFRA");
+            String naziv = rs.getString("NAZIV");
+            Integer brojEctsBodova = rs.getInt("BROJ_ECTS_BODOVA");
+            Long profesorId = rs.getLong("PROFESOR_ID");
+            Profesor profesor = getProfesorById(profesorId);
+
+            Predmet predmet = new Predmet(id, sifra, naziv, brojEctsBodova, profesor, new HashSet<>());
+
+            statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM PREDMET_STUDENT WHERE PREDMET_ID = " + predmet.getId());
+
+            while (rs.next()){
+                Long studentId = rs.getLong("STUDENT_ID");
+                Student student = getStudentById(studentId);
+                predmet.getStudenti().add(student);
+            }
+
+            return predmet;
+
         } catch (SQLException | IOException e) {
             throw new BazaPodatakaException(e);
         }
@@ -289,5 +351,39 @@ public class BazaPodataka {
         } catch (SQLException | IOException e) {
             throw new BazaPodatakaException(e);
         }
+    }
+
+    public static List<Ispit> getIspiti() throws BazaPodatakaException {
+        List<Ispit> ispiti = new ArrayList<>();
+
+        try(Connection connection = spajanjeNaBazu()) {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM ISPIT");
+
+            while (rs.next()){
+                Long id = rs.getLong("ID");
+                Long predmetId = rs.getLong("PREDMET_ID");
+                Long studentId = rs.getLong("STUDENT_ID");
+                Ocjena ocjena = intToOcjena(rs.getInt("OCJENA"));
+                LocalDateTime datumIVrijeme = rs.getTimestamp("DATUM_I_VRIJEME").toLocalDateTime();
+
+                ispiti.add(new Ispit(id, getPredmetById(predmetId), getStudentById(studentId), ocjena, datumIVrijeme, new Dvorana("Dvorana", "Zgrada")));
+            }
+        } catch (SQLException | IOException e) {
+            throw new BazaPodatakaException(e);
+        }
+
+        return ispiti;
+    }
+
+    private static Ocjena intToOcjena(Integer intOcjena) {
+        return switch (intOcjena) {
+            case 1 -> Ocjena.NEDOVOLJAN;
+            case 2 -> Ocjena.DOVOLJAN;
+            case 3 -> Ocjena.DOBAR;
+            case 4 -> Ocjena.VRLODOBAR;
+            case 5 -> Ocjena.ODLICAN;
+            default -> throw new RuntimeException("Critical error, nije moguce doci do ovog dijela koda!");
+        };
     }
 }
