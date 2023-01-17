@@ -18,7 +18,7 @@ public class Glavna extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Glavna.class.getResource("pocetna.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         scene.getStylesheets().add("style.css");
-        stage.setTitle("Popovic-8");
+        stage.setTitle("Popovic-9");
         stage.setScene(scene);
         stage.show();
     }

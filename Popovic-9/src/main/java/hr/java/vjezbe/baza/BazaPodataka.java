@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,8 +22,7 @@ public class BazaPodataka {
         String dataBaseUrl = properties.getProperty("dataBaseUrl");
         String username = properties.getProperty("username");
         String password = properties.getProperty("password");
-        Connection connection = DriverManager.getConnection(dataBaseUrl, username, password);
-        return connection;
+        return DriverManager.getConnection(dataBaseUrl, username, password);
     }
 
     public static List<Profesor> getProfesori() throws BazaPodatakaException {
