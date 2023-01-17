@@ -1,6 +1,8 @@
 package hr.java.vjezbe.glavna;
 
+import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entitet.*;
+import hr.java.vjezbe.iznimke.BazaPodatakaException;
 import hr.java.vjezbe.util.Datoteke;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -11,6 +13,7 @@ import javafx.scene.control.TextField;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,14 +35,13 @@ public class IspitiUnosController {
     private List<Ispit> ispiti;
 
     public void initialize(){
-        List<Profesor> profesori = Datoteke.getProfesori();
-        List<Student> studenti = Datoteke.getStudenti();
-        List<Predmet> predmeti = Datoteke.getPredmeti(profesori, studenti);
-        ispiti = Datoteke.getIspiti(predmeti, studenti);
-
-        predmetChoiceBox.setItems(FXCollections.observableList(predmeti));
-        studentChoiceBox.setItems(FXCollections.observableList(studenti));
-        ocjenaChoiceBox.setItems(FXCollections.observableList(Arrays.asList(Ocjena.values())));
+        try {
+            predmetChoiceBox.setItems(FXCollections.observableList(BazaPodataka.getPredmeti()));
+            studentChoiceBox.setItems(FXCollections.observableList(BazaPodataka.getStudenti()));
+            ocjenaChoiceBox.setItems(FXCollections.observableList(Arrays.asList(Ocjena.values())));
+        } catch (BazaPodatakaException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void spremi(){
@@ -59,22 +61,15 @@ public class IspitiUnosController {
         if(vrijeme.isEmpty())
             greske.add("vrijeme");
 
-        if(greske.isEmpty()){
-            try(BufferedWriter out = new BufferedWriter(new FileWriter(Datoteke.ISPITI_PATH, true))) {
-                OptionalLong optionalId = ispiti.stream().mapToLong(p -> p.getId()).max();
-                Long id = optionalId.getAsLong() + 1;
-                out.write('\n' + id.toString());
-                out.write('\n' + predmetChoiceBox.getValue().getId().toString());
-                out.write('\n' + studentChoiceBox.getValue().getId().toString());
-                out.write('\n' + ocjenaChoiceBox.getValue().getInt().toString());
-                out.write('\n' + datum + "T" + vrijeme);
-                out.write("\ndvorana");
-                out.write("\nzgrada");
-            } catch (IOException e) {
+        if (greske.isEmpty()) {
+            try {
+                BazaPodataka.addIspit(new Ispit(null, predmetChoiceBox.getValue(), studentChoiceBox.getValue(), ocjenaChoiceBox.getValue(), LocalDateTime.parse(datum + vrijeme, DateTimeFormatter.ofPattern("dd.MM.yyyy.HH:mm")), null));
+            } catch (BazaPodatakaException e) {
                 throw new RuntimeException(e);
             }
         }
         else
             Glavna.pogresanUnosPodataka(greske);
+
     }
 }

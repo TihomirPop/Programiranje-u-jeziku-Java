@@ -414,4 +414,18 @@ public class BazaPodataka {
             throw new BazaPodatakaException(e);
         }
     }
+
+    public static void addIspit(Ispit ispit) throws BazaPodatakaException{
+        try(Connection connection = spajanjeNaBazu()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ISPIT (PREDMET_ID, STUDENT_ID, OCJENA, DATUM_I_VRIJEME) VALUES (?, ?, ?, ?)");
+            preparedStatement.setLong(1, ispit.getPredmet().getId());
+            preparedStatement.setLong(2, ispit.getStudent().getId());
+            preparedStatement.setInt(3, ispit.getOcjena().getInt());
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(ispit.getDatumIVrijeme()));
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException | IOException e) {
+            throw new BazaPodatakaException(e);
+        }
+    }
 }
