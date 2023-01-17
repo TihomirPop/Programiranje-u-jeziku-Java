@@ -364,7 +364,7 @@ public class BazaPodataka {
                 Long id = rs.getLong("ID");
                 Long predmetId = rs.getLong("PREDMET_ID");
                 Long studentId = rs.getLong("STUDENT_ID");
-                Ocjena ocjena = intToOcjena(rs.getInt("OCJENA"));
+                Ocjena ocjena = Ocjena.intToOcjena(rs.getInt("OCJENA"));
                 LocalDateTime datumIVrijeme = rs.getTimestamp("DATUM_I_VRIJEME").toLocalDateTime();
 
                 ispiti.add(new Ispit(id, getPredmetById(predmetId), getStudentById(studentId), ocjena, datumIVrijeme, new Dvorana("Dvorana", "Zgrada")));
@@ -376,14 +376,42 @@ public class BazaPodataka {
         return ispiti;
     }
 
-    private static Ocjena intToOcjena(Integer intOcjena) {
-        return switch (intOcjena) {
-            case 1 -> Ocjena.NEDOVOLJAN;
-            case 2 -> Ocjena.DOVOLJAN;
-            case 3 -> Ocjena.DOBAR;
-            case 4 -> Ocjena.VRLODOBAR;
-            case 5 -> Ocjena.ODLICAN;
-            default -> throw new RuntimeException("Critical error, nije moguce doci do ovog dijela koda!");
-        };
+    public static List<Ispit> getFilteredIspiti(Ispit ispit) throws BazaPodatakaException {
+        try(Connection connection = spajanjeNaBazu()) {
+            if(ispit == null){
+                return getIspiti();
+            }
+            else{
+                List<Ispit> ispiti = new ArrayList<>();
+                StringBuilder sqlUpit = new StringBuilder("SELECT * FROM ISPIT WHERE 1 = 1");
+
+                if(ispit.getId() != null)
+                    sqlUpit.append(" AND ID = " + ispit.getId());
+                if(ispit.getPredmet() != null)
+                    sqlUpit.append(" AND PREDMET_ID " + ispit.getPredmet().getId());
+                if(ispit.getStudent() != null)
+                    sqlUpit.append(" AND STUDENT_ID " + ispit.getStudent().getId());
+                if(ispit.getOcjena() != null)
+                    sqlUpit.append(" AND OCJENA = " + ispit.getOcjena().getInt());
+                if(ispit.getDatumIVrijeme() != null)
+                    sqlUpit.append(" AND DATUM_I_VRIJEME = '" + ispit.getDatumIVrijeme().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SS")) + "'");
+
+                Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(sqlUpit.toString());
+
+                while (rs.next()){
+                    Long id = rs.getLong("ID");
+                    Long predmetId = rs.getLong("PREDMET_ID");
+                    Long studentId = rs.getLong("STUDENT_ID");
+                    Ocjena ocjena = Ocjena.intToOcjena(rs.getInt("OCJENA"));
+                    LocalDateTime datumIVrijeme = rs.getTimestamp("DATUM_I_VRIJEME").toLocalDateTime();
+
+                    ispiti.add(new Ispit(id, getPredmetById(predmetId), getStudentById(studentId), ocjena, datumIVrijeme, new Dvorana("Dvorana", "Zgrada")));
+                }
+                return ispiti;
+            }
+        } catch (SQLException | IOException e) {
+            throw new BazaPodatakaException(e);
+        }
     }
 }

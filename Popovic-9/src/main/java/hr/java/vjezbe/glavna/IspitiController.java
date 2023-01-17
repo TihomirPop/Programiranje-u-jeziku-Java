@@ -2,6 +2,7 @@ package hr.java.vjezbe.glavna;
 
 import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entitet.Ispit;
+import hr.java.vjezbe.entitet.Ocjena;
 import hr.java.vjezbe.entitet.Predmet;
 import hr.java.vjezbe.entitet.Student;
 import hr.java.vjezbe.iznimke.BazaPodatakaException;
@@ -61,22 +62,29 @@ public class IspitiController {
     public void pretraziIspite(){
         String naziv = nazivTextField.getText();
         String student[] = studentTextField.getText().split(" ");
-        String ocjena = ocjenaTextField.getText();
-        String datumIVrijeme = datumIVrijemeTextField.getText();
+        String ocjenaString = ocjenaTextField.getText();
+        String datumIVrijemeString = datumIVrijemeTextField.getText();
+        Ocjena ocjena = null;
+        LocalDateTime datumIVrijeme = null;
 
-        List<Ispit> filteredIspiti = ispiti;
+        if(!ocjenaString.isEmpty())
+            ocjena = Ocjena.intToOcjena(Integer.parseInt(ocjenaString));
+        if(!datumIVrijemeString.isEmpty())
+            datumIVrijeme = LocalDateTime.parse(datumIVrijemeString, DateTimeFormatter.ofPattern("dd.MM.yyyy.'T'HH:mm"));
 
-        if(!naziv.isEmpty())
-            filteredIspiti = filteredIspiti.stream().filter(i -> i.getPredmet().getNaziv().contains(naziv)).toList();
-        if(student.length == 1)
-            filteredIspiti = filteredIspiti.stream().filter(i -> (i.getStudent().getIme() + " " + i.getStudent().getPrezime()).contains(student[0])).toList();
-        else if(student.length == 2)
-            filteredIspiti = filteredIspiti.stream().filter(i -> i.getStudent().getIme().contains(student[0]) && i.getStudent().getPrezime().contains(student[1])).toList();
-        if(!ocjena.isEmpty())
-            filteredIspiti = filteredIspiti.stream().filter(i -> i.getOcjena().getInt().toString().equals(ocjena)).toList();
-        if(!datumIVrijeme.isEmpty())
-            filteredIspiti = filteredIspiti.stream().filter(i -> i.getDatumIVrijeme().equals(LocalDateTime.parse(datumIVrijeme, DateTimeFormatter.ofPattern("dd.MM.yyyy.'T'HH:mm")))).toList();
 
-        ispitTableView.setItems(FXCollections.observableList(filteredIspiti));
+        try {
+            List<Ispit> filteredIspiti = BazaPodataka.getFilteredIspiti(new Ispit(null, null, null, ocjena, datumIVrijeme, null));
+
+            if(!naziv.isEmpty())
+                filteredIspiti = filteredIspiti.stream().filter(i -> i.getPredmet().getNaziv().contains(naziv)).toList();
+            if(student.length == 1)
+                filteredIspiti = filteredIspiti.stream().filter(i -> (i.getStudent().getIme() + " " + i.getStudent().getPrezime()).contains(student[0])).toList();
+            else if(student.length == 2)
+                filteredIspiti = filteredIspiti.stream().filter(i -> i.getStudent().getIme().contains(student[0]) && i.getStudent().getPrezime().contains(student[1])).toList();
+            ispitTableView.setItems(FXCollections.observableList(filteredIspiti));
+        } catch (BazaPodatakaException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
