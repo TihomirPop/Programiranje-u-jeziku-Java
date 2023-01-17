@@ -1,7 +1,9 @@
 package hr.java.vjezbe.glavna;
 
+import hr.java.vjezbe.baza.BazaPodataka;
 import hr.java.vjezbe.entitet.Predmet;
 import hr.java.vjezbe.entitet.Profesor;
+import hr.java.vjezbe.iznimke.BazaPodatakaException;
 import hr.java.vjezbe.util.Datoteke;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -35,7 +37,11 @@ public class PredmetiController {
 
 
     public void initialize(){
-        predmeti = Datoteke.getPredmeti(Datoteke.getProfesori(), Datoteke.getStudenti());
+        try {
+            predmeti = BazaPodataka.getPredmeti();
+        } catch (BazaPodatakaException e) {
+            throw new RuntimeException(e);
+        }
         sifraTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSifra()));
         nazivTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNaziv()));
         ectsTableColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getBrojEctsBodova().toString()));
@@ -54,20 +60,30 @@ public class PredmetiController {
         String naziv = nazivTextField.getText();
         String ects = ectsTextField.getText();
         String nositelj[] = nositeljTextField.getText().split(" ");
+        Integer brojEcts = null;
+        Profesor profesor = null;
 
-        List<Predmet> filteredPredmeti = predmeti;
-
-        if(!sifra.isEmpty())
-            filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getSifra().contains(sifra)).toList();
-        if(!naziv.isEmpty())
-            filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getNaziv().contains(naziv)).toList();
+        if(sifra.isEmpty())
+            sifra = null;
+        if(naziv.isEmpty())
+            naziv = null;
         if(!ects.isEmpty())
-        filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getBrojEctsBodova().toString().equals(ects)).toList();
-        if(nositelj.length == 1)
-            filteredPredmeti = filteredPredmeti.stream().filter(p -> (p.getNositelj().getIme() + " " + p.getNositelj().getPrezime()).contains(nositelj[0])).toList();
-        else if(nositelj.length == 2)
-            filteredPredmeti = filteredPredmeti.stream().filter(p -> p.getNositelj().getIme().contains(nositelj[0]) && p.getNositelj().getPrezime().contains(nositelj[1])).toList();
+            brojEcts = Integer.parseInt(ects);
+        if(nositelj.length == 2){
+            try {
+                profesor = BazaPodataka.getFilteredProfesori(new Profesor.Builder(null, nositelj[0], nositelj[1]).build()).get(0);
+            } catch (BazaPodatakaException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else if(!nositeljTextField.getText().isEmpty()){
+            profesor = new Profesor.Builder(Long.parseLong("-1"), "0", "0").build();
+        }
 
-        predmetTableView.setItems(FXCollections.observableList(filteredPredmeti));
+        try {
+            predmetTableView.setItems(FXCollections.observableList(BazaPodataka.getFilteredPredmeti(new Predmet(null, sifra, naziv, brojEcts, profesor, null))));
+        } catch (BazaPodatakaException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package hr.java.vjezbe.baza;
 
 import hr.java.vjezbe.entitet.Ocjena;
+import hr.java.vjezbe.entitet.Predmet;
 import hr.java.vjezbe.entitet.Profesor;
 import hr.java.vjezbe.entitet.Student;
 import hr.java.vjezbe.iznimke.BazaPodatakaException;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 
@@ -174,6 +176,116 @@ public class BazaPodataka {
             preparedStatement.setDate(4, Date.valueOf(student.getDatumRodjenja()));
 
             preparedStatement.executeUpdate();
+        } catch (SQLException | IOException e) {
+            throw new BazaPodatakaException(e);
+        }
+    }
+
+    public static List<Predmet> getPredmeti() throws BazaPodatakaException {
+        List<Predmet> predmeti = new ArrayList<>();
+
+        try(Connection connection = spajanjeNaBazu()) {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM PREDMET");
+
+            while (rs.next()){
+                Long id = rs.getLong("ID");
+                String sifra = rs.getString("SIFRA");
+                String naziv = rs.getString("NAZIV");
+                Integer brojEctsBodova = rs.getInt("BROJ_ECTS_BODOVA");
+                Long profesorId = rs.getLong("PROFESOR_ID");
+                Profesor profesor = getFilteredProfesori(new Profesor.Builder(profesorId, null, null).build()).get(0);
+                predmeti.add(new Predmet(id, sifra, naziv, brojEctsBodova, profesor, new HashSet<>()));
+            }
+
+            statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM PREDMET_STUDENT");
+
+            while (rs.next()){
+                Long predmetId = rs.getLong("PREDMET_ID");
+                Long studentId = rs.getLong("STUDENT_ID");
+                Student student = getFilteredStudenti(new Student(studentId, null, null, null, null, null, null)).get(0);
+                predmeti.stream().filter(p -> p.getId().equals(predmetId)).forEach(p -> p.getStudenti().add(student));
+            }
+        } catch (SQLException | IOException e) {
+            throw new BazaPodatakaException(e);
+        }
+
+        return predmeti;
+    }
+
+    public static List<Predmet> getFilteredPredmeti(Predmet predmet) throws BazaPodatakaException {
+        try(Connection connection = spajanjeNaBazu()) {
+            if(predmet == null){
+                return getPredmeti();
+            }
+            else{
+                List<Predmet> predmeti = new ArrayList<>();
+                StringBuilder sqlUpit = new StringBuilder("SELECT * FROM PREDMET WHERE 1 = 1");
+
+                if(predmet.getId() != null)
+                    sqlUpit.append(" AND ID = " + predmet.getId());
+                if(predmet.getSifra() != null)
+                    sqlUpit.append(" AND SIFRA LIKE '%" + predmet.getSifra() + "%'");
+                if(predmet.getNaziv() != null)
+                    sqlUpit.append(" AND NAZIV LIKE '%" + predmet.getNaziv() + "%'");
+                if(predmet.getBrojEctsBodova() != null)
+                    sqlUpit.append(" AND BROJ_ECTS_BODOVA = " + predmet.getBrojEctsBodova());
+                if(predmet.getNositelj() != null)
+                    sqlUpit.append(" AND PROFESOR_ID = " + predmet.getNositelj().getId());
+
+                Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(sqlUpit.toString());
+
+                while (rs.next()){
+                    Long id = rs.getLong("ID");
+                    String sifra = rs.getString("SIFRA");
+                    String naziv = rs.getString("NAZIV");
+                    Integer brojEctsBodova = rs.getInt("BROJ_ECTS_BODOVA");
+                    Long profesorId = rs.getLong("PROFESOR_ID");
+                    Profesor profesor = getFilteredProfesori(new Profesor.Builder(profesorId, null, null).build()).get(0);
+                    predmeti.add(new Predmet(id, sifra, naziv, brojEctsBodova, profesor, new HashSet<>()));
+                }
+
+                for(Predmet p: predmeti){
+                    statement = connection.createStatement();
+                    rs = statement.executeQuery("SELECT * FROM PREDMET_STUDENT WHERE PREDMET_ID = " + p.getId());
+
+                    while (rs.next()){
+                        Long studentId = rs.getLong("STUDENT_ID");
+                        Student student = getFilteredStudenti(new Student(studentId, null, null, null, null, null, null)).get(0);
+                        p.getStudenti().add(student);
+                    }
+                }
+
+                return predmeti;
+            }
+        } catch (SQLException | IOException e) {
+            throw new BazaPodatakaException(e);
+        }
+    }
+
+    public static void addPredmet(Predmet predmet) throws BazaPodatakaException{
+        try(Connection connection = spajanjeNaBazu()) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PREDMET (SIFRA, NAZIV, BROJ_ECTS_BODOVA, PROFESOR_ID) VALUES (?, ?, ?, ?)");
+            preparedStatement.setString(1, predmet.getSifra());
+            preparedStatement.setString(2, predmet.getNaziv());
+            preparedStatement.setInt(3, predmet.getBrojEctsBodova());
+            preparedStatement.setLong(4, predmet.getNositelj().getId());
+            preparedStatement.executeUpdate();
+
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM PREDMET ORDER BY ID DESC LIMIT 0, 1");
+            rs.next();
+            predmet.setId(rs.getLong("ID"));
+
+            for(Student s: predmet.getStudenti()){
+                preparedStatement = connection.prepareStatement("INSERT INTO PREDMET_STUDENT (PREDMET_ID, STUDENT_ID) VALUES (?, ?)");
+                preparedStatement.setLong(1, predmet.getId());
+                preparedStatement.setLong(2, s.getId());
+                preparedStatement.executeUpdate();
+            }
         } catch (SQLException | IOException e) {
             throw new BazaPodatakaException(e);
         }
