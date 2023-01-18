@@ -197,6 +197,35 @@ public class BazaPodataka {
         }
     }
 
+    public static List<Student> getRodendanStudenti() throws BazaPodatakaException{
+        List<Student> studenti = new ArrayList<>();
+
+        try(Connection connection = spajanjeNaBazu()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM STUDENT WHERE DAY(DATUM_RODJENJA) = DAY(?) AND MONTH(DATUM_RODJENJA) = MONTH(?)");
+
+            Date today = Date.valueOf(LocalDate.now());
+            preparedStatement.setDate(1, today);
+            preparedStatement.setDate(2, today);
+            preparedStatement.execute();
+
+            ResultSet rs = preparedStatement.getResultSet();
+
+            while (rs.next()){
+                Long id = rs.getLong("ID");
+                String ime = rs.getString("IME");
+                String prezime = rs.getString("PREZIME");
+                String jmbag = rs.getString("JMBAG");
+                LocalDate datumRodenja = rs.getDate("DATUM_RODJENJA").toLocalDate();
+
+                studenti.add(new Student(id, ime, prezime, jmbag, datumRodenja, Ocjena.ODLICAN, Ocjena.ODLICAN));
+            }
+        } catch (SQLException | IOException e) {
+            throw new BazaPodatakaException(e);
+        }
+
+        return studenti;
+    }
+
     public static void addStudent(Student student) throws BazaPodatakaException{
         try(Connection connection = spajanjeNaBazu()) {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO STUDENT (IME, PREZIME, JMBAG, DATUM_RODJENJA) VALUES (?, ?, ?, ?)");
