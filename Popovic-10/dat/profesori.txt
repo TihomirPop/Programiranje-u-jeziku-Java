@@ -1,0 +1,20 @@
+1
+Janko
+Petrović
+P5567
+Viši predavač
+2
+Ivica
+Župan
+P9878
+Profesor visoke škole
+3
+Darko
+Milic
+P123
+Viši predavač
+4
+Danica
+Despot
+P456
+Predavac

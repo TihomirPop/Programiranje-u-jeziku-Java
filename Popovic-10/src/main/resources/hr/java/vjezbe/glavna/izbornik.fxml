@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="1920.0" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.java.vjezbe.glavna.IzbornikController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1920.0" percentWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="-Infinity" vgrow="NEVER" />
+  </rowConstraints>
+   <children>
+      <MenuBar fx:id="menuBar" GridPane.valignment="TOP">
+        <menus>
+          <Menu mnemonicParsing="false" text="Profesor">
+            <items>
+                <MenuItem mnemonicParsing="false" onAction="#prikaziPretraguProfesora" text="Pretraga" />
+                <MenuItem mnemonicParsing="false" onAction="#prikaziUnosProfesora" text="Unos" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Student">
+               <items>
+              <MenuItem mnemonicParsing="false" onAction="#prikaziPretraguStudenta" text="Pretraga" />
+                   <MenuItem mnemonicParsing="false" onAction="#prikaziUnosStudenta" text="Unos" />
+               </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Predmet">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#prikaziPretraguPredmeta" text="Pretraga" />
+                <MenuItem mnemonicParsing="false" onAction="#prikaziUnosPredmeta" text="Unos" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Ispit">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#prikaziPretraguIspita" text="Pretraga" />
+                   <MenuItem mnemonicParsing="false" onAction="#prikaziUnosIspita" text="Unos" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</GridPane>

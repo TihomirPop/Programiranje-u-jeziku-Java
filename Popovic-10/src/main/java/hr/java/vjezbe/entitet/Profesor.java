@@ -1,0 +1,85 @@
+package hr.java.vjezbe.entitet;
+
+/**
+ * Klasa koja predstavlja profesora neke obrazovne ustanove, nasljeduje osobu
+ */
+public class Profesor extends Osoba {
+    private String sifra;
+    private  String titula;
+
+    private Profesor(Builder builder){
+        super(builder.id, builder.ime, builder.prezime);
+        this.sifra = builder.sifra;
+        this.titula = builder.titula;
+    }
+
+    /**
+     * Builder klasa za objekt tipa Profesor
+     */
+    public static class Builder{
+        private Long id;
+        private String ime;
+        private String prezime;
+        private String sifra;
+        private String titula;
+
+        /**
+         * Konstruktor buildera sa obaveznim parametrima
+         * @param ime - ime profesora
+         * @param prezime - prezime profesora
+         */
+        public Builder(Long id, String ime, String prezime){
+            this.id = id;
+            this.ime = ime;
+            this.prezime = prezime;
+        }
+
+        /**
+         * metoda za dodavanje sifre builderu profesora
+         * @param sifra - sifra profesora
+         * @return - builder vraca sam sebe
+         */
+        public Builder saSifrom(String sifra){
+            this.sifra = sifra;
+            return this;
+        }
+
+        /**
+         * metoda za dodavanje titule builderu profesora
+         * @param titula - titula profesora
+         * @return - builder vraca sam sebe
+         */
+        public Builder saTitulom(String titula){
+            this.titula = titula;
+            return this;
+        }
+
+        /**
+         * metoda koja builda objekt tipa profesor sa zadanim elementima
+         * @return - profesor sa zadanim elementima
+         */
+        public Profesor build(){
+            return new Profesor(this);
+        }
+    }
+
+    public String getSifra() {
+        return sifra;
+    }
+
+    public void setSifra(String sifra) {
+        this.sifra = sifra;
+    }
+
+    public String getTitula() {
+        return titula;
+    }
+
+    public void setTitula(String titula) {
+        this.titula = titula;
+    }
+    @Override
+    public String toString() {
+        return getId().toString() + " - " + getIme() + " " + getPrezime();
+    }
+}
