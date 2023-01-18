@@ -415,9 +415,9 @@ public class BazaPodataka {
                 if(ispit.getId() != null)
                     sqlUpit.append(" AND ID = " + ispit.getId());
                 if(ispit.getPredmet() != null)
-                    sqlUpit.append(" AND PREDMET_ID " + ispit.getPredmet().getId());
+                    sqlUpit.append(" AND PREDMET_ID = " + ispit.getPredmet().getId());
                 if(ispit.getStudent() != null)
-                    sqlUpit.append(" AND STUDENT_ID " + ispit.getStudent().getId());
+                    sqlUpit.append(" AND STUDENT_ID = " + ispit.getStudent().getId());
                 if(ispit.getOcjena() != null)
                     sqlUpit.append(" AND OCJENA = " + ispit.getOcjena().getInt());
                 if(ispit.getDatumIVrijeme() != null)

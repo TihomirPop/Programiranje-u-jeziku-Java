@@ -1,6 +1,7 @@
 package hr.java.vjezbe.glavna;
 
 import hr.java.vjezbe.niti.DatumRodjenjaNit;
+import hr.java.vjezbe.niti.NajboljiStudentNit;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -25,7 +26,7 @@ public class Glavna extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Glavna.class.getResource("pocetna.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         scene.getStylesheets().add("style.css");
-        stage.setTitle("Popovic-10");
+        stage.setTitle("Najbolji student jos nije odreden!");
         stage.setScene(scene);
         stage.show();
 
@@ -38,6 +39,20 @@ public class Glavna extends Application {
                 }));
         prikazSlavljenika.setCycleCount(Timeline.INDEFINITE);
         prikazSlavljenika.play();
+
+        Timeline prikazNajboljegStudenta = new Timeline(
+                new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        Platform.runLater(new NajboljiStudentNit());
+                    }
+                }));
+        prikazNajboljegStudenta.setCycleCount(Timeline.INDEFINITE);
+        prikazNajboljegStudenta.play();
+    }
+
+    public static void setMainStageTitle(String title){
+        mainStage.setTitle(title);
     }
 
     public static void prikaziScene(FXMLLoader fxmlLoader){
