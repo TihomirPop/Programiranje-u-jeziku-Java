@@ -41,12 +41,7 @@ public class Glavna extends Application {
         prikazSlavljenika.play();
 
         Timeline prikazNajboljegStudenta = new Timeline(
-                new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        Platform.runLater(new NajboljiStudentNit());
-                    }
-                }));
+                new KeyFrame(Duration.seconds(3), event -> Platform.runLater(new NajboljiStudentNit())));
         prikazNajboljegStudenta.setCycleCount(Timeline.INDEFINITE);
         prikazNajboljegStudenta.play();
     }

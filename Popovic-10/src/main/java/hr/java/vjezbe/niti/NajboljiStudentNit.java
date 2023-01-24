@@ -19,7 +19,10 @@ public class NajboljiStudentNit implements Runnable{
             Map<Student, Double> prosjeci = new HashMap<>();
             for(Student student: studenti){
                 List<Ispit> ispiti = BazaPodataka.getFilteredIspiti(new Ispit(null, null, student, null, null, null));
-                prosjeci.put(student, ispiti.stream().mapToDouble(i -> i.getOcjena().getInt()).average().orElse(0));
+                prosjeci.put(student, ispiti.stream()
+                        .mapToDouble(i -> i.getOcjena().getInt())
+                        .average()
+                        .orElse(0));
             }
             Student najboljiStudent = null;
             double najboljiProsjek = -1;
